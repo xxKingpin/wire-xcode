@@ -61,6 +61,7 @@
 		6F8FCC221851A5D400EB0F4E /* WireTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "WireTests-Info.plist"; sourceTree = "<group>"; };
 		6F8FCC241851A5D400EB0F4E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6F8FCC261851A5D400EB0F4E /* WireTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WireTests.m; sourceTree = "<group>"; };
+		6F8FCC301851A67400EB0F4E /* Wire.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Wire.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +121,7 @@
 		6F8FCBF81851A5D400EB0F4E /* Wire */ = {
 			isa = PBXGroup;
 			children = (
+				6F8FCC301851A67400EB0F4E /* Wire.entitlements */,
 				6F8FCC011851A5D400EB0F4E /* wireAppDelegate.h */,
 				6F8FCC021851A5D400EB0F4E /* wireAppDelegate.m */,
 				6F8FCC041851A5D400EB0F4E /* wireRootViewController.h */,
@@ -213,6 +215,16 @@
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = "VINE Entertainment, Inc.";
 				TargetAttributes = {
+					6F8FCBEE1851A5D400EB0F4E = {
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
+					};
 					6F8FCC181851A5D400EB0F4E = {
 						TestTargetID = 6F8FCBEE1851A5D400EB0F4E;
 					};
@@ -405,6 +417,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Wire/Wire.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wire/Wire-Prefix.pch";
 				INFOPLIST_FILE = "Wire/Wire-Info.plist";
@@ -418,6 +431,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Wire/Wire.entitlements;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wire/Wire-Prefix.pch";
 				INFOPLIST_FILE = "Wire/Wire-Info.plist";
