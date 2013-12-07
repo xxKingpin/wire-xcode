@@ -14,6 +14,8 @@
 
 @implementation loginViewController
 
+@synthesize uname, upass;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -27,12 +29,30 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    self.uname.delegate = self;
+    self.upass.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+/*
+- (IBAction)backGroundTouched:(id)sender
+{
+    [sender resignFirstResponder];
+}
+
+- (IBAction)textFieldReturn:(id)sender
+{
+    [sender resignFirstResponder];
+} */
+- (BOOL)textFieldShouldReturn: (UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return NO;
 }
 
 @end

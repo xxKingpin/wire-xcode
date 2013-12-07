@@ -91,6 +91,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="uname" destination="ht3-ap-ZvE" id="ccy-fx-6yJ"/>
+                        <outlet property="upass" destination="MSo-4g-CTa" id="aj6-zW-9oF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gCS-4v-NWt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
