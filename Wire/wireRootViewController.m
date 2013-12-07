@@ -58,8 +58,10 @@
     
     // create login view controller
     UIStoryboard *storyboard = self.storyboard;
-    loginViewController *lvc =[storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-    [self presentViewController:lvc animated:YES completion:nil];
+/*loginViewController *lvc =[storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+    [self presentViewController:lvc animated:YES completion:nil]; */
+    UINavigationController *loginNav = [storyboard instantiateViewControllerWithIdentifier:@"loginNav"];
+    [self presentViewController:loginNav animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

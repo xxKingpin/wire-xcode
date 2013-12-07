@@ -25,6 +25,7 @@
 		6F8FCC251851A5D400EB0F4E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FCC231851A5D400EB0F4E /* InfoPlist.strings */; };
 		6F8FCC271851A5D400EB0F4E /* WireTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FCC261851A5D400EB0F4E /* WireTests.m */; };
 		6FEDD73A1853290E0003012E /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEDD7381853290E0003012E /* loginViewController.m */; };
+		E58269E01853D082001C088A /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E58269DF1853D082001C088A /* registerViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,8 @@
 		6F8FCC301851A67400EB0F4E /* Wire.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Wire.entitlements; sourceTree = "<group>"; };
 		6FEDD7371853290E0003012E /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = loginViewController.h; path = Wire/loginViewController.h; sourceTree = "<group>"; };
 		6FEDD7381853290E0003012E /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = loginViewController.m; path = Wire/loginViewController.m; sourceTree = "<group>"; };
+		E58269DE1853D082001C088A /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = registerViewController.h; path = Wire/registerViewController.h; sourceTree = "<group>"; };
+		E58269DF1853D082001C088A /* registerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = registerViewController.m; path = Wire/registerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +99,8 @@
 			children = (
 				6FEDD7371853290E0003012E /* loginViewController.h */,
 				6FEDD7381853290E0003012E /* loginViewController.m */,
+				E58269DE1853D082001C088A /* registerViewController.h */,
+				E58269DF1853D082001C088A /* registerViewController.m */,
 				6F8FCBF81851A5D400EB0F4E /* Wire */,
 				6F8FCC201851A5D400EB0F4E /* WireTests */,
 				6F8FCBF11851A5D400EB0F4E /* Frameworks */,
@@ -287,6 +292,7 @@
 				6F8FCC061851A5D400EB0F4E /* wireRootViewController.m in Sources */,
 				6FEDD73A1853290E0003012E /* loginViewController.m in Sources */,
 				6F8FCC091851A5D400EB0F4E /* wireDataViewController.m in Sources */,
+				E58269E01853D082001C088A /* registerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
