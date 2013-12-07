@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UITextField *uname;
 @property (strong, nonatomic) IBOutlet UITextField *upass;
+@property (strong, nonatomic) IBOutlet UIButton *bSubmit;
 
 @end

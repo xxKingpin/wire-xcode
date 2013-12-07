@@ -14,7 +14,7 @@
 
 @implementation loginViewController
 
-@synthesize uname, upass;
+@synthesize uname, upass, bSubmit;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,6 +53,11 @@
 {
     [textField resignFirstResponder];
     return NO;
+}
+
+- (IBAction)buttonTapped:(UIButton *) sender
+{
+    
 }
 
 @end
