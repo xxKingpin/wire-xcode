@@ -12,6 +12,8 @@
 
 #import "wireDataViewController.h"
 
+#import "loginViewController.h"
+
 @interface wireRootViewController ()
 @property (readonly, strong, nonatomic) wireModelController *modelController;
 @end
@@ -48,6 +50,16 @@
 
     // Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
     self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // create login view controller
+    UIStoryboard *storyboard = self.storyboard;
+    loginViewController *lvc =[storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+    [self presentViewController:lvc animated:YES completion:nil];
 }
 
 - (void)didReceiveMemoryWarning

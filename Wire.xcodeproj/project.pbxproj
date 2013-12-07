@@ -24,6 +24,7 @@
 		6F8FCC1D1851A5D400EB0F4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8FCBF61851A5D400EB0F4E /* UIKit.framework */; };
 		6F8FCC251851A5D400EB0F4E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FCC231851A5D400EB0F4E /* InfoPlist.strings */; };
 		6F8FCC271851A5D400EB0F4E /* WireTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FCC261851A5D400EB0F4E /* WireTests.m */; };
+		6FEDD73A1853290E0003012E /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEDD7381853290E0003012E /* loginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		6F8FCC241851A5D400EB0F4E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6F8FCC261851A5D400EB0F4E /* WireTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WireTests.m; sourceTree = "<group>"; };
 		6F8FCC301851A67400EB0F4E /* Wire.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Wire.entitlements; sourceTree = "<group>"; };
+		6FEDD7371853290E0003012E /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = loginViewController.h; path = Wire/loginViewController.h; sourceTree = "<group>"; };
+		6FEDD7381853290E0003012E /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = loginViewController.m; path = Wire/loginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +94,8 @@
 		6F8FCBE61851A5D400EB0F4E = {
 			isa = PBXGroup;
 			children = (
+				6FEDD7371853290E0003012E /* loginViewController.h */,
+				6FEDD7381853290E0003012E /* loginViewController.m */,
 				6F8FCBF81851A5D400EB0F4E /* Wire */,
 				6F8FCC201851A5D400EB0F4E /* WireTests */,
 				6F8FCBF11851A5D400EB0F4E /* Frameworks */,
@@ -280,6 +285,7 @@
 				6F8FCC031851A5D400EB0F4E /* wireAppDelegate.m in Sources */,
 				6F8FCC0C1851A5D400EB0F4E /* wireModelController.m in Sources */,
 				6F8FCC061851A5D400EB0F4E /* wireRootViewController.m in Sources */,
+				6FEDD73A1853290E0003012E /* loginViewController.m in Sources */,
 				6F8FCC091851A5D400EB0F4E /* wireDataViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -501,6 +507,7 @@
 				6F8FCC2C1851A5D400EB0F4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		6F8FCC2D1851A5D400EB0F4E /* Build configuration list for PBXNativeTarget "WireTests" */ = {
 			isa = XCConfigurationList;
@@ -509,6 +516,7 @@
 				6F8FCC2F1851A5D400EB0F4E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
