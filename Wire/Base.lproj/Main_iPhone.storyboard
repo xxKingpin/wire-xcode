@@ -54,7 +54,7 @@
                         <viewControllerLayoutGuide type="top" id="W4s-yd-g8g"/>
                         <viewControllerLayoutGuide type="bottom" id="2CG-Hv-hqM"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="6eq-pg-8sN">
+                    <view key="view" contentMode="scaleToFill" id="6eq-pg-8sN" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -78,6 +78,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="touchDown:" destination="phB-pr-9g9" eventType="touchDown" id="Hvj-NC-btY"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ald-QL-aR7">
                                 <rect key="frame" x="20" y="371" width="280" height="40"/>
@@ -93,6 +96,9 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="touchBackground:" destination="phB-pr-9g9" eventType="touchDown" id="gIE-8q-oLa"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="XYu-aH-8VZ"/>
                     <connections>
@@ -141,13 +147,13 @@
                                 <rect key="frame" x="20" y="257" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Confirm Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Anb-aM-RnC">
                                 <rect key="frame" x="20" y="295" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
