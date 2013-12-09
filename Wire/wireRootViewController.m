@@ -22,6 +22,8 @@
 
 @synthesize modelController = _modelController;
 
+bool loginHasStarted = false;
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -58,10 +60,15 @@
     
     // create login view controller
     UIStoryboard *storyboard = self.storyboard;
-/*loginViewController *lvc =[storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+    /*loginViewController *lvc =[storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
     [self presentViewController:lvc animated:YES completion:nil]; */
-    UINavigationController *loginNav = [storyboard instantiateViewControllerWithIdentifier:@"loginNav"];
-    [self presentViewController:loginNav animated:YES completion:nil];
+    if (!loginHasStarted) // avoids restarting login view after signin
+    {
+        UINavigationController *loginNav = [storyboard instantiateViewControllerWithIdentifier:@"loginNav"];
+        [self presentViewController:loginNav animated:YES completion:^{
+            loginHasStarted = true;
+        }];
+    }
 }
 
 - (void)didReceiveMemoryWarning

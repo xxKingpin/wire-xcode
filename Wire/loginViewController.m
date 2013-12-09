@@ -89,6 +89,8 @@
     if ([responseStr  isEqual: @"1"])
     {
         NSLog(@"Login successful.");
+        //[self.navigationController popViewControllerAnimated:YES];
+        [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
     }
     else
     {

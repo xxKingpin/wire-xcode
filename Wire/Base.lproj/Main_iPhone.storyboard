@@ -124,7 +124,7 @@
                         <viewControllerLayoutGuide type="top" id="Bph-nk-rO2"/>
                         <viewControllerLayoutGuide type="bottom" id="EZt-oN-f0r"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="NYc-Au-SUV">
+                    <view key="view" contentMode="scaleToFill" id="NYc-Au-SUV" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
@@ -136,6 +136,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="touchRegister:" destination="NYT-FI-X6A" eventType="touchDown" id="9dI-cM-UpR"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4wC-RF-kfD">
                                 <rect key="frame" x="20" y="187" width="280" height="30"/>
@@ -169,6 +172,9 @@
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <connections>
+                            <action selector="touchedBackground:" destination="NYT-FI-X6A" eventType="touchDown" id="q7h-XH-lKZ"/>
+                        </connections>
                     </view>
                     <navigationItem key="navigationItem" id="AVE-gC-GC0"/>
                     <connections>

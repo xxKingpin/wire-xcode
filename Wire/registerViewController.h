@@ -14,5 +14,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *upass;
 @property (strong, nonatomic) IBOutlet UITextField *cupass;
 @property (strong, nonatomic) IBOutlet UITextField *email;
+- (IBAction)touchedBackground:(id)sender;
+- (IBAction)touchRegister:(id)sender;
 
 @end
