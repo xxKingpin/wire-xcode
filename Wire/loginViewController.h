@@ -10,8 +10,13 @@
 
 @interface loginViewController : UIViewController
 
+@property (retain, nonatomic) NSURLConnection *connection;
+@property (retain, nonatomic) NSMutableData *response;
+
 @property (strong, nonatomic) IBOutlet UITextField *uname;
 @property (strong, nonatomic) IBOutlet UITextField *upass;
 @property (strong, nonatomic) IBOutlet UIButton *bSubmit;
+- (IBAction)touchDown:(id)sender;
+- (IBAction)touchBackground:(id)sender;
 
 @end
