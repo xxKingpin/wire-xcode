@@ -10,4 +10,9 @@
 
 @interface registerViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UITextField *uname;
+@property (strong, nonatomic) IBOutlet UITextField *upass;
+@property (strong, nonatomic) IBOutlet UITextField *cupass;
+@property (strong, nonatomic) IBOutlet UITextField *email;
+
 @end

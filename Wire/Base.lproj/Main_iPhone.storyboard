@@ -171,6 +171,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="AVE-gC-GC0"/>
+                    <connections>
+                        <outlet property="cupass" destination="Anb-aM-RnC" id="gLo-rS-sp9"/>
+                        <outlet property="email" destination="af0-3r-8Hq" id="tur-bp-Rff"/>
+                        <outlet property="uname" destination="4wC-RF-kfD" id="1b1-ev-baG"/>
+                        <outlet property="upass" destination="n4S-E2-DSD" id="j9t-uu-7CG"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Noh-6Q-b0c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
