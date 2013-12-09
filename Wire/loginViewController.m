@@ -66,6 +66,7 @@
     [loginRequest setHTTPBody:postData];
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:loginRequest delegate:self];
     self.connection = conn;
+    self.response = [[NSMutableData alloc] init]; // this is important apparently!
     [conn start]; // initiate connection
     NSLog(@"login request sent");
 }
@@ -83,11 +84,20 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     NSString *responseStr = [[NSString alloc] initWithData:self.response encoding:NSUTF8StringEncoding];
-    //int responseInt;
-    //[self.response getBytes:&responseInt length:sizeof(responseInt)];
-    //responseInt = CFSwapInt32BigToHost(responseInt);
-    //NSLog(@"%@", responseStr);
-    NSLog(@"%@", self.response);
+    NSLog(@"Response: %@", responseStr);
+    
+    if ([responseStr  isEqual: @"1"])
+    {
+        NSLog(@"Login successful.");
+    }
+    else
+    {
+        NSLog(@"Login failed.");
+    }
+    
+    // release connection & response data
+    connection = nil;
+    self.response = nil;
 }
 
 @end
