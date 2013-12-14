@@ -59,16 +59,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username or Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ht3-ap-ZvE">
-                                <rect key="frame" x="20" y="187" width="280" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="QlE-4C-Nq3"/>
-                                    <constraint firstAttribute="height" constant="30" id="c8Z-hk-REK"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MSo-4g-CTa">
                                 <rect key="frame" x="20" y="225" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -109,6 +99,12 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username or Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Op0-aF-NtO">
+                                <rect key="frame" x="20" y="179" width="280" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" white="0.88247034671532842" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -117,7 +113,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="XYu-aH-8VZ"/>
                     <connections>
-                        <outlet property="uname" destination="ht3-ap-ZvE" id="ccy-fx-6yJ"/>
+                        <outlet property="uname" destination="Op0-aF-NtO" id="3I9-j4-uKe"/>
                         <outlet property="upass" destination="MSo-4g-CTa" id="aj6-zW-9oF"/>
                     </connections>
                 </viewController>
