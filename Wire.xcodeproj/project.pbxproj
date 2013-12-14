@@ -26,7 +26,6 @@
 		6F8FCC271851A5D400EB0F4E /* WireTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FCC261851A5D400EB0F4E /* WireTests.m */; };
 		6FEDD73A1853290E0003012E /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEDD7381853290E0003012E /* loginViewController.m */; };
 		E58269E01853D082001C088A /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E58269DF1853D082001C088A /* registerViewController.m */; };
-		E5C01019185C1538004684B7 /* UIButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E5C0101B185C1538004684B7 /* UIButton.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,7 +68,6 @@
 		6FEDD7381853290E0003012E /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = loginViewController.m; path = Wire/loginViewController.m; sourceTree = "<group>"; };
 		E58269DE1853D082001C088A /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = registerViewController.h; path = Wire/registerViewController.h; sourceTree = "<group>"; };
 		E58269DF1853D082001C088A /* registerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = registerViewController.m; path = Wire/registerViewController.m; sourceTree = "<group>"; };
-		E5C0101A185C1538004684B7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file; name = Base; path = Base.lproj/UIButton.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,7 +131,6 @@
 		6F8FCBF81851A5D400EB0F4E /* Wire */ = {
 			isa = PBXGroup;
 			children = (
-				E5C0101B185C1538004684B7 /* UIButton.png */,
 				6F8FCC301851A67400EB0F4E /* Wire.entitlements */,
 				6F8FCC011851A5D400EB0F4E /* wireAppDelegate.h */,
 				6F8FCC021851A5D400EB0F4E /* wireAppDelegate.m */,
@@ -267,7 +264,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5C01019185C1538004684B7 /* UIButton.png in Resources */,
 				6F8FCC121851A5D400EB0F4E /* Main_iPad.storyboard in Resources */,
 				6F8FCC141851A5D400EB0F4E /* Images.xcassets in Resources */,
 				6F8FCC0F1851A5D400EB0F4E /* Main_iPhone.storyboard in Resources */,
@@ -349,15 +345,6 @@
 				6F8FCC241851A5D400EB0F4E /* en */,
 			);
 			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		E5C0101B185C1538004684B7 /* UIButton.png */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E5C0101A185C1538004684B7 /* Base */,
-			);
-			name = UIButton.png;
-			path = ../../../Desktop;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
