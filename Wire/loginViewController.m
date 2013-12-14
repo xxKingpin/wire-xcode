@@ -32,6 +32,9 @@
     
     self.uname.delegate = self;
     self.upass.delegate = self;
+    
+    uname.borderStyle = UITextBorderStyleRoundedRect;
+    upass.borderStyle = UITextBorderStyleRoundedRect;
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,6 +57,8 @@
 /****/
 
 - (IBAction)touchDown:(id)sender {
+    //[sender setBackgroundColor:[UIColor colorWithRed:0.812 green:0.404 blue:0.404 alpha:1.0]];
+    
     // send login request to graffiti
     NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_pass=%@", uname.text, upass.text];
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
