@@ -133,6 +133,7 @@
 		6F8FCBF81851A5D400EB0F4E /* Wire */ = {
 			isa = PBXGroup;
 			children = (
+				E5C01017185C0D23004684B7 /* UIButton.png */,
 				6F8FCC301851A67400EB0F4E /* Wire.entitlements */,
 				6F8FCC011851A5D400EB0F4E /* wireAppDelegate.h */,
 				6F8FCC021851A5D400EB0F4E /* wireAppDelegate.m */,
@@ -153,7 +154,6 @@
 		6F8FCBF91851A5D400EB0F4E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				E5C01017185C0D23004684B7 /* UIButton.png */,
 				6F8FCBFA1851A5D400EB0F4E /* Wire-Info.plist */,
 				6F8FCBFB1851A5D400EB0F4E /* InfoPlist.strings */,
 				6F8FCBFE1851A5D400EB0F4E /* main.m */,
