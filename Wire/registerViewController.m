@@ -34,6 +34,11 @@
     self.upass.delegate = self;
     self.cupass.delegate = self;
     self.email.delegate = self;
+    
+    uname.borderStyle = UITextBorderStyleRoundedRect;
+    upass.borderStyle = UITextBorderStyleRoundedRect;
+    cupass.borderStyle = UITextBorderStyleRoundedRect;
+    email.borderStyle = UITextBorderStyleRoundedRect;
 }
 
 - (void)didReceiveMemoryWarning
