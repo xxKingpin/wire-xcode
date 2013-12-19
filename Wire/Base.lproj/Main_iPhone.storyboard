@@ -83,7 +83,7 @@
             </objects>
             <point key="canvasLocation" x="802" y="476"/>
         </scene>
-        <!--Login View Controller-->
+        <!--Login View Controller - Login-->
         <scene sceneID="pCk-ib-fCd">
             <objects>
                 <viewController storyboardIdentifier="loginViewController" id="phB-pr-9g9" customClass="loginViewController" sceneMemberID="viewController">
@@ -96,43 +96,37 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="MSo-4g-CTa">
-                                <rect key="frame" x="20" y="289" width="280" height="40"/>
+                                <rect key="frame" x="20" y="264" width="280" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.32941177487373352" green="0.78431379795074463" blue="0.56078433990478516" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WIO-Dk-Ggk">
-                                <rect key="frame" x="20" y="414" width="135" height="50"/>
+                                <rect key="frame" x="20" y="365" width="138" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.78823536630000002" green="0.32941177490000001" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Sign in">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <state key="normal" title="Sign in" backgroundImage="UIButton.png"/>
                                 <state key="selected" title="Sign in Selected"/>
                                 <connections>
                                     <action selector="touchDown:" destination="phB-pr-9g9" eventType="touchDown" id="Hvj-NC-btY"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ald-QL-aR7">
-                                <rect key="frame" x="165" y="414" width="135" height="50"/>
+                                <rect key="frame" x="162" y="365" width="138" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.32941177487373352" green="0.7882353663444519" blue="0.78431379795074463" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="Create an Account">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
+                                <state key="normal" title="Create an Account" backgroundImage="UIButton.png"/>
                                 <connections>
                                     <segue destination="NYT-FI-X6A" kind="push" id="8ej-qs-Qos"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username or Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Op0-aF-NtO">
-                                <rect key="frame" x="20" y="243" width="280" height="40"/>
+                                <rect key="frame" x="20" y="216" width="280" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.32941177487373352" green="0.55686277151107788" blue="0.78431379795074463" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -144,7 +138,7 @@
                             <action selector="touchBackground:" destination="phB-pr-9g9" eventType="touchDown" id="gIE-8q-oLa"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="XYu-aH-8VZ"/>
+                    <navigationItem key="navigationItem" title="Login" id="XYu-aH-8VZ"/>
                     <connections>
                         <outlet property="uname" destination="Op0-aF-NtO" id="3I9-j4-uKe"/>
                         <outlet property="upass" destination="MSo-4g-CTa" id="aj6-zW-9oF"/>
@@ -154,7 +148,7 @@
             </objects>
             <point key="canvasLocation" x="1738" y="476"/>
         </scene>
-        <!--Register View Controller-->
+        <!--Register View Controller - Registration-->
         <scene sceneID="bUu-wJ-Wbf">
             <objects>
                 <viewController storyboardIdentifier="registerViewController" id="NYT-FI-X6A" customClass="registerViewController" sceneMemberID="viewController">
@@ -204,19 +198,13 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Wire Registration" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZsU-EQ-6C0">
-                                <rect key="frame" x="72" y="70" width="176" height="32"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
                             <action selector="touchedBackground:" destination="NYT-FI-X6A" eventType="touchDown" id="q7h-XH-lKZ"/>
                         </connections>
                     </view>
-                    <navigationItem key="navigationItem" id="AVE-gC-GC0"/>
+                    <navigationItem key="navigationItem" title="Registration" id="AVE-gC-GC0"/>
                     <connections>
                         <outlet property="cupass" destination="Anb-aM-RnC" id="gLo-rS-sp9"/>
                         <outlet property="email" destination="af0-3r-8Hq" id="tur-bp-Rff"/>
@@ -266,6 +254,9 @@
             <point key="canvasLocation" x="360" y="476"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="UIButton.png" width="300" height="60"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
