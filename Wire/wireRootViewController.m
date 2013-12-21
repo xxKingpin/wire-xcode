@@ -22,13 +22,14 @@
 
 @synthesize modelController = _modelController;
 
-bool loginHasStarted = false;
+//bool loginHasStarted = false;
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     // Configure the page view controller and add it as a child view controller.
+/*
     self.pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStylePageCurl navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     self.pageViewController.delegate = self;
 
@@ -52,6 +53,7 @@ bool loginHasStarted = false;
 
     // Add the page view controller's gesture recognizers to the book view controller's view so that the gestures are started more easily.
     self.view.gestureRecognizers = self.pageViewController.gestureRecognizers;
+*/
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -60,8 +62,7 @@ bool loginHasStarted = false;
     
     // create login view controller
     UIStoryboard *storyboard = self.storyboard;
-    /*loginViewController *lvc =[storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
-    [self presentViewController:lvc animated:YES completion:nil]; */
+/*** commented out to avoid linking issues
     if (!loginHasStarted) // avoids restarting login view after signin
     {
         UINavigationController *loginNav = [storyboard instantiateViewControllerWithIdentifier:@"loginNav"];
@@ -69,6 +70,8 @@ bool loginHasStarted = false;
             loginHasStarted = true;
         }];
     }
+***/
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -77,6 +80,7 @@ bool loginHasStarted = false;
     // Dispose of any resources that can be recreated.
 }
 
+/*
 - (wireModelController *)modelController
 {
      // Return the model controller object, creating it if necessary.
@@ -86,6 +90,7 @@ bool loginHasStarted = false;
     }
     return _modelController;
 }
+*/
 
 #pragma mark - UIPageViewController delegate methods
 
@@ -96,6 +101,7 @@ bool loginHasStarted = false;
 }
  */
 
+/*
 - (UIPageViewControllerSpineLocation)pageViewController:(UIPageViewController *)pageViewController spineLocationForInterfaceOrientation:(UIInterfaceOrientation)orientation
 {
     if (UIInterfaceOrientationIsPortrait(orientation) || ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone)) {
@@ -126,5 +132,6 @@ bool loginHasStarted = false;
 
     return UIPageViewControllerSpineLocationMid;
 }
+*/
 
 @end

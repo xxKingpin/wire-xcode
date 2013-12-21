@@ -24,8 +24,10 @@
 		6F8FCC1D1851A5D400EB0F4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8FCBF61851A5D400EB0F4E /* UIKit.framework */; };
 		6F8FCC251851A5D400EB0F4E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FCC231851A5D400EB0F4E /* InfoPlist.strings */; };
 		6F8FCC271851A5D400EB0F4E /* WireTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FCC261851A5D400EB0F4E /* WireTests.m */; };
+		6FBCA357186417E4007BCAD3 /* UIButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBCA356186417E4007BCAD3 /* UIButton.png */; };
+		6FBCA35A1865834E007BCAD3 /* friendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBCA3591865834E007BCAD3 /* friendsViewController.m */; };
+		6FBCA35D18659F46007BCAD3 /* wireRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBCA35C18659F46007BCAD3 /* wireRootNavigationController.m */; };
 		6FEDD73A1853290E0003012E /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEDD7381853290E0003012E /* loginViewController.m */; };
-		E5641451186294A90072F436 /* UIButton.png in Resources */ = {isa = PBXBuildFile; fileRef = E5641450186294A90072F436 /* UIButton.png */; };
 		E58269E01853D082001C088A /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E58269DF1853D082001C088A /* registerViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -65,9 +67,13 @@
 		6F8FCC241851A5D400EB0F4E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6F8FCC261851A5D400EB0F4E /* WireTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WireTests.m; sourceTree = "<group>"; };
 		6F8FCC301851A67400EB0F4E /* Wire.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Wire.entitlements; sourceTree = "<group>"; };
+		6FBCA356186417E4007BCAD3 /* UIButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton.png; sourceTree = "<group>"; };
+		6FBCA3581865834D007BCAD3 /* friendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = friendsViewController.h; path = Wire/friendsViewController.h; sourceTree = "<group>"; };
+		6FBCA3591865834E007BCAD3 /* friendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = friendsViewController.m; path = Wire/friendsViewController.m; sourceTree = "<group>"; };
+		6FBCA35B18659F45007BCAD3 /* wireRootNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wireRootNavigationController.h; sourceTree = "<group>"; };
+		6FBCA35C18659F46007BCAD3 /* wireRootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wireRootNavigationController.m; sourceTree = "<group>"; };
 		6FEDD7371853290E0003012E /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = loginViewController.h; path = Wire/loginViewController.h; sourceTree = "<group>"; };
 		6FEDD7381853290E0003012E /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = loginViewController.m; path = Wire/loginViewController.m; sourceTree = "<group>"; };
-		E5641450186294A90072F436 /* UIButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = UIButton.png; path = ../../Desktop/UIButton.png; sourceTree = "<group>"; };
 		E58269DE1853D082001C088A /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = registerViewController.h; path = Wire/registerViewController.h; sourceTree = "<group>"; };
 		E58269DF1853D082001C088A /* registerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = registerViewController.m; path = Wire/registerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -99,7 +105,9 @@
 		6F8FCBE61851A5D400EB0F4E = {
 			isa = PBXGroup;
 			children = (
-				E5641450186294A90072F436 /* UIButton.png */,
+				6FBCA3581865834D007BCAD3 /* friendsViewController.h */,
+				6FBCA3591865834E007BCAD3 /* friendsViewController.m */,
+				6FBCA356186417E4007BCAD3 /* UIButton.png */,
 				6FEDD7371853290E0003012E /* loginViewController.h */,
 				6FEDD7381853290E0003012E /* loginViewController.m */,
 				E58269DE1853D082001C088A /* registerViewController.h */,
@@ -147,6 +155,8 @@
 				6F8FCC101851A5D400EB0F4E /* Main_iPad.storyboard */,
 				6F8FCC131851A5D400EB0F4E /* Images.xcassets */,
 				6F8FCBF91851A5D400EB0F4E /* Supporting Files */,
+				6FBCA35B18659F45007BCAD3 /* wireRootNavigationController.h */,
+				6FBCA35C18659F46007BCAD3 /* wireRootNavigationController.m */,
 			);
 			path = Wire;
 			sourceTree = "<group>";
@@ -267,7 +277,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E5641451186294A90072F436 /* UIButton.png in Resources */,
+				6FBCA357186417E4007BCAD3 /* UIButton.png in Resources */,
 				6F8FCC121851A5D400EB0F4E /* Main_iPad.storyboard in Resources */,
 				6F8FCC141851A5D400EB0F4E /* Images.xcassets in Resources */,
 				6F8FCC0F1851A5D400EB0F4E /* Main_iPhone.storyboard in Resources */,
@@ -294,9 +304,11 @@
 				6F8FCC031851A5D400EB0F4E /* wireAppDelegate.m in Sources */,
 				6F8FCC0C1851A5D400EB0F4E /* wireModelController.m in Sources */,
 				6F8FCC061851A5D400EB0F4E /* wireRootViewController.m in Sources */,
+				6FBCA35A1865834E007BCAD3 /* friendsViewController.m in Sources */,
 				6FEDD73A1853290E0003012E /* loginViewController.m in Sources */,
 				6F8FCC091851A5D400EB0F4E /* wireDataViewController.m in Sources */,
 				E58269E01853D082001C088A /* registerViewController.m in Sources */,
+				6FBCA35D18659F46007BCAD3 /* wireRootNavigationController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
