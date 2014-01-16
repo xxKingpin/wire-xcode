@@ -24,6 +24,7 @@
 		6F8FCC1D1851A5D400EB0F4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8FCBF61851A5D400EB0F4E /* UIKit.framework */; };
 		6F8FCC251851A5D400EB0F4E /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6F8FCC231851A5D400EB0F4E /* InfoPlist.strings */; };
 		6F8FCC271851A5D400EB0F4E /* WireTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F8FCC261851A5D400EB0F4E /* WireTests.m */; };
+		6FABF2A81887E0B0001F0A0C /* wireDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FABF2A71887E0B0001F0A0C /* wireDrawing.m */; };
 		6FBCA357186417E4007BCAD3 /* UIButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 6FBCA356186417E4007BCAD3 /* UIButton.png */; };
 		6FBCA35A1865834E007BCAD3 /* friendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBCA3591865834E007BCAD3 /* friendsViewController.m */; };
 		6FBCA35D18659F46007BCAD3 /* wireRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBCA35C18659F46007BCAD3 /* wireRootNavigationController.m */; };
@@ -67,6 +68,8 @@
 		6F8FCC241851A5D400EB0F4E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		6F8FCC261851A5D400EB0F4E /* WireTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WireTests.m; sourceTree = "<group>"; };
 		6F8FCC301851A67400EB0F4E /* Wire.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Wire.entitlements; sourceTree = "<group>"; };
+		6FABF2A61887E0B0001F0A0C /* wireDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wireDrawing.h; path = Wire/wireDrawing.h; sourceTree = "<group>"; };
+		6FABF2A71887E0B0001F0A0C /* wireDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = wireDrawing.m; path = Wire/wireDrawing.m; sourceTree = "<group>"; };
 		6FBCA356186417E4007BCAD3 /* UIButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = UIButton.png; sourceTree = "<group>"; };
 		6FBCA3581865834D007BCAD3 /* friendsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = friendsViewController.h; path = Wire/friendsViewController.h; sourceTree = "<group>"; };
 		6FBCA3591865834E007BCAD3 /* friendsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = friendsViewController.m; path = Wire/friendsViewController.m; sourceTree = "<group>"; };
@@ -105,6 +108,8 @@
 		6F8FCBE61851A5D400EB0F4E = {
 			isa = PBXGroup;
 			children = (
+				6FABF2A61887E0B0001F0A0C /* wireDrawing.h */,
+				6FABF2A71887E0B0001F0A0C /* wireDrawing.m */,
 				6FBCA3581865834D007BCAD3 /* friendsViewController.h */,
 				6FBCA3591865834E007BCAD3 /* friendsViewController.m */,
 				6FBCA356186417E4007BCAD3 /* UIButton.png */,
@@ -307,6 +312,7 @@
 				6FBCA35A1865834E007BCAD3 /* friendsViewController.m in Sources */,
 				6FEDD73A1853290E0003012E /* loginViewController.m in Sources */,
 				6F8FCC091851A5D400EB0F4E /* wireDataViewController.m in Sources */,
+				6FABF2A81887E0B0001F0A0C /* wireDrawing.m in Sources */,
 				E58269E01853D082001C088A /* registerViewController.m in Sources */,
 				6FBCA35D18659F46007BCAD3 /* wireRootNavigationController.m in Sources */,
 			);
