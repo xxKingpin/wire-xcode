@@ -10,13 +10,13 @@
 
 #define             STROKE_WIDTH_MIN 0.002 // Stroke width determined by touch velocity
 #define             STROKE_WIDTH_MAX 0.010
-#define       STROKE_WIDTH_SMOOTHING 0.5   // Low pass filter alpha
+#define       STROKE_WIDTH_SMOOTHING 0.3   // Low pass filter alpha
 
 #define           VELOCITY_CLAMP_MIN 20
 #define           VELOCITY_CLAMP_MAX 5000
 
-#define QUADRATIC_DISTANCE_TOLERANCE 3.0   // Minimum distance to make a curve
-
+#define QUADRATIC_DISTANCE_TOLERANCE 2.0   // Minimum distance to make a curve
+                                           // default is 3.0, but it's at 2.0 currently to avoid breaking at cusps
 #define             MAXIMUM_VERTICES 100000
 
 
@@ -103,6 +103,7 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     // Width of line at current and previous vertex
     float penThickness;
     float previousThickness;
+    float previousVelocity;
     
     
     // Previous points for quadratic bezier computations
@@ -271,9 +272,15 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     float velocityMagnitude = sqrtf(v.x*v.x + v.y*v.y);
     float clampedVelocityMagnitude = clamp(VELOCITY_CLAMP_MIN, VELOCITY_CLAMP_MAX, velocityMagnitude);
     float normalizedVelocity = (clampedVelocityMagnitude - VELOCITY_CLAMP_MIN) / (VELOCITY_CLAMP_MAX - VELOCITY_CLAMP_MIN);
-    
+    // added for velocity smoothing
     float lowPassFilterAlpha = STROKE_WIDTH_SMOOTHING;
+    normalizedVelocity = previousVelocity * lowPassFilterAlpha + normalizedVelocity * (1 - lowPassFilterAlpha);
+    previousVelocity = normalizedVelocity;
+    
+    /* old thickness algorithm
     float newThickness = (STROKE_WIDTH_MAX - STROKE_WIDTH_MIN) * normalizedVelocity + STROKE_WIDTH_MIN;
+     */
+    float newThickness = (STROKE_WIDTH_MIN - STROKE_WIDTH_MAX) * normalizedVelocity + STROKE_WIDTH_MAX;
     penThickness = penThickness * lowPassFilterAlpha + newThickness * (1 - lowPassFilterAlpha);
     
     if ([p state] == UIGestureRecognizerStateBegan) {
