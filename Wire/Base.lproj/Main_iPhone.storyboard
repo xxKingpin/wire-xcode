@@ -77,7 +77,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <segue destination="z8O-XZ-Gka" kind="modal" id="rZN-yO-6el"/>
+                                            <segue destination="z8O-XZ-Gka" kind="push" id="nPp-cR-d9n"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -269,6 +269,7 @@
                             <outlet property="delegate" destination="z8O-XZ-Gka" id="boB-e5-J7C"/>
                         </connections>
                     </glkView>
+                    <navigationItem key="navigationItem" id="tvd-Gk-SKB"/>
                 </glkViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aLW-4z-FpH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
