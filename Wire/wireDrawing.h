@@ -13,6 +13,7 @@
 
 @property (assign, nonatomic) BOOL hasSignature;
 @property (strong, nonatomic) UIImage *signatureImage;
+- (IBAction)sendWire:(id)sender;
 
 - (void)erase;
 

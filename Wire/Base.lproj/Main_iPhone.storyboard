@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
-        <!--Friends View Controller - Root View Controller-->
+        <!--Friends View Controller - Conversations-->
         <scene sceneID="xWS-FZ-UqJ">
             <objects>
                 <tableViewController storyboardIdentifier="friendsTable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8fw-q6-8hv" customClass="friendsViewController" sceneMemberID="viewController">
@@ -32,12 +32,12 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="hzS-jB-y9W" kind="push" id="GfN-14-cZv"/>
+                                    <segue destination="hzS-jB-y9W" kind="push" id="qto-Yc-Tko"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="AmQ-JW-q92"/>
+                    <navigationItem key="navigationItem" title="Conversations" id="AmQ-JW-q92"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="puD-GI-D0Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -67,8 +67,8 @@
             <objects>
                 <viewController storyboardIdentifier="wireDataViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="hzS-jB-y9W" customClass="wireDataViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="eEW-CN-4ig"/>
-                        <viewControllerLayoutGuide type="bottom" id="iWu-y0-Lvb"/>
+                        <viewControllerLayoutGuide type="top" id="UQi-Ev-s9Q"/>
+                        <viewControllerLayoutGuide type="bottom" id="R9O-Lj-dzb"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="gLe-Tb-ylt">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -79,7 +79,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button opaque="NO" alpha="0.69999999999999973" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pG7-Z7-0W5">
-                                        <rect key="frame" x="234" y="13" width="66" height="30"/>
+                                        <rect key="frame" x="238" y="13" width="66" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="New Wire">
                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -88,6 +88,13 @@
                                         <connections>
                                             <segue destination="z8O-XZ-Gka" kind="push" id="nPp-cR-d9n"/>
                                         </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Omx-IE-qN3">
+                                        <rect key="frame" x="137" y="460" width="46" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Edit">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -107,8 +114,8 @@
             <objects>
                 <viewController storyboardIdentifier="loginViewController" id="phB-pr-9g9" customClass="loginViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="fyc-IO-h6J"/>
-                        <viewControllerLayoutGuide type="bottom" id="w7w-vV-Bh5"/>
+                        <viewControllerLayoutGuide type="top" id="yx9-gP-Ml0"/>
+                        <viewControllerLayoutGuide type="bottom" id="VMd-Ac-VUB"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="6eq-pg-8sN" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -172,8 +179,8 @@
             <objects>
                 <viewController storyboardIdentifier="registerViewController" id="NYT-FI-X6A" customClass="registerViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="g6u-lX-AYi"/>
-                        <viewControllerLayoutGuide type="bottom" id="Aa6-Us-Dkl"/>
+                        <viewControllerLayoutGuide type="top" id="6sa-pY-ezZ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Gc4-1F-Fof"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="NYc-Au-SUV" customClass="UIControl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -259,17 +266,41 @@
             <objects>
                 <glkViewController autoresizesArchivedViewToFullSize="NO" preferredFramesPerSecond="30" id="z8O-XZ-Gka" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Te8-2S-m97"/>
-                        <viewControllerLayoutGuide type="bottom" id="RXN-yk-HJe"/>
+                        <viewControllerLayoutGuide type="top" id="Ywr-nn-nNr"/>
+                        <viewControllerLayoutGuide type="bottom" id="AeK-vU-zTO"/>
                     </layoutGuides>
                     <glkView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="72Z-Ie-R4K" customClass="wireDrawing">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wyG-uh-Q08">
+                                <rect key="frame" x="123" y="518" width="74" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Pen Active">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bQr-7t-TeI">
+                                <rect key="frame" x="96" y="65" width="128" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="temp_Send">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendWire:" destination="72Z-Ie-R4K" eventType="touchUpInside" id="NIe-Cf-ANT"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <connections>
                             <outlet property="delegate" destination="z8O-XZ-Gka" id="boB-e5-J7C"/>
                         </connections>
                     </glkView>
-                    <navigationItem key="navigationItem" id="tvd-Gk-SKB"/>
+                    <navigationItem key="navigationItem" id="tvd-Gk-SKB">
+                        <nil key="title"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="Fx7-9d-bKn"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="z47-eQ-xqG"/>
+                    </navigationItem>
                 </glkViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aLW-4z-FpH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -280,8 +311,8 @@
             <objects>
                 <viewController id="PxF-Ax-wPy" customClass="wireRootViewController" sceneMemberID="viewController">
                     <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="aCu-Xh-8QO"/>
-                        <viewControllerLayoutGuide type="bottom" id="dcg-uz-kld"/>
+                        <viewControllerLayoutGuide type="top" id="Hy7-xK-taa"/>
+                        <viewControllerLayoutGuide type="bottom" id="HEa-lC-Lmg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cc6-cB-pgf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>

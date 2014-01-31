@@ -212,6 +212,14 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     return [self snapshot];
 }
 
+- (IBAction)sendWire:(id)sender {
+    // capture image
+    
+    // send to server
+    
+    // perform animations
+}
+
 
 
 #pragma mark - Gesture Recognizers
