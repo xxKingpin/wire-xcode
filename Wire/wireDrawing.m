@@ -214,12 +214,44 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
 
 - (IBAction)sendWire:(id)sender {
     // capture image
+    NSData *pngData = UIImagePNGRepresentation(_signatureImage);
     
     // send to server
+    //NSString *post = [NSString stringWithFormat:@"wire=wire&wire_type=private&wire_recipient=%@", @"recipient"];
+    NSMutableURLRequest *sendRequest = [[NSMutableURLRequest alloc] init];
+    NSString *postLength = [NSString stringWithFormat:@"%d", [pngData length]];
+    [sendRequest setURL:[NSURL URLWithString:@"http://graffiti.im/index.php?wire=wire&wire_type=private&wire_recipient=recipient"]];
+    [sendRequest setHTTPMethod:@"POST"];
+    [sendRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [sendRequest setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
+    [sendRequest setHTTPBody:pngData];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:sendRequest delegate:self];
+    self.connection = conn;
+    self.response = [[NSMutableData alloc] init];
+    [conn start];
+    NSLog(@"Wire sent!");
     
     // perform animations
 }
 
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [self.response appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"%@", error);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    // don't currently need this for anything
+    
+    // release connection & response data
+    connection = nil;
+    self.response = nil;
+}
 
 
 #pragma mark - Gesture Recognizers

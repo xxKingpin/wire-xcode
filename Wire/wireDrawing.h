@@ -11,6 +11,9 @@
 
 @interface wireDrawing : GLKView
 
+@property (retain, nonatomic) NSURLConnection *connection;
+@property (retain, nonatomic) NSMutableData *response;
+
 @property (assign, nonatomic) BOOL hasSignature;
 @property (strong, nonatomic) UIImage *signatureImage;
 - (IBAction)sendWire:(id)sender;
