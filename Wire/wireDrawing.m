@@ -218,13 +218,28 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     
     // send to server
     //NSString *post = [NSString stringWithFormat:@"wire=wire&wire_type=private&wire_recipient=%@", @"recipient"];
+    NSString *recipient = @"recipient";
+    NSString *wire_type = @"_private";
+    NSString *boundary = @"---------------------------14737809831466499882746641449";
+    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
+    NSMutableData *httpBody = [NSMutableData data];
+    [httpBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[@"Content-Disposition: form-data; name=\"wire_recipient\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[recipient dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[@"Content-Disposition: form-data; name=\"wire_type\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[wire_type dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[@"Content-Disposition: form-data; name=\"pngData\"; filename=\"test.png\"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[@"Content-Type: image/png\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[NSData dataWithData:pngData]];
+    [httpBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    
     NSMutableURLRequest *sendRequest = [[NSMutableURLRequest alloc] init];
-    NSString *postLength = [NSString stringWithFormat:@"%d", [pngData length]];
-    [sendRequest setURL:[NSURL URLWithString:@"http://graffiti.im/index.php?wire=wire&wire_type=private&wire_recipient=recipient"]];
+    [sendRequest setURL:[NSURL URLWithString:@"http://graffiti.im/wire.php"]];
     [sendRequest setHTTPMethod:@"POST"];
-    [sendRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [sendRequest setValue:@"multipart/form-data" forHTTPHeaderField:@"Content-Type"];
-    [sendRequest setHTTPBody:pngData];
+    [sendRequest setValue:contentType forHTTPHeaderField:@"Content-Type"];
+    [sendRequest setHTTPBody:httpBody];
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:sendRequest delegate:self];
     self.connection = conn;
     self.response = [[NSMutableData alloc] init];
