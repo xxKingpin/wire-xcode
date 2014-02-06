@@ -29,12 +29,59 @@
 {
     self = [super init];
     if (self) {
+        // retrieve messages to/from recipient
+        NSString *post = [NSString stringWithFormat:@"wire_type=retrieve&wire_user=%@&wire_recipient=%@", @"user", @"recipient"];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding];
+        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        NSMutableURLRequest *retrieveRequest = [[NSMutableURLRequest alloc] init];
+        [retrieveRequest setURL:[NSURL URLWithString:@"http://graffiti.im/wire.php"]];
+        [retrieveRequest setHTTPMethod:@"POST"];
+        [retrieveRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [retrieveRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [retrieveRequest setHTTPBody:postData];
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:retrieveRequest delegate:self];
+        self.connection = conn;
+        self.response = [[NSMutableData alloc] init];
+        [conn start]; // initiate connection
+        NSLog(@"Conversation retrieval began.");
+        
         // Create the data model.
+        _pageData = [NSArray arrayWithObject:@"foo"];
+        /*
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         _pageData = [[dateFormatter monthSymbols] copy];
+         */
     }
     return self;
 }
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [self.response appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"%@", error);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    //NSString *responseStr = [[NSString alloc] initWithData:self.response encoding:NSUTF8StringEncoding];
+    NSError *error;
+    NSArray *responseArray = [NSJSONSerialization JSONObjectWithData:self.response options:kNilOptions error:&error];
+    NSLog(@"Array: %@", responseArray);
+    
+    // Replace the data model with new information from the server
+    _pageData = [NSArray arrayWithObjects:@"foo", [UIImage imageNamed:@"UIButton.png"], @"bar", nil];
+    
+    
+    // release connection & response data
+    self.connection = nil;
+    self.response = nil;
+}
+
+/********/
 
 - (wireDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard
 {   

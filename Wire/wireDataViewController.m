@@ -34,6 +34,10 @@
 {
     [super viewWillAppear:animated];
     self.dataLabel.text = [self.dataObject description];
+    if ([_dataObject isKindOfClass:[UIImage class]])
+    {
+        self.imageObject.image = _dataObject;
+    }
 }
 
 @end

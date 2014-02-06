@@ -214,10 +214,10 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
 
 - (IBAction)sendWire:(id)sender {
     // capture image
-    NSData *pngData = UIImagePNGRepresentation(_signatureImage);
+    UIImage *imagedata = [self signatureImage];
+    NSData *pngData = UIImagePNGRepresentation(imagedata);
     
     // send to server
-    //NSString *post = [NSString stringWithFormat:@"wire=wire&wire_type=private&wire_recipient=%@", @"recipient"];
     NSString *recipient = @"recipient";
     NSString *wire_type = @"_private";
     NSString *boundary = @"---------------------------14737809831466499882746641449";
