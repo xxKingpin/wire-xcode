@@ -67,14 +67,20 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    //NSString *responseStr = [[NSString alloc] initWithData:self.response encoding:NSUTF8StringEncoding];
     NSError *error;
     NSArray *responseArray = [NSJSONSerialization JSONObjectWithData:self.response options:kNilOptions error:&error];
     NSLog(@"Array: %@", responseArray);
     
     // Replace the data model with new information from the server
-    _pageData = [NSArray arrayWithObjects:@"foo", [UIImage imageNamed:@"UIButton.png"], @"bar", nil];
-    
+    NSMutableArray *convoImages = [[NSMutableArray alloc] init];
+    [convoImages addObject:@"foo"];
+    for (NSString *image in responseArray)
+    {
+        NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:image options:0];
+        UIImage *decodedImage = [[UIImage alloc] initWithData:decodedData];
+        [convoImages addObject:decodedImage];
+    }
+    _pageData = convoImages;
     
     // release connection & response data
     self.connection = nil;
