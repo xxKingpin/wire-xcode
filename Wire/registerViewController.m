@@ -62,6 +62,64 @@
 }
 
 - (IBAction)touchRegister:(id)sender {
-    // submit registration data to graffiti
+    if ([uname.text length] == 0 || [upass.text length] == 0 || [cupass.text length] == 0 || [email.text length] == 0)
+    {
+        UIAlertView *incompleteAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please complete all fields." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [incompleteAlert show];
+    }
+    else if (![upass.text isEqualToString:cupass.text])
+    {
+        UIAlertView *mismatchAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your passwords do not match." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [mismatchAlert show];
+    }
+    else
+    {
+        // submit registration data to graffiti
+        NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_pass=%@&wire_email=%@", uname.text, upass.text, email.text];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        NSMutableURLRequest *registrationRequest = [[NSMutableURLRequest alloc] init];
+        [registrationRequest setURL:[NSURL URLWithString:@"http://graffiti.im/index.php"]];
+        [registrationRequest setHTTPMethod:@"POST"];
+        [registrationRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [registrationRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [registrationRequest setHTTPBody:postData];
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:registrationRequest delegate:self];
+        self.connection = conn;
+        self.response = [[NSMutableData alloc] init];
+        [conn start];
+        NSLog(@"registration request sent");
+    }
 }
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [self.response appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"%@", error);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    NSString *responseStr = [[NSString alloc] initWithData:self.response encoding:NSUTF8StringEncoding];
+    NSLog(@"Response: %@", responseStr);
+    
+    if ([responseStr  isEqual: @"1"])
+    {
+        NSLog(@"Registration successful.");
+        [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+    }
+    else
+    {
+        NSLog(@"Registration failed.");
+    }
+    
+    // release connection & response data
+    connection = nil;
+    self.response = nil;
+}
+
 @end

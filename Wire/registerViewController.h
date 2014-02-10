@@ -10,6 +10,9 @@
 
 @interface registerViewController : UIViewController
 
+@property (retain, nonatomic) NSURLConnection *connection;
+@property (retain, nonatomic) NSMutableData *response;
+
 @property (strong, nonatomic) IBOutlet UITextField *uname;
 @property (strong, nonatomic) IBOutlet UITextField *upass;
 @property (strong, nonatomic) IBOutlet UITextField *cupass;

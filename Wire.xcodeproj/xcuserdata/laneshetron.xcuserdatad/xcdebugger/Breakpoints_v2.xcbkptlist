@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wire/loginViewController.m"
-            timestampString = "408792437.89015"
+            timestampString = "413709294.129998"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "-touchDown:"
             landmarkType = "5">
          </BreakpointContent>

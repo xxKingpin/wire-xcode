@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F25DDCC18A8BE6100533736 /* notfriend.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F25DDCB18A8BE6100533736 /* notfriend.png */; };
 		6F8FCBF31851A5D400EB0F4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8FCBF21851A5D400EB0F4E /* Foundation.framework */; };
 		6F8FCBF51851A5D400EB0F4E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8FCBF41851A5D400EB0F4E /* CoreGraphics.framework */; };
 		6F8FCBF71851A5D400EB0F4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8FCBF61851A5D400EB0F4E /* UIKit.framework */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F25DDCB18A8BE6100533736 /* notfriend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notfriend.png; sourceTree = "<group>"; };
 		6F8FCBEF1851A5D400EB0F4E /* Wire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8FCBF21851A5D400EB0F4E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6F8FCBF41851A5D400EB0F4E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -108,6 +110,7 @@
 		6F8FCBE61851A5D400EB0F4E = {
 			isa = PBXGroup;
 			children = (
+				6F25DDCB18A8BE6100533736 /* notfriend.png */,
 				6FABF2A61887E0B0001F0A0C /* wireDrawing.h */,
 				6FABF2A71887E0B0001F0A0C /* wireDrawing.m */,
 				6FBCA3581865834D007BCAD3 /* friendsViewController.h */,
@@ -285,6 +288,7 @@
 				6FBCA357186417E4007BCAD3 /* UIButton.png in Resources */,
 				6F8FCC121851A5D400EB0F4E /* Main_iPad.storyboard in Resources */,
 				6F8FCC141851A5D400EB0F4E /* Images.xcassets in Resources */,
+				6F25DDCC18A8BE6100533736 /* notfriend.png in Resources */,
 				6F8FCC0F1851A5D400EB0F4E /* Main_iPhone.storyboard in Resources */,
 				6F8FCBFD1851A5D400EB0F4E /* InfoPlist.strings in Resources */,
 			);
@@ -474,6 +478,7 @@
 				GCC_PREFIX_HEADER = "Wire/Wire-Prefix.pch";
 				INFOPLIST_FILE = "Wire/Wire-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "18CE620C-E8C6-4ACC-AC75-7EAFC9CDF373";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

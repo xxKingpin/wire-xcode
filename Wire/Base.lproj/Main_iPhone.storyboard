@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="T3q-HO-ZN4">
     <dependencies>
-        <deployment defaultVersion="1552" identifier="iOS"/>
+        <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3747"/>
     </dependencies>
     <scenes>
@@ -37,11 +37,18 @@
                             </tableViewCell>
                         </prototypes>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Conversations" id="AmQ-JW-q92"/>
+                    <navigationItem key="navigationItem" title="Conversations" id="AmQ-JW-q92">
+                        <barButtonItem key="rightBarButtonItem" image="notfriend.png" id="S7J-d6-Whs">
+                            <color key="tintColor" red="0.81176477670000002" green="0.40392160420000001" blue="0.40392160420000001" alpha="1" colorSpace="deviceRGB"/>
+                            <connections>
+                                <segue destination="nVi-VI-08d" kind="push" id="axu-6z-GCO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="puD-GI-D0Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="442" y="476"/>
+            <point key="canvasLocation" x="366" y="476"/>
         </scene>
         <!--Wire Root Navigation Controller-->
         <scene sceneID="eVm-YE-QKt">
@@ -198,13 +205,12 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lGp-8Y-5Hy">
-                                <rect key="frame" x="20" y="371" width="280" height="50"/>
+                                <rect key="frame" x="75" y="421" width="171" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.78823536630000002" green="0.32941177490000001" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <state key="normal" title="Create an Account">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
@@ -212,26 +218,34 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="4wC-RF-kfD">
-                                <rect key="frame" x="20" y="167" width="280" height="40"/>
+                                <rect key="frame" x="20" y="192" width="280" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.78823536630000002" green="0.32941177490000001" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="af0-3r-8Hq">
-                                <rect key="frame" x="20" y="215" width="280" height="40"/>
+                                <rect key="frame" x="20" y="240" width="280" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.78823536630000002" green="0.32941177490000001" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="n4S-E2-DSD">
-                                <rect key="frame" x="20" y="263" width="280" height="40"/>
+                                <rect key="frame" x="20" y="288" width="280" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.78823536630000002" green="0.32941177490000001" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Anb-aM-RnC">
-                                <rect key="frame" x="20" y="311" width="280" height="40"/>
+                                <rect key="frame" x="20" y="336" width="280" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.78823536630000002" green="0.32941177490000001" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
@@ -271,6 +285,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="LVS-nO-UUL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1315" y="476"/>
+        </scene>
+        <!--Table View Controller - Add Friend-->
+        <scene sceneID="jAz-Eg-Qi8">
+            <objects>
+                <tableViewController id="nVi-VI-08d" sceneMemberID="viewController">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="5xg-8d-U5f">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="kUy-Io-pK1">
+                            <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                            <connections>
+                                <outlet property="delegate" destination="nVi-VI-08d" id="D83-ZG-ieu"/>
+                            </connections>
+                        </searchBar>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="RLn-C0-q69">
+                                <rect key="frame" x="0.0" y="130" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="RLn-C0-q69" id="9Dl-Rh-dtA">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="nVi-VI-08d" id="Jha-hs-ygQ"/>
+                            <outlet property="delegate" destination="nVi-VI-08d" id="gU7-Q1-bt3"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Add Friend" id="kmQ-7v-q4x"/>
+                    <connections>
+                        <outlet property="searchDisplayController" destination="wDo-DA-FND" id="N0P-we-vvN"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zhO-wR-Syq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <searchDisplayController id="wDo-DA-FND">
+                    <connections>
+                        <outlet property="delegate" destination="nVi-VI-08d" id="pIL-CC-hN4"/>
+                        <outlet property="searchBar" destination="kUy-Io-pK1" id="5vJ-3O-5ac"/>
+                        <outlet property="searchContentsController" destination="nVi-VI-08d" id="NIG-qP-6B6"/>
+                        <outlet property="searchResultsDataSource" destination="nVi-VI-08d" id="aGN-Wb-WmA"/>
+                        <outlet property="searchResultsDelegate" destination="nVi-VI-08d" id="KwN-9M-jph"/>
+                    </connections>
+                </searchDisplayController>
+            </objects>
+            <point key="canvasLocation" x="848" y="1153"/>
         </scene>
         <!--GLKit View Controller-->
         <scene sceneID="Xda-Kx-9bB">
@@ -336,6 +399,9 @@
             <point key="canvasLocation" x="676" y="-252"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="notfriend.png" width="30" height="30"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

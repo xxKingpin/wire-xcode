@@ -59,21 +59,29 @@
 - (IBAction)touchDown:(id)sender {
     //[sender setBackgroundColor:[UIColor colorWithRed:0.812 green:0.404 blue:0.404 alpha:1.0]];
     
-    // send login request to graffiti
-    NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_pass=%@", uname.text, upass.text];
-    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
-    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
-    NSMutableURLRequest *loginRequest = [[NSMutableURLRequest alloc] init];
-    [loginRequest setURL:[NSURL URLWithString:@"http://graffiti.im/index.php"]];
-    [loginRequest setHTTPMethod:@"POST"];
-    [loginRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
-    [loginRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    [loginRequest setHTTPBody:postData];
-    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:loginRequest delegate:self];
-    self.connection = conn;
-    self.response = [[NSMutableData alloc] init]; // this is important apparently!
-    [conn start]; // initiate connection
-    NSLog(@"login request sent");
+    if ([uname.text length] != 0 && [upass.text length] != 0)
+    {
+        // send login request to graffiti
+        NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_pass=%@", uname.text, upass.text];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        NSMutableURLRequest *loginRequest = [[NSMutableURLRequest alloc] init];
+        [loginRequest setURL:[NSURL URLWithString:@"http://graffiti.im/index.php"]];
+        [loginRequest setHTTPMethod:@"POST"];
+        [loginRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [loginRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [loginRequest setHTTPBody:postData];
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:loginRequest delegate:self];
+        self.connection = conn;
+        self.response = [[NSMutableData alloc] init]; // this is important apparently!
+        [conn start]; // initiate connection
+        NSLog(@"login request sent");
+    }
+    else
+    {
+        UIAlertView *incompleteAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please complete both fields." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [incompleteAlert show];
+    }
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
