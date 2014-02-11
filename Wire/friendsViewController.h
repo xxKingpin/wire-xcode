@@ -9,6 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface friendsViewController : UITableViewController
-- (IBAction)openConversation:(id)sender;
 
 @end

@@ -13,16 +13,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <button key="tableFooterView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="h73-cS-V8J">
-                            <rect key="frame" x="0.0" y="130" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            <state key="normal" title="Button">
-                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                            </state>
-                            <connections>
-                                <action selector="openConversation:" destination="8fw-q6-8hv" eventType="touchUpInside" id="FCX-ku-LqV"/>
-                            </connections>
-                        </button>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="qpz-lV-B1C">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
@@ -32,12 +22,25 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="hzS-jB-y9W" kind="push" id="qto-Yc-Tko"/>
+                                    <segue destination="7Pi-r4-Wik" kind="push" id="dRm-I3-L8m"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
                     </tableView>
                     <navigationItem key="navigationItem" title="Conversations" id="AmQ-JW-q92">
+                        <barButtonItem key="leftBarButtonItem" style="plain" id="rYt-Rf-RnW">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cBP-WQ-lV2">
+                                <rect key="frame" x="16" y="5" width="71" height="33"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" title="Open">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <segue destination="7Pi-r4-Wik" kind="push" id="BxF-yf-J73"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="notfriend.png" id="S7J-d6-Whs">
                             <color key="tintColor" red="0.81176477670000002" green="0.40392160420000001" blue="0.40392160420000001" alpha="1" colorSpace="deviceRGB"/>
                             <connections>
@@ -89,17 +92,6 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <button opaque="NO" alpha="0.69999999999999973" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pG7-Z7-0W5">
-                                        <rect key="frame" x="234" y="0.0" width="66" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="New Wire">
-                                            <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <segue destination="z8O-XZ-Gka" kind="push" id="nPp-cR-d9n"/>
-                                        </connections>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Omx-IE-qN3">
                                         <rect key="frame" x="137" y="368" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -121,7 +113,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PHE-GN-Yf3" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="848" y="476"/>
+            <point key="canvasLocation" x="366" y="1153"/>
         </scene>
         <!--Login View Controller - Login-->
         <scene sceneID="pCk-ib-fCd">
@@ -286,6 +278,31 @@
             </objects>
             <point key="canvasLocation" x="1315" y="476"/>
         </scene>
+        <!--Wire Conversations - Friend-->
+        <scene sceneID="vdq-Pr-brM">
+            <objects>
+                <viewController storyboardIdentifier="conversationsController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7Pi-r4-Wik" customClass="wireConversations" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="mRK-dh-iKx"/>
+                        <viewControllerLayoutGuide type="bottom" id="eTv-om-tBD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9gN-wB-TNw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Friend" id="prg-dV-dY3">
+                        <barButtonItem key="rightBarButtonItem" title="New Wire" id="GYk-4j-6xJ">
+                            <connections>
+                                <segue destination="z8O-XZ-Gka" kind="push" id="qQy-hg-Eba"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RFu-4Z-hki" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="894" y="1153"/>
+        </scene>
         <!--Table View Controller - Add Friend-->
         <scene sceneID="jAz-Eg-Qi8">
             <objects>
@@ -294,12 +311,12 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="kUy-Io-pK1">
+                        <searchBar key="tableHeaderView" contentMode="redraw" id="oA1-GB-qa6">
                             <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                             <textInputTraits key="textInputTraits"/>
                             <connections>
-                                <outlet property="delegate" destination="nVi-VI-08d" id="D83-ZG-ieu"/>
+                                <outlet property="delegate" destination="nVi-VI-08d" id="0bY-of-DfZ"/>
                             </connections>
                         </searchBar>
                         <prototypes>
@@ -319,21 +336,29 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Add Friend" id="kmQ-7v-q4x"/>
                     <connections>
-                        <outlet property="searchDisplayController" destination="wDo-DA-FND" id="N0P-we-vvN"/>
+                        <outlet property="searchDisplayController" destination="Py1-Dm-Ym3" id="Yu6-9B-KDL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zhO-wR-Syq" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <searchDisplayController id="wDo-DA-FND">
                     <connections>
                         <outlet property="delegate" destination="nVi-VI-08d" id="pIL-CC-hN4"/>
-                        <outlet property="searchBar" destination="kUy-Io-pK1" id="5vJ-3O-5ac"/>
                         <outlet property="searchContentsController" destination="nVi-VI-08d" id="NIG-qP-6B6"/>
                         <outlet property="searchResultsDataSource" destination="nVi-VI-08d" id="aGN-Wb-WmA"/>
                         <outlet property="searchResultsDelegate" destination="nVi-VI-08d" id="KwN-9M-jph"/>
                     </connections>
                 </searchDisplayController>
+                <searchDisplayController id="Py1-Dm-Ym3">
+                    <connections>
+                        <outlet property="delegate" destination="nVi-VI-08d" id="FZF-OF-YIr"/>
+                        <outlet property="searchBar" destination="oA1-GB-qa6" id="KGW-Uy-cR3"/>
+                        <outlet property="searchContentsController" destination="nVi-VI-08d" id="Z5F-po-jvg"/>
+                        <outlet property="searchResultsDataSource" destination="nVi-VI-08d" id="mON-Fy-VRE"/>
+                        <outlet property="searchResultsDelegate" destination="nVi-VI-08d" id="dhn-7Z-13f"/>
+                    </connections>
+                </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="848" y="1153"/>
+            <point key="canvasLocation" x="894" y="476"/>
         </scene>
         <!--GLKit View Controller-->
         <scene sceneID="Xda-Kx-9bB">
@@ -372,13 +397,12 @@
                     </glkView>
                     <navigationItem key="navigationItem" id="tvd-Gk-SKB">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="Fx7-9d-bKn"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="z47-eQ-xqG"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Fx7-9d-bKn"/>
                     </navigationItem>
                 </glkViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aLW-4z-FpH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1309" y="1153"/>
+            <point key="canvasLocation" x="1315" y="1153"/>
         </scene>
         <!--Wire Root View Controller-->
         <scene sceneID="3GU-QQ-JyJ">
@@ -407,4 +431,7 @@
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="dRm-I3-L8m"/>
+    </inferredMetricsTieBreakers>
 </document>

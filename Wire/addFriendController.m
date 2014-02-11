@@ -1,21 +1,27 @@
 //
-//  friendsViewController.m
+//  addFriendController.m
 //  Wire
 //
-//  Created by Lane Shetron on 12/21/13.
-//  Copyright (c) 2013 VINE Entertainment, Inc. All rights reserved.
+//  Created by Lane Shetron on 2/10/14.
+//  Copyright (c) 2014 VINE Entertainment, Inc. All rights reserved.
 //
 
-#import "friendsViewController.h"
-#import "wireModelController.h"
-#import "wireDataViewController.h"
+#import "addFriendController.h"
 
-@interface friendsViewController ()
+@interface addFriendController ()
 
 @end
 
-@implementation friendsViewController
+@implementation addFriendController
 
+- (id)initWithStyle:(UITableViewStyle)style
+{
+    self = [super initWithStyle:style];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -27,6 +33,30 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+
+-(BOOL)searchDisplayController:(UISearchDisplayController *)controller
+shouldReloadTableForSearchString:(NSString *)searchString
+{
+    [self filterContentForSearchText:searchString
+        scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
+            objectAtIndex:[self.searchDisplayController.searchBar
+                selectedScopeButtonIndex]]];
+    
+    return YES;
+}
+
+- (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
+{
+    // handles finding and returning search information
+}
+
 
 #pragma mark - Table view data source
 
@@ -104,6 +134,5 @@
 }
 
  */
-
 
 @end

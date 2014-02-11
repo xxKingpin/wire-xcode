@@ -20,7 +20,7 @@
  */
 
 @interface wireModelController()
-@property (readonly, strong, nonatomic) NSArray *pageData;
+@property (strong, nonatomic) NSArray *pageData;
 @end
 
 @implementation wireModelController
@@ -47,6 +47,7 @@
         
         // Create the data model.
         _pageData = [NSArray arrayWithObject:@"foo"];
+        //_pageData = [NSArray arrayWithObjects:@"foo", @"bar", nil];
         /*
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         _pageData = [[dateFormatter monthSymbols] copy];
@@ -90,7 +91,7 @@
 /********/
 
 - (wireDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard
-{   
+{
     // Return the data view controller for the given index.
     if (([self.pageData count] == 0) || (index >= [self.pageData count])) {
         return nil;

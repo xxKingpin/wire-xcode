@@ -7,7 +7,6 @@
 //
 
 #import "wireDataViewController.h"
-#import "wireModelController.h"
 
 @interface wireDataViewController ()
 
@@ -39,5 +38,6 @@
         self.imageObject.image = _dataObject;
     }
 }
+
 
 @end
