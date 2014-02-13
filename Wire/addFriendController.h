@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface addFriendController : UITableViewController
+@interface addFriendController : UITableViewController <UISearchDisplayDelegate, UISearchBarDelegate>
+
+@property (retain, nonatomic) NSURLConnection *connection;
+@property (retain, nonatomic) NSMutableData *response;
 
 @end

@@ -58,6 +58,8 @@
 
 - (IBAction)touchDown:(id)sender {
     //[sender setBackgroundColor:[UIColor colorWithRed:0.812 green:0.404 blue:0.404 alpha:1.0]];
+    [uname resignFirstResponder];
+    [upass resignFirstResponder];
     
     if ([uname.text length] != 0 && [upass.text length] != 0)
     {
@@ -107,6 +109,8 @@
     }
     else
     {
+        UIAlertView *loginFailAlert = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"Your username or password is incorrect." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [loginFailAlert show];
         NSLog(@"Login failed.");
     }
     

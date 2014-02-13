@@ -12,7 +12,9 @@
 
 @end
 
-@implementation addFriendController
+@implementation addFriendController {
+    NSArray *searchResults;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,6 +34,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -48,15 +51,64 @@ shouldReloadTableForSearchString:(NSString *)searchString
         scope:[[self.searchDisplayController.searchBar scopeButtonTitles]
             objectAtIndex:[self.searchDisplayController.searchBar
                 selectedScopeButtonIndex]]];
-    
-    return YES;
+
+    return YES; // set to NO because we're updating manually when our information is returned
 }
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
 {
     // handles finding and returning search information
+    if ([searchText length] > 0)
+    {
+        NSString *post = [NSString stringWithFormat:@"wire_search=%@", searchText];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        NSMutableURLRequest *searchRequest = [[NSMutableURLRequest alloc] init];
+        [searchRequest setURL:[NSURL URLWithString:@"http://graffiti.im/wire.php"]];
+        [searchRequest setHTTPMethod:@"POST"];
+        [searchRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [searchRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [searchRequest setHTTPBody:postData];
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:searchRequest delegate:self];
+        self.connection = conn;
+        self.response = [[NSMutableData alloc] init];
+        [conn start];
+    }
 }
 
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [self.response appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"%@", error);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    NSError *error;
+    if (self.response)
+    {
+        NSArray *responseArray = [NSJSONSerialization JSONObjectWithData:self.response options:kNilOptions error:&error];
+    
+        if (responseArray.firstObject)
+        {
+            searchResults = responseArray;
+            [self.tableView reloadData];
+        }
+    }
+    else
+    {
+        searchResults = nil;
+        [self.tableView reloadData];
+    }
+
+    // release connection & response data
+    connection = nil;
+    self.response = nil;
+}
 
 #pragma mark - Table view data source
 
@@ -64,22 +116,38 @@ shouldReloadTableForSearchString:(NSString *)searchString
 {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return 0;
+    if (tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        return [searchResults count];
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (!cell)
+    {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
     
     // Configure the cell...
+    if (tableView == self.searchDisplayController.searchResultsTableView)
+    {
+        cell.textLabel.text = [searchResults objectAtIndex:indexPath.row];
+    }
     
     return cell;
 }
