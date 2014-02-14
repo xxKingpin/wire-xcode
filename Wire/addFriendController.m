@@ -92,7 +92,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     if (self.response)
     {
         NSArray *responseArray = [NSJSONSerialization JSONObjectWithData:self.response options:kNilOptions error:&error];
-    
+
         if (responseArray.firstObject)
         {
             searchResults = responseArray;
@@ -146,7 +146,15 @@ shouldReloadTableForSearchString:(NSString *)searchString
     // Configure the cell...
     if (tableView == self.searchDisplayController.searchResultsTableView)
     {
-        cell.textLabel.text = [searchResults objectAtIndex:indexPath.row];
+        cell.textLabel.text = searchResults[indexPath.row][0];
+        if ([[[searchResults objectAtIndex:indexPath.row] objectAtIndex:1] isEqualToNumber:[NSNumber numberWithInt:2]])
+        {
+            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        }
+        else
+        {
+            [cell setAccessoryType:UITableViewCellAccessoryNone];
+        }
     }
     
     return cell;
