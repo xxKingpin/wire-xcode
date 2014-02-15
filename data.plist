@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>username</key>
+	<string></string>
+	<key>token</key>
+	<string></string>
+	<key>friends</key>
+	<array>
+		<dict>
+			<key>username</key>
+			<string></string>
+			<key>key</key>
+			<string></string>
+		</dict>
+	</array>
+	<key>conversations</key>
+	<dict>
+		<key>username</key>
+		<dict>
+			<key>date</key>
+			<date>2014-02-15T06:41:20Z</date>
+			<key>imagedata</key>
+			<data></data>
+		</dict>
+	</dict>
+</dict>
+</plist>

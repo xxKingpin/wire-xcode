@@ -10,6 +10,8 @@
 		6F25DDCC18A8BE6100533736 /* notfriend.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F25DDCB18A8BE6100533736 /* notfriend.png */; };
 		6F25DDD218A8C83600533736 /* addFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F25DDD118A8C83600533736 /* addFriendController.m */; };
 		6F25DDD818A8DB4B00533736 /* wireConversations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F25DDD718A8DB4B00533736 /* wireConversations.m */; };
+		6F3207AF18AF408D00F3CBCB /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F3207AE18AF408D00F3CBCB /* data.plist */; };
+		6F3207B218AF615B00F3CBCB /* notificationsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3207B118AF615B00F3CBCB /* notificationsController.m */; };
 		6F8FCBF31851A5D400EB0F4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8FCBF21851A5D400EB0F4E /* Foundation.framework */; };
 		6F8FCBF51851A5D400EB0F4E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8FCBF41851A5D400EB0F4E /* CoreGraphics.framework */; };
 		6F8FCBF71851A5D400EB0F4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8FCBF61851A5D400EB0F4E /* UIKit.framework */; };
@@ -51,6 +53,9 @@
 		6F25DDD118A8C83600533736 /* addFriendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = addFriendController.m; path = Wire/addFriendController.m; sourceTree = "<group>"; };
 		6F25DDD618A8DB4B00533736 /* wireConversations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wireConversations.h; path = Wire/wireConversations.h; sourceTree = "<group>"; };
 		6F25DDD718A8DB4B00533736 /* wireConversations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = wireConversations.m; path = Wire/wireConversations.m; sourceTree = "<group>"; };
+		6F3207AE18AF408D00F3CBCB /* data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = data.plist; sourceTree = "<group>"; };
+		6F3207B018AF615B00F3CBCB /* notificationsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notificationsController.h; sourceTree = "<group>"; };
+		6F3207B118AF615B00F3CBCB /* notificationsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = notificationsController.m; sourceTree = "<group>"; };
 		6F8FCBEF1851A5D400EB0F4E /* Wire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8FCBF21851A5D400EB0F4E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6F8FCBF41851A5D400EB0F4E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -113,9 +118,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6F3207AD18AF402100F3CBCB /* resources */ = {
+			isa = PBXGroup;
+			children = (
+				6F3207AE18AF408D00F3CBCB /* data.plist */,
+			);
+			name = resources;
+			sourceTree = "<group>";
+		};
 		6F8FCBE61851A5D400EB0F4E = {
 			isa = PBXGroup;
 			children = (
+				6F3207AD18AF402100F3CBCB /* resources */,
+				6F3207B018AF615B00F3CBCB /* notificationsController.h */,
+				6F3207B118AF615B00F3CBCB /* notificationsController.m */,
 				6F25DDD618A8DB4B00533736 /* wireConversations.h */,
 				6F25DDD718A8DB4B00533736 /* wireConversations.m */,
 				6F25DDD018A8C83600533736 /* addFriendController.h */,
@@ -300,6 +316,7 @@
 				6F8FCC141851A5D400EB0F4E /* Images.xcassets in Resources */,
 				6F25DDCC18A8BE6100533736 /* notfriend.png in Resources */,
 				6F8FCC0F1851A5D400EB0F4E /* Main_iPhone.storyboard in Resources */,
+				6F3207AF18AF408D00F3CBCB /* data.plist in Resources */,
 				6F8FCBFD1851A5D400EB0F4E /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -327,6 +344,7 @@
 				6FEDD73A1853290E0003012E /* loginViewController.m in Sources */,
 				6F8FCC091851A5D400EB0F4E /* wireDataViewController.m in Sources */,
 				6F25DDD218A8C83600533736 /* addFriendController.m in Sources */,
+				6F3207B218AF615B00F3CBCB /* notificationsController.m in Sources */,
 				6FABF2A81887E0B0001F0A0C /* wireDrawing.m in Sources */,
 				E58269E01853D082001C088A /* registerViewController.m in Sources */,
 				6FBCA35D18659F46007BCAD3 /* wireRootNavigationController.m in Sources */,

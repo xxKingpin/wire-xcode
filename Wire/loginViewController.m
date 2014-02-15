@@ -35,6 +35,27 @@
     
     uname.borderStyle = UITextBorderStyleRoundedRect;
     upass.borderStyle = UITextBorderStyleRoundedRect;
+    
+    // read from plist
+    NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+    if ([[plistData objectForKey:@"username"] length] != 0 && [[plistData objectForKey:@"token"] length] != 0)
+    {
+        NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_token=%@", [plistData objectForKey:@"username"], [plistData objectForKey:@"token"]];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        NSMutableURLRequest *loginRequest = [[NSMutableURLRequest alloc] init];
+        [loginRequest setURL:[NSURL URLWithString:@"http://graffiti.im/index.php"]];
+        [loginRequest setHTTPMethod:@"POST"];
+        [loginRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [loginRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [loginRequest setHTTPBody:postData];
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:loginRequest delegate:self];
+        self.connection = conn;
+        self.response = [[NSMutableData alloc] init];
+        [conn start];
+        NSLog(@"Automatic login request sent.");
+    }
 }
 
 - (void)didReceiveMemoryWarning
