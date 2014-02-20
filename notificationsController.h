@@ -9,5 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface notificationsController : UITableViewController
+- (IBAction)returnToFriends:(id)sender;
+
 
 @end

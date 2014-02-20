@@ -16,6 +16,7 @@
     NSArray *searchResults;
 }
 
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -149,6 +150,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         cell.textLabel.text = searchResults[indexPath.row][0];
         if ([[[searchResults objectAtIndex:indexPath.row] objectAtIndex:1] isEqualToNumber:[NSNumber numberWithInt:2]])
         {
+            //friendButton.hidden = YES;
             [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
         }
         else

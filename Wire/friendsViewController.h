@@ -10,4 +10,6 @@
 
 @interface friendsViewController : UITableViewController
 
+@property (strong, nonatomic) NSDictionary *conversations;
+
 @end

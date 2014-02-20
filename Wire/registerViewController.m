@@ -75,7 +75,7 @@
     else
     {
         // submit registration data to graffiti
-        NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_pass=%@&wire_email=%@", uname.text, upass.text, email.text];
+        NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_pass=%@&wire_email=%@&wire_pass_confirm=%@", uname.text, upass.text, email.text, cupass.text];
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
         NSMutableURLRequest *registrationRequest = [[NSMutableURLRequest alloc] init];
@@ -107,14 +107,40 @@
     NSString *responseStr = [[NSString alloc] initWithData:self.response encoding:NSUTF8StringEncoding];
     NSLog(@"Response: %@", responseStr);
     
-    if ([responseStr  isEqual: @"1"])
+    if ([responseStr isEqual:@"0"])
+    {
+        UIAlertView *incompleteAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please complete all fields." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [incompleteAlert show];
+    }
+    else if ([responseStr  isEqual: @"1"])
+    {
+        UIAlertView *mismatchAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your passwords do not match." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [mismatchAlert show];
+    }
+    else if ([responseStr isEqual:@"2"])
+    {
+        UIAlertView *invalidAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter a valid email address." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [invalidAlert show];
+    }
+    else if ([responseStr isEqual:@"3"])
+    {
+        UIAlertView *accountAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There is already an account matching that username or email." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [accountAlert show];
+    }
+    else if ([responseStr isEqual:@"4"])
+    {
+        UIAlertView *databaseAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Registration failed. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [databaseAlert show];
+    }
+    else if ([responseStr isEqual:@"5"])
     {
         NSLog(@"Registration successful.");
         [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
     }
     else
     {
-        NSLog(@"Registration failed.");
+        UIAlertView *failAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Something went wrong. Sorry about that." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [failAlert show];
     }
     
     // release connection & response data

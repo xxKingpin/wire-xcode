@@ -26,6 +26,11 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // load plist
+    NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+    self.conversations = [plistData objectForKey:@"conversations"];
 }
 
 #pragma mark - Table view data source
@@ -39,9 +44,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [self.conversations count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath

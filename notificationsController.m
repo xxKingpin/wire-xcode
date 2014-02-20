@@ -117,4 +117,7 @@
 
  */
 
+- (IBAction)returnToFriends:(id)sender {
+    [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+}
 @end
