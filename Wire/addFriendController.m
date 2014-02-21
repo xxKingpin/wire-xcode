@@ -14,6 +14,7 @@
 
 @implementation addFriendController {
     NSArray *searchResults;
+    NSString *requestRecipient;
 }
 
 
@@ -53,7 +54,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
             objectAtIndex:[self.searchDisplayController.searchBar
                 selectedScopeButtonIndex]]];
 
-    return YES; // set to NO because we're updating manually when our information is returned
+    return YES;
 }
 
 - (void)filterContentForSearchText:(NSString*)searchText scope:(NSString*)scope
@@ -97,12 +98,16 @@ shouldReloadTableForSearchString:(NSString *)searchString
         if (responseArray.firstObject)
         {
             searchResults = responseArray;
+            [self.tableView reloadData];  // we're handling the data correctly, but for some reason this isn't reloading the table
+        }
+        else
+        {
+            searchResults = nil;
             [self.tableView reloadData];
         }
     }
     else
     {
-        searchResults = nil;
         [self.tableView reloadData];
     }
 
@@ -155,11 +160,48 @@ shouldReloadTableForSearchString:(NSString *)searchString
         }
         else
         {
-            [cell setAccessoryType:UITableViewCellAccessoryNone];
+            cell.detailTextLabel.text = @"Add Friend";
+            [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         }
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (![[[searchResults objectAtIndex:indexPath.row] objectAtIndex:1] isEqualToNumber:[NSNumber numberWithInt:2]])
+    {
+        UIAlertView *requestAlert = [[UIAlertView alloc] initWithTitle:@"Add Friend" message:[NSString stringWithFormat:@"Are you sure you want to send %@ a friend request?", searchResults[indexPath.row][0]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
+        [requestAlert show];
+        
+        requestRecipient = searchResults[indexPath.row][0];
+    }
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+        NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+        
+        // send friend request
+        NSString *post = [NSString stringWithFormat:@"wire_request=friend&wire_recipient=%@&wire_sender=%@", requestRecipient, [plistData objectForKey:@"username"]];
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        NSMutableURLRequest *friendRequest = [[NSMutableURLRequest alloc] init];
+        [friendRequest setURL:[NSURL URLWithString:@"http://graffiti.im/wire.php"]];
+        [friendRequest setHTTPMethod:@"POST"];
+        [friendRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [friendRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [friendRequest setHTTPBody:postData];
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:friendRequest delegate:self];
+        self.connection = conn;
+        self.response = [[NSMutableData alloc] init];
+        [conn start];
+        NSLog(@"%@", post);
+    }
 }
 
 /*

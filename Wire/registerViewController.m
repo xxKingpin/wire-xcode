@@ -135,6 +135,16 @@
     else if ([responseStr isEqual:@"5"])
     {
         NSLog(@"Registration successful.");
+        
+        NSString *error;
+        NSURL *plistURL = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+        NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:uname.text, nil] forKeys:[NSArray arrayWithObjects:@"username", nil]];
+        NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+        if (plistData)
+        {
+            [plistData writeToURL:plistURL atomically:YES];
+        }
+        
         [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
     }
     else

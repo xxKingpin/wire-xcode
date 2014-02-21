@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6F027D6418B757F400809259 /* friendRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F027D6318B757F400809259 /* friendRequestController.m */; };
 		6F25DDCC18A8BE6100533736 /* notfriend.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F25DDCB18A8BE6100533736 /* notfriend.png */; };
 		6F25DDD218A8C83600533736 /* addFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F25DDD118A8C83600533736 /* addFriendController.m */; };
 		6F25DDD818A8DB4B00533736 /* wireConversations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F25DDD718A8DB4B00533736 /* wireConversations.m */; };
@@ -48,6 +49,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6F027D6218B757F400809259 /* friendRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = friendRequestController.h; path = Wire/friendRequestController.h; sourceTree = "<group>"; };
+		6F027D6318B757F400809259 /* friendRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = friendRequestController.m; path = Wire/friendRequestController.m; sourceTree = "<group>"; };
 		6F25DDCB18A8BE6100533736 /* notfriend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notfriend.png; sourceTree = "<group>"; };
 		6F25DDD018A8C83600533736 /* addFriendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = addFriendController.h; path = Wire/addFriendController.h; sourceTree = "<group>"; };
 		6F25DDD118A8C83600533736 /* addFriendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = addFriendController.m; path = Wire/addFriendController.m; sourceTree = "<group>"; };
@@ -129,6 +132,8 @@
 		6F8FCBE61851A5D400EB0F4E = {
 			isa = PBXGroup;
 			children = (
+				6F027D6218B757F400809259 /* friendRequestController.h */,
+				6F027D6318B757F400809259 /* friendRequestController.m */,
 				6F3207AD18AF402100F3CBCB /* resources */,
 				6F3207B018AF615B00F3CBCB /* notificationsController.h */,
 				6F3207B118AF615B00F3CBCB /* notificationsController.m */,
@@ -347,6 +352,7 @@
 				6F3207B218AF615B00F3CBCB /* notificationsController.m in Sources */,
 				6FABF2A81887E0B0001F0A0C /* wireDrawing.m in Sources */,
 				E58269E01853D082001C088A /* registerViewController.m in Sources */,
+				6F027D6418B757F400809259 /* friendRequestController.m in Sources */,
 				6FBCA35D18659F46007BCAD3 /* wireRootNavigationController.m in Sources */,
 				6F25DDD818A8DB4B00533736 /* wireConversations.m in Sources */,
 			);
