@@ -12,7 +12,9 @@
 
 @end
 
-@implementation notificationsController
+@implementation notificationsController {
+    NSArray *notificationsResult;
+}
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -32,6 +34,59 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+    
+    // load recent notifications
+    NSString *post = [NSString stringWithFormat:@"wire_notifications=wire&wire_user=%@", [plistData objectForKey:@"username"]];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    NSMutableURLRequest *searchRequest = [[NSMutableURLRequest alloc] init];
+    [searchRequest setURL:[NSURL URLWithString:@"http://graffiti.im/wire.php"]];
+    [searchRequest setHTTPMethod:@"POST"];
+    [searchRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [searchRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [searchRequest setHTTPBody:postData];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:searchRequest delegate:self];
+    self.connection = conn;
+    self.response = [[NSMutableData alloc] init];
+    [conn start];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [self.response appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"%@", error);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    NSError *error;
+    if (self.response)
+    {
+        NSArray *notifications = [NSJSONSerialization JSONObjectWithData:self.response options:kNilOptions error:&error];
+        
+        if (notifications.firstObject)
+        {
+            NSLog(@"yo");
+            notificationsResult = notifications;
+            [self.tableView reloadData];
+        }
+        else
+        {
+            notificationsResult = nil;
+            [self.tableView reloadData];
+        }
+    }
+    
+    // release connection & response data
+    connection = nil;
+    self.response = nil;
 }
 
 - (void)didReceiveMemoryWarning
@@ -58,10 +113,16 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"request";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
+    NSDictionary *notification = [notificationsResult objectAtIndex:indexPath.row];
+    if ([[notification objectForKey:@"content"] rangeOfString:@"sent you a friend request"].location != NSNotFound)
+    {
+        
+    }
+    cell.textLabel.text = [notification objectForKey:@"content"];
     
     return cell;
 }

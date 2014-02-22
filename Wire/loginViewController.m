@@ -125,7 +125,17 @@
     if ([responseStr  isEqual: @"1"])
     {
         NSLog(@"Login successful.");
-        //[self.navigationController popViewControllerAnimated:YES];
+        
+        // update plist
+        NSString *error;
+        NSURL *plistURL = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+        NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:uname.text, nil] forKeys:[NSArray arrayWithObjects:@"username", nil]];
+        NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+        if (plistData)
+        {
+            [plistData writeToURL:plistURL atomically:YES];
+        }
+        
         [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
     }
     else

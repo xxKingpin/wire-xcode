@@ -15,6 +15,7 @@
 @implementation addFriendController {
     NSArray *searchResults;
     NSString *requestRecipient;
+    NSDictionary *plistData;
 }
 
 
@@ -37,6 +38,8 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+    plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
 }
 
 - (void)didReceiveMemoryWarning
@@ -62,7 +65,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     // handles finding and returning search information
     if ([searchText length] > 0)
     {
-        NSString *post = [NSString stringWithFormat:@"wire_search=%@", searchText];
+        NSString *post = [NSString stringWithFormat:@"wire_search=%@&wire_username=%@", searchText, [plistData objectForKey:@"username"]];
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
         NSMutableURLRequest *searchRequest = [[NSMutableURLRequest alloc] init];

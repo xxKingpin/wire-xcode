@@ -11,5 +11,7 @@
 @interface notificationsController : UITableViewController
 - (IBAction)returnToFriends:(id)sender;
 
+@property (retain, nonatomic) NSURLConnection *connection;
+@property (retain, nonatomic) NSMutableData *response;
 
 @end
