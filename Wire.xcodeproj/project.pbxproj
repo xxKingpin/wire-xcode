@@ -278,6 +278,7 @@
 				ORGANIZATIONNAME = "VINE Entertainment, Inc.";
 				TargetAttributes = {
 					6F8FCBEE1851A5D400EB0F4E = {
+						DevelopmentTeam = 34JWB775RX;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -496,11 +497,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Wire/Wire.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Erin May (34JWB775RX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wire/Wire-Prefix.pch";
 				INFOPLIST_FILE = "Wire/Wire-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "C912B227-5F55-4C3A-8403-325BD8A83424";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -511,11 +514,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Wire/Wire.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Erin May (34JWB775RX)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Erin May (34JWB775RX)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Wire/Wire-Prefix.pch";
 				INFOPLIST_FILE = "Wire/Wire-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "C912B227-5F55-4C3A-8403-325BD8A83424";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
