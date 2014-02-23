@@ -413,7 +413,6 @@
                         </subviews>
                         <connections>
                             <outlet property="delegate" destination="4KH-uO-YHZ" id="3IB-ct-mS3"/>
-                            <outlet property="sendBtn" destination="vQA-IR-scK" id="7j5-dO-Ws0"/>
                         </connections>
                     </glkView>
                     <navigationItem key="navigationItem" id="kie-3h-yke">
