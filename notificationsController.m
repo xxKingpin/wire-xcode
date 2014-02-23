@@ -16,6 +16,8 @@
     NSArray *notificationsResult;
 }
 
+@synthesize navBar;
+
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -34,6 +36,13 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    // fix navigation bar in iOS7
+    float currentVersion = 7.0;
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= currentVersion) {
+        // iOS 7
+        navBar.frame = CGRectMake(navBar.frame.origin.x, navBar.frame.origin.y, navBar.frame.size.width, 64);
+    }
     
     NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
     NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
@@ -73,7 +82,6 @@
         
         if (notifications.firstObject)
         {
-            NSLog(@"yo");
             notificationsResult = notifications;
             [self.tableView reloadData];
         }
@@ -101,28 +109,45 @@
 {
 #warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-#warning Incomplete method implementation.
-    // Return the number of rows in the section.
-    return 0;
+    return [notificationsResult count];
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSDictionary *notification = [notificationsResult objectAtIndex:indexPath.row];
+    if ([[notification objectForKey:@"content"] rangeOfString:@"sent you a friend request"].location != NSNotFound)
+    {
+        return 73.0f;
+    }
+    else
+    {
+        return 44.0f;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"request";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    static NSString *CellIdentifier;
     
     // Configure the cell...
     NSDictionary *notification = [notificationsResult objectAtIndex:indexPath.row];
     if ([[notification objectForKey:@"content"] rangeOfString:@"sent you a friend request"].location != NSNotFound)
     {
-        
+        CellIdentifier = @"request";
     }
-    cell.textLabel.text = [notification objectForKey:@"content"];
+    else
+    {
+        CellIdentifier = @"normal";
+    }
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+
+    UILabel *contentLabel = (UILabel *)[cell viewWithTag:3];
+    contentLabel.text = [notification objectForKey:@"content"];
     
     return cell;
 }
@@ -180,5 +205,20 @@
 
 - (IBAction)returnToFriends:(id)sender {
     [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+}
+- (IBAction)requestAccept:(id)sender {
+    // tell server request has been accepted
+    
+    // alert user
+    UIAlertView *acceptAlert = [[UIAlertView alloc] initWithTitle:@"Making Friends" message:@"Friend request accepted!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [acceptAlert show];
+}
+
+- (IBAction)requestDecline:(id)sender {
+    // tell server request declined
+    
+    // alert user
+    UIAlertView *declineAlert = [[UIAlertView alloc] initWithTitle:@"Request Declined" message:@"You have declined this friend request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+    [declineAlert show];
 }
 @end
