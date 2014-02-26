@@ -14,6 +14,7 @@
 
 @implementation notificationsController {
     NSArray *notificationsResult;
+    NSDictionary *plistData;
 }
 
 @synthesize navBar;
@@ -45,7 +46,7 @@
     }
     
     NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
-    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+    plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
     
     // load recent notifications
     NSString *post = [NSString stringWithFormat:@"wire_notifications=wire&wire_user=%@", [plistData objectForKey:@"username"]];
@@ -85,11 +86,11 @@
             notificationsResult = notifications;
             [self.tableView reloadData];
         }
-        else
+        /*else
         {
             notificationsResult = nil;
             [self.tableView reloadData];
-        }
+        }*/
     }
     
     // release connection & response data
@@ -132,22 +133,21 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier;
+    UITableViewCell *cell;
     
     // Configure the cell...
     NSDictionary *notification = [notificationsResult objectAtIndex:indexPath.row];
     if ([[notification objectForKey:@"content"] rangeOfString:@"sent you a friend request"].location != NSNotFound)
     {
-        CellIdentifier = @"request";
+        cell = [tableView dequeueReusableCellWithIdentifier:@"request" forIndexPath:indexPath];
+        UILabel *contentLabel = (UILabel *)[cell viewWithTag:3];
+        contentLabel.text = [notification objectForKey:@"content"];
     }
     else
     {
-        CellIdentifier = @"normal";
+        cell = [tableView dequeueReusableCellWithIdentifier:@"normal" forIndexPath:indexPath];
+        cell.textLabel.text = [notification objectForKey:@"content"];
     }
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-
-    UILabel *contentLabel = (UILabel *)[cell viewWithTag:3];
-    contentLabel.text = [notification objectForKey:@"content"];
     
     return cell;
 }
@@ -206,19 +206,88 @@
 - (IBAction)returnToFriends:(id)sender {
     [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
 }
-- (IBAction)requestAccept:(id)sender {
-    // tell server request has been accepted
-    
-    // alert user
-    UIAlertView *acceptAlert = [[UIAlertView alloc] initWithTitle:@"Making Friends" message:@"Friend request accepted!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [acceptAlert show];
+- (IBAction)requestAccept:(UIButton *)sender {
+    UIView *parentView = sender.superview;
+    while (![parentView.class isSubclassOfClass:UITableViewCell.class])
+    {
+        parentView = parentView.superview;
+    }
+    if ([parentView.class isSubclassOfClass:UITableViewCell.class])
+    {
+        UITableViewCell *cell = (UITableViewCell *) parentView;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
+        // tell server request has been accepted
+        NSDictionary *notification = [notificationsResult objectAtIndex:indexPath.row];
+        NSString *post = [NSString stringWithFormat:@"wire_request=friend&wire_recipient=%@&wire_sender=%@&wire_response=accept",
+                [plistData objectForKey:@"username"], [notification objectForKey:@"sender"]]; // we should add in the login token here, otherwise someone could easily friend whoever they want
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        NSMutableURLRequest *searchRequest = [[NSMutableURLRequest alloc] init];
+        [searchRequest setURL:[NSURL URLWithString:@"http://graffiti.im/wire.php"]];
+        [searchRequest setHTTPMethod:@"POST"];
+        [searchRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [searchRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [searchRequest setHTTPBody:postData];
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:searchRequest delegate:self];
+        self.connection = conn;
+        self.response = [[NSMutableData alloc] init];
+        [conn start];
+        
+        // alert user
+        UIAlertView *acceptAlert = [[UIAlertView alloc] initWithTitle:@"Making Friends" message:@"Friend request accepted!" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [acceptAlert show];
+        
+        // change UI
+        [sender setHidden:YES];
+        UIButton *declineBtn = (UIButton *)[cell viewWithTag:5];
+        [declineBtn setHidden:YES];
+        UILabel *detail = (UILabel *)[cell viewWithTag:2];
+        [detail setHidden:NO];
+        detail.text = @"Accepted!";
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+    }
 }
 
-- (IBAction)requestDecline:(id)sender {
-    // tell server request declined
+- (IBAction)requestDecline:(UIButton *)sender {
+    UIView *parentView = sender.superview;
+    while (![parentView.class isSubclassOfClass:UITableViewCell.class])
+    {
+        parentView = parentView.superview;
+    }
+    if ([parentView.class isSubclassOfClass:UITableViewCell.class])
+    {
+        UITableViewCell *cell = (UITableViewCell *) parentView;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:cell];
+        
+        // tell server request declined
+        NSDictionary *notification = [notificationsResult objectAtIndex:indexPath.row];
+        NSString *post = [NSString stringWithFormat:@"wire_request=friend&wire_recipient=%@&wire_sender=%@&wire_response=decline",
+                [plistData objectForKey:@"username"], [notification objectForKey:@"sender"]]; // we should add in the login token here, otherwise someone could easily friend whoever they want
+        NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+        NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+        NSMutableURLRequest *searchRequest = [[NSMutableURLRequest alloc] init];
+        [searchRequest setURL:[NSURL URLWithString:@"http://graffiti.im/wire.php"]];
+        [searchRequest setHTTPMethod:@"POST"];
+        [searchRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+        [searchRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [searchRequest setHTTPBody:postData];
+        NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:searchRequest delegate:self];
+        self.connection = conn;
+        self.response = [[NSMutableData alloc] init];
+        [conn start];
     
-    // alert user
-    UIAlertView *declineAlert = [[UIAlertView alloc] initWithTitle:@"Request Declined" message:@"You have declined this friend request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
-    [declineAlert show];
+        // alert user
+        UIAlertView *declineAlert = [[UIAlertView alloc] initWithTitle:@"Request Declined" message:@"You have declined this friend request." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles: nil];
+        [declineAlert show];
+        
+        // change UI
+        [sender setHidden:YES];
+        UIButton *acceptBtn = (UIButton *)[cell viewWithTag:4];
+        [acceptBtn setHidden:YES];
+        UILabel *detail = (UILabel *)[cell viewWithTag:2];
+        [detail setHidden:NO];
+        detail.text = @"Request Declined";
+    }
 }
 @end
