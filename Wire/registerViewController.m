@@ -104,41 +104,43 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    NSString *responseStr = [[NSString alloc] initWithData:self.response encoding:NSUTF8StringEncoding];
-    NSLog(@"Response: %@", responseStr);
+    NSError *error;
+    //NSString *responseStr = [[NSString alloc] initWithData:self.response encoding:NSUTF8StringEncoding];
+    NSArray *response = [NSJSONSerialization JSONObjectWithData:self.response options:kNilOptions error:&error];
+    NSLog(@"Response: %@", response);
     
-    if ([responseStr isEqual:@"0"])
+    if ([response[0] isEqual:@"0"])
     {
         UIAlertView *incompleteAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please complete all fields." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [incompleteAlert show];
     }
-    else if ([responseStr  isEqual: @"1"])
+    else if ([response[0]  isEqual: @"1"])
     {
         UIAlertView *mismatchAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Your passwords do not match." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [mismatchAlert show];
     }
-    else if ([responseStr isEqual:@"2"])
+    else if ([response[0] isEqual:@"2"])
     {
         UIAlertView *invalidAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Please enter a valid email address." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [invalidAlert show];
     }
-    else if ([responseStr isEqual:@"3"])
+    else if ([response[0] isEqual:@"3"])
     {
         UIAlertView *accountAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There is already an account matching that username or email." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [accountAlert show];
     }
-    else if ([responseStr isEqual:@"4"])
+    else if ([response[0] isEqual:@"4"])
     {
         UIAlertView *databaseAlert = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Registration failed. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [databaseAlert show];
     }
-    else if ([responseStr isEqual:@"5"])
+    else if ([response[0] isEqual:@"5"])
     {
         NSLog(@"Registration successful.");
         
         NSString *error;
         NSURL *plistURL = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
-        NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:uname.text, nil] forKeys:[NSArray arrayWithObjects:@"username", nil]];
+        NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:uname.text, response[1], nil] forKeys:[NSArray arrayWithObjects:@"username", @"address", nil]];
         NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
         if (plistData)
         {

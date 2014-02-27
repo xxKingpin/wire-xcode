@@ -6,24 +6,28 @@
 	<string></string>
 	<key>token</key>
 	<string></string>
+	<key>address</key>
+	<string></string>
 	<key>friends</key>
 	<array>
 		<dict>
 			<key>username</key>
 			<string></string>
-			<key>key</key>
+			<key>address</key>
 			<string></string>
 		</dict>
 	</array>
 	<key>conversations</key>
 	<dict>
 		<key>username</key>
-		<dict>
-			<key>date</key>
-			<date>2014-02-15T06:41:20Z</date>
-			<key>imagedata</key>
-			<data></data>
-		</dict>
+		<array>
+			<dict>
+				<key>date</key>
+				<date>2014-02-27T09:08:54Z</date>
+				<key>imagedata</key>
+				<data></data>
+			</dict>
+		</array>
 	</dict>
 </dict>
 </plist>

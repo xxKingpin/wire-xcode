@@ -119,17 +119,19 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    NSString *responseStr = [[NSString alloc] initWithData:self.response encoding:NSUTF8StringEncoding];
-    NSLog(@"Response: %@", responseStr);
+    //NSString *responseStr = [[NSString alloc] initWithData:self.response encoding:NSUTF8StringEncoding];
+    NSError *error;
+    NSArray *response = [NSJSONSerialization JSONObjectWithData:self.response options:kNilOptions error:&error];
+    NSLog(@"Response: %@", response);
     
-    if ([responseStr  isEqual: @"1"])
+    if ([response[0]  isEqual: @"1"])
     {
         NSLog(@"Login successful.");
         
         // update plist
         NSString *error;
         NSURL *plistURL = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
-        NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:uname.text, nil] forKeys:[NSArray arrayWithObjects:@"username", nil]];
+        NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:uname.text, response[1], nil] forKeys:[NSArray arrayWithObjects:@"username", @"token", nil]];
         NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
         if (plistData)
         {

@@ -10,6 +10,10 @@
 
 @interface friendsViewController : UITableViewController
 
+@property (retain, nonatomic) NSURLConnection *connection;
+@property (retain, nonatomic) NSMutableData *response;
+
 @property (strong, nonatomic) NSDictionary *conversations;
+@property (strong, nonatomic) NSArray *friends;
 
 @end

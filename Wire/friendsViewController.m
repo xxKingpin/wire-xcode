@@ -31,13 +31,76 @@
     NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
     NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
     self.conversations = [plistData objectForKey:@"conversations"];
+    self.friends = [plistData objectForKey:@"friends"];
+    
+    // update with data from server
+    NSMutableArray *lastMessages = [[NSMutableArray alloc] init];
+    for (id user in self.conversations)
+    {
+        NSDate *lastDate;
+        for (int i = 0; i < [[self.conversations objectForKey:user] count]; i++)
+        {
+            if ([lastDate compare:[[[self.conversations objectForKey:user] objectAtIndex:i] objectForKey:@"date"]] == NSOrderedAscending)
+            {
+                lastDate = [[[self.conversations objectForKey:user] objectAtIndex:i] objectForKey:@"date"];
+            }
+            else if ([lastDate compare:[[[self.conversations objectForKey:user] objectAtIndex:i] objectForKey:@"date"]] == NSOrderedDescending)
+            {
+                // do nothing
+            }
+            else
+            {
+                // added for checking the first element in the array
+                lastDate = [[[self.conversations objectForKey:user] objectAtIndex:i] objectForKey:@"date"];
+            }
+        }
+        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+        [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+        if (user && [dateFormatter stringFromDate:lastDate])
+        {
+            NSDictionary *lastMessage = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:user, [dateFormatter stringFromDate:lastDate], nil] forKeys:[NSArray arrayWithObjects:@"username", @"date", nil]];
+            [lastMessages addObject:lastMessage];
+        }
+    }
+    NSError *error;
+    NSData *jsonData = [NSJSONSerialization dataWithJSONObject:lastMessages options:kNilOptions error:&error];
+    NSString *jsonStr = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
+    
+    NSString *post = [NSString stringWithFormat:@"wire_update=update&wire_user=%@&wire_token=%@&wire_json=%@", [plistData objectForKey:@"username"], [plistData objectForKey:@"token"], jsonStr];
+    NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
+    NSMutableURLRequest *updateRequest = [[NSMutableURLRequest alloc] init];
+    [updateRequest setURL:[NSURL URLWithString:@"http://graffiti.im/wire.php"]];
+    [updateRequest setHTTPMethod:@"POST"];
+    [updateRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    [updateRequest setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    [updateRequest setHTTPBody:postData];
+    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:updateRequest delegate:self];
+    self.connection = conn;
+    self.response = [[NSMutableData alloc] init];
+    [conn start];
 }
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [self.response appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"%@", error);
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+
+}
+
 
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-#warning Potentially incomplete method implementation.
     // Return the number of sections.
     return 0;
 }
