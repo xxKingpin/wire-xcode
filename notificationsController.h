@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface notificationsController : UITableViewController
+
 - (IBAction)returnToFriends:(id)sender;
 @property (strong, nonatomic) IBOutlet UINavigationBar *navBar;
 - (IBAction)requestAccept:(id)sender;

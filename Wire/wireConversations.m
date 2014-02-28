@@ -24,7 +24,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+    self.navigationController.title = self.friendUsername;
     
     UIPageViewController *pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     pageViewController.delegate = self;
@@ -35,6 +35,7 @@
     [pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
     
     pageViewController.dataSource = self.modelController;
+    self.modelController.friendUsername = self.friendUsername;
     
     [self addChildViewController:pageViewController];
     [self.view addSubview:pageViewController.view];

@@ -9,6 +9,7 @@
 #import "friendsViewController.h"
 #import "wireModelController.h"
 #import "wireDataViewController.h"
+#import "wireConversations.h"
 
 @interface friendsViewController ()
 
@@ -93,7 +94,64 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    NSError *error;
+    NSDictionary *response = [NSJSONSerialization JSONObjectWithData:self.response options:kNilOptions error:&error];
+    NSLog(@"Response: %@", response);
 
+    if ([response objectForKey:@"new_data"])
+    {
+        for (NSDictionary *message in [response objectForKey:@"new_data"])
+        {
+            [[self.conversations objectForKey:[message objectForKey:@"username"]] addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[message objectForKey:@"date"], [message objectForKey:@"imagedata"], nil] forKeys:[NSArray arrayWithObjects:@"date", @"imagedata", nil]]];
+        }
+    }
+
+    self.friends = [response objectForKey:@"aspects"];
+    
+    // update cache
+    NSURL *plistURL = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+    NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:self.conversations, self.friends, nil] forKeys:[NSArray arrayWithObjects:@"conversations", @"friends", nil]];
+    NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+    if (plistData)
+    {
+        [plistData writeToURL:plistURL atomically:YES];
+    }
+
+    // update cell list
+    NSMutableArray *cells = [[NSMutableArray alloc] init];
+    for (id user in self.conversations)
+    {
+        NSDictionary *cell = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:user, [[[self.conversations objectForKey:user] lastObject] objectForKey:@"date"], nil] forKeys:[NSArray arrayWithObjects:@"username", @"date", nil]];
+        [cells addObject:cell];
+    }
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:FALSE];
+    [cells sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+
+    NSMutableArray *remainingFriends = [[NSMutableArray alloc] init];
+    for (NSDictionary *friend in self.friends)
+    {
+        [remainingFriends addObject:[NSDictionary dictionaryWithObject:[friend objectForKey:@"username"] forKey:@"username"]];
+    }
+    for (NSDictionary *friend in cells)
+    {
+        for (int i = 0; i < [remainingFriends count]; i++)
+        {
+            if ([friend objectForKey:@"username"] == [remainingFriends[i] objectForKey:@"username"])
+            {
+                [remainingFriends removeObjectAtIndex:i];
+            }
+        }
+    }
+    NSSortDescriptor *alphabetize = [[NSSortDescriptor alloc] initWithKey:@"username" ascending:TRUE];
+    [remainingFriends sortUsingDescriptors:[NSArray arrayWithObject:alphabetize]];
+    
+    self.cellList = [cells arrayByAddingObjectsFromArray:remainingFriends];
+    
+    // release connection & response data
+    self.connection = nil;
+    self.response = nil;
+
+    [self.tableView reloadData];
 }
 
 
@@ -102,21 +160,22 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 0;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.conversations count];
+    return [self.cellList count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"conversation";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    
+    cell.textLabel.text = [self.cellList[indexPath.row] objectForKey:@"username"];
+
     return cell;
 }
 
@@ -159,17 +218,27 @@
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a story board-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(UITableViewCell *)sender
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([segue.identifier isEqualToString:@"openConversation"])
+    {
+        wireConversations *vc = [segue destinationViewController];
+        if ([sender isKindOfClass:[UITableViewCell class]])
+        {
+            NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+            vc.friendUsername = [self.cellList[indexPath.row] objectForKey:@"username"];
+        }
+    }
 }
 
- */
+ 
 
 
 @end

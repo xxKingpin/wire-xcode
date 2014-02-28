@@ -140,6 +140,10 @@
         
         [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
     }
+    else if (response == nil)
+    {
+        // do nothing
+    }
     else
     {
         UIAlertView *loginFailAlert = [[UIAlertView alloc] initWithTitle:@"Login Failed" message:@"Your username or password is incorrect." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];

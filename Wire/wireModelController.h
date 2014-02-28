@@ -14,6 +14,7 @@
 
 @property (retain, nonatomic) NSURLConnection *connection;
 @property (retain, nonatomic) NSMutableData *response;
+@property (strong, nonatomic) NSString *friendUsername;
 
 - (wireDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard;
 - (NSUInteger)indexOfViewController:(wireDataViewController *)viewController;

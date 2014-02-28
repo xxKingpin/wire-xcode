@@ -7,8 +7,8 @@
 //
 
 #import "wireModelController.h"
-
 #import "wireDataViewController.h"
+#import "wireConversations.h"
 
 /*
  A controller object that manages a simple model -- a collection of month names.
@@ -29,6 +29,7 @@
 {
     self = [super init];
     if (self) {
+    /*
         // retrieve messages to/from recipient
         NSString *post = [NSString stringWithFormat:@"wire_type=retrieve&wire_user=%@&wire_recipient=%@", @"user", @"recipient"];
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding];
@@ -44,14 +45,28 @@
         self.response = [[NSMutableData alloc] init];
         [conn start]; // initiate connection
         NSLog(@"Conversation retrieval began.");
+     */
+        
+        // load data from plist
+        NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+        NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+        NSMutableArray *images = [[NSMutableArray alloc] init];
+        for (NSDictionary *message in [plistData objectForKey:self.friendUsername])
+        {
+            NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:[message objectForKey:@"imagedata"] options:0];
+            UIImage *decodedImage = [[UIImage alloc] initWithData:decodedData];
+            [images insertObject:decodedImage atIndex:0]; // add each image to beginning of array
+        }
         
         // Create the data model.
-        _pageData = [NSArray arrayWithObject:@"foo"];
-        //_pageData = [NSArray arrayWithObjects:@"foo", @"bar", nil];
-        /*
-        NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-        _pageData = [[dateFormatter monthSymbols] copy];
-         */
+        if ([images firstObject])
+        {
+            _pageData = [images copy];
+        }
+        else
+        {
+            _pageData = [NSArray arrayWithObject:@"foo"];
+        }
     }
     return self;
 }

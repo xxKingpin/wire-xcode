@@ -13,7 +13,8 @@
 @property (retain, nonatomic) NSURLConnection *connection;
 @property (retain, nonatomic) NSMutableData *response;
 
-@property (strong, nonatomic) NSDictionary *conversations;
+@property (strong, nonatomic) NSMutableDictionary *conversations;
 @property (strong, nonatomic) NSArray *friends;
+@property (strong, nonatomic) NSArray *cellList;
 
 @end

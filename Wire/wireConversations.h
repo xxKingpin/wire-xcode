@@ -10,4 +10,6 @@
 
 @interface wireConversations : UIViewController <UIPageViewControllerDelegate>
 
+@property (strong, nonatomic) NSString *friendUsername;
+
 @end

@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wire/wireConversations.m"
-            timestampString = "413799719.871096"
+            timestampString = "415282459.813348"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
             landmarkName = "-pageViewController:spineLocationForInterfaceOrientation:"
             landmarkType = "5">
          </BreakpointContent>
