@@ -85,6 +85,7 @@
     NSString *jsonStr = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
     
     NSString *post = [NSString stringWithFormat:@"wire_update=update&wire_user=%@&wire_token=%@&wire_json=%@", [plistData objectForKey:@"username"], [plistData objectForKey:@"token"], jsonStr];
+    NSLog(@"%@", post);
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
     NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
     NSMutableURLRequest *updateRequest = [[NSMutableURLRequest alloc] init];
@@ -160,6 +161,10 @@
         [remainingFriends sortUsingDescriptors:[NSArray arrayWithObject:alphabetize]];
     
         self.cellList = [cells arrayByAddingObjectsFromArray:remainingFriends];
+    }
+    else
+    {
+        NSLog(@"%@", response);
     }
   
     // release connection & response data
