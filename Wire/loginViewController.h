@@ -18,5 +18,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *bSubmit;
 - (IBAction)touchDown:(id)sender;
 - (IBAction)touchBackground:(id)sender;
+- (IBAction)beganEditingPass:(id)sender;
+- (IBAction)endedEditingPass:(id)sender;
 
 @end

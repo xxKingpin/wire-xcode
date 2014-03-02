@@ -86,15 +86,15 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wFW-NB-ba9">
-                                <rect key="frame" x="0.0" y="66" width="320" height="566"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="632"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xZL-gB-wJW">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                                        <rect key="frame" x="0.0" y="66" width="320" height="480"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Omx-IE-qN3">
-                                        <rect key="frame" x="137" y="368" width="46" height="30"/>
+                                        <rect key="frame" x="137" y="434" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="Edit">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -135,6 +135,10 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <action selector="beganEditingPass:" destination="phB-pr-9g9" eventType="editingDidBegin" id="sOS-Ww-pHd"/>
+                                    <action selector="endedEditingPass:" destination="phB-pr-9g9" eventType="editingDidEnd" id="Z6M-m2-DIu"/>
+                                </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WIO-Dk-Ggk">
                                 <rect key="frame" x="18" y="325" width="138" height="50"/>
@@ -238,6 +242,10 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                                <connections>
+                                    <action selector="editingBegan:" destination="NYT-FI-X6A" eventType="editingDidBegin" id="WZS-yd-oO6"/>
+                                    <action selector="editingEnded:" destination="NYT-FI-X6A" eventType="editingDidEnd" id="Xpz-9o-I7B"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="n4S-E2-DSD">
                                 <rect key="frame" x="20" y="288" width="280" height="40"/>
@@ -246,6 +254,10 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <action selector="editingBegan:" destination="NYT-FI-X6A" eventType="editingDidBegin" id="LW8-Zw-GG0"/>
+                                    <action selector="editingEnded:" destination="NYT-FI-X6A" eventType="editingDidEnd" id="rye-5L-L1y"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Anb-aM-RnC">
                                 <rect key="frame" x="20" y="336" width="280" height="40"/>
@@ -254,6 +266,10 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                <connections>
+                                    <action selector="editingBegan:" destination="NYT-FI-X6A" eventType="editingDidBegin" id="A9k-D0-Z6u"/>
+                                    <action selector="editingEnded:" destination="NYT-FI-X6A" eventType="editingDidEnd" id="sgv-f6-dBg"/>
+                                </connections>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -292,7 +308,7 @@
             </objects>
             <point key="canvasLocation" x="1315" y="476"/>
         </scene>
-        <!--Wire Conversations - Friend-->
+        <!--Wire Conversations-->
         <scene sceneID="vdq-Pr-brM">
             <objects>
                 <viewController storyboardIdentifier="conversationsController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="7Pi-r4-Wik" customClass="wireConversations" sceneMemberID="viewController">
@@ -305,10 +321,10 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Friend" id="prg-dV-dY3">
+                    <navigationItem key="navigationItem" id="prg-dV-dY3">
                         <barButtonItem key="rightBarButtonItem" title="New Wire" id="GYk-4j-6xJ">
                             <connections>
-                                <segue destination="z8O-XZ-Gka" kind="push" id="qQy-hg-Eba"/>
+                                <segue destination="z8O-XZ-Gka" kind="push" identifier="newWire" id="qQy-hg-Eba"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -385,7 +401,7 @@
         <!--GLKit View Controller-->
         <scene sceneID="Xda-Kx-9bB">
             <objects>
-                <glkViewController autoresizesArchivedViewToFullSize="NO" preferredFramesPerSecond="30" id="z8O-XZ-Gka" sceneMemberID="viewController">
+                <glkViewController storyboardIdentifier="GLKContainer" autoresizesArchivedViewToFullSize="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" preferredFramesPerSecond="30" id="z8O-XZ-Gka" customClass="GLKContainer" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Ywr-nn-nNr"/>
                         <viewControllerLayoutGuide type="bottom" id="AeK-vU-zTO"/>
@@ -428,6 +444,9 @@
                     <navigationItem key="navigationItem" id="tvd-Gk-SKB">
                         <nil key="title"/>
                     </navigationItem>
+                    <connections>
+                        <outlet property="drawingView" destination="72Z-Ie-R4K" id="bT6-Hi-2Wp"/>
+                    </connections>
                 </glkViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aLW-4z-FpH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

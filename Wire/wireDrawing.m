@@ -7,6 +7,7 @@
 //
 
 #import "wireDrawing.h"
+#import "GLKContainer.h"
 
 #define             STROKE_WIDTH_MIN 0.002 // Stroke width determined by touch velocity
 #define             STROKE_WIDTH_MAX 0.015 // default is 0.010
@@ -214,12 +215,25 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
 }
 
 - (IBAction)sendWire:(id)sender {
+    // load plist
+    NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+    
     // capture image
     UIImage *imagedata = [self signatureImage];
     NSData *pngData = UIImagePNGRepresentation(imagedata);
-    
+   
     // send to server
-    NSString *recipient = @"recipient";
+    NSString *address;
+    for (NSDictionary *friend in [plistData objectForKey:@"friends"])
+    {
+        if ([friend objectForKey:@"username"] == self.recipient)
+        {
+            address = [friend objectForKey:@"address"];
+        }
+    }
+    NSString *recipient = self.recipient;
+    NSString *username = [plistData objectForKey:@"username"];
     NSString *wire_type = @"_private";
     NSString *boundary = @"---------------------------14737809831466499882746641449";
     NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@", boundary];
@@ -227,6 +241,12 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     [httpBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [httpBody appendData:[@"Content-Disposition: form-data; name=\"wire_recipient\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     [httpBody appendData:[recipient dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[@"Content-Disposition: form-data; name=\"wire_sender\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[username dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[@"Content-Disposition: form-data; name=\"address\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+    [httpBody appendData:[address dataUsingEncoding:NSUTF8StringEncoding]];
     [httpBody appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [httpBody appendData:[@"Content-Disposition: form-data; name=\"wire_type\"\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     [httpBody appendData:[wire_type dataUsingEncoding:NSUTF8StringEncoding]];

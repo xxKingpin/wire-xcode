@@ -7,14 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "wireConversations.h"
 
 @class wireDataViewController;
 
-@interface wireModelController : NSObject <UIPageViewControllerDataSource>
+@interface wireModelController : NSObject <UIPageViewControllerDataSource, wireConversationsDelegate>
 
 @property (retain, nonatomic) NSURLConnection *connection;
 @property (retain, nonatomic) NSMutableData *response;
 @property (strong, nonatomic) NSString *friendUsername;
+@property (strong, nonatomic) NSArray *conversations;
 
 - (wireDataViewController *)viewControllerAtIndex:(NSUInteger)index storyboard:(UIStoryboard *)storyboard;
 - (NSUInteger)indexOfViewController:(wireDataViewController *)viewController;

@@ -8,6 +8,7 @@
 
 #import "wireConversations.h"
 #import "wireModelController.h"
+#import "GLKContainer.h"
 
 @interface wireConversations ()
 
@@ -17,15 +18,19 @@
 
 @implementation wireConversations
 
+@synthesize delegate;
+@synthesize imageData;
 @synthesize modelController = _modelController;
 
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view.
-    self.navigationController.title = self.friendUsername;
     
+	// Do any additional setup after loading the view.
+    UINavigationController *navCon  = (UINavigationController*) [self.navigationController.viewControllers objectAtIndex:1];
+    navCon.navigationItem.title = self.friendUsername;
+
     UIPageViewController *pageViewController = [[UIPageViewController alloc] initWithTransitionStyle:UIPageViewControllerTransitionStyleScroll navigationOrientation:UIPageViewControllerNavigationOrientationHorizontal options:nil];
     pageViewController.delegate = self;
     
@@ -33,9 +38,10 @@
     wireDataViewController *startingViewController = [self.modelController viewControllerAtIndex:0 storyboard:self.storyboard];
     NSArray *viewControllers = @[startingViewController];
     [pageViewController setViewControllers:viewControllers direction:UIPageViewControllerNavigationDirectionForward animated:NO completion:nil];
-    
+
     pageViewController.dataSource = self.modelController;
     self.modelController.friendUsername = self.friendUsername;
+    
     
     [self addChildViewController:pageViewController];
     [self.view addSubview:pageViewController.view];
@@ -43,12 +49,6 @@
     [pageViewController didMoveToParentViewController:self];
     
     self.view.gestureRecognizers = pageViewController.gestureRecognizers;
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -97,6 +97,15 @@
     
     
     return UIPageViewControllerSpineLocationMid;
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"newWire"])
+    {
+        GLKContainer *vc = [segue destinationViewController];
+        vc.recipient = self.friendUsername;
+    }
 }
 
 @end

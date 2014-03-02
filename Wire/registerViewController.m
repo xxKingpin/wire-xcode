@@ -16,6 +16,8 @@
 
 @synthesize uname, upass, cupass, email;
 
+float delta;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -90,6 +92,27 @@
         [conn start];
         NSLog(@"registration request sent");
     }
+}
+
+- (IBAction)editingBegan:(UITextField *)sender {
+    delta = (sender.frame.origin.y / 2);
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    CGRect rect = self.view.window.frame;
+    rect.origin.y -= (sender.frame.origin.y / 2);
+    rect.size.height += (sender.frame.origin.y / 2);
+    self.view.window.frame = rect;
+    [UIView commitAnimations];
+}
+
+- (IBAction)editingEnded:(id)sender {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    CGRect rect = self.view.window.frame;
+    rect.origin.y += delta;
+    rect.size.height -= delta;
+    self.view.window.frame = rect;
+    [UIView commitAnimations];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data

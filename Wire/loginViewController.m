@@ -58,6 +58,15 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    
+    //CGPoint center = self.view.window.center;
+    //self.view.window.center = CGPointMake(center.x, center.y - 100);
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
@@ -76,6 +85,27 @@
     [upass resignFirstResponder];
 }
 /****/
+
+- (IBAction)beganEditingPass:(id)sender {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    CGRect rect = self.view.window.frame;
+    rect.origin.y -= 80;
+    rect.size.height += 80;
+    self.view.window.frame = rect;
+    [UIView commitAnimations];
+}
+
+- (IBAction)endedEditingPass:(id)sender {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    CGRect rect = self.view.window.frame;
+    rect.origin.y += 80;
+    rect.size.height -= 80;
+    self.view.window.frame = rect;
+    [UIView commitAnimations];
+}
+
 
 - (IBAction)touchDown:(id)sender {
     //[sender setBackgroundColor:[UIColor colorWithRed:0.812 green:0.404 blue:0.404 alpha:1.0]];

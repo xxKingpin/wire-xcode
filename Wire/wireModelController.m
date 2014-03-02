@@ -25,6 +25,7 @@
 
 @implementation wireModelController
 
+
 - (id)init
 {
     self = [super init];
@@ -50,18 +51,19 @@
         // load data from plist
         NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
         NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+        
         NSMutableArray *images = [[NSMutableArray alloc] init];
-        for (NSDictionary *message in [plistData objectForKey:self.friendUsername])
+        for (NSDictionary *message in [[plistData objectForKey:@"conversations"] objectForKey:[plistData objectForKey:@"recipient"]])
         {
             NSData *decodedData = [[NSData alloc] initWithBase64EncodedString:[message objectForKey:@"imagedata"] options:0];
             UIImage *decodedImage = [[UIImage alloc] initWithData:decodedData];
             [images insertObject:decodedImage atIndex:0]; // add each image to beginning of array
         }
-        
+ 
         // Create the data model.
         if ([images firstObject])
         {
-            _pageData = [images copy];
+            _pageData = images;
         }
         else
         {

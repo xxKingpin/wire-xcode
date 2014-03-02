@@ -27,7 +27,24 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+
+    // load plist
+    NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+    self.conversations = [plistData objectForKey:@"conversations"];
+    self.friends = [plistData objectForKey:@"friends"];
     
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    [self updateConversationsData];
+}
+
+- (void)updateConversationsData
+{
     // load plist
     NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
     NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
@@ -96,57 +113,55 @@
 {
     NSError *error;
     NSDictionary *response = [NSJSONSerialization JSONObjectWithData:self.response options:kNilOptions error:&error];
-    NSLog(@"Response: %@", response);
-
-    if ([response objectForKey:@"new_data"])
+    if ([[response objectForKey:@"aspects"] count] > 0)
     {
-        for (NSDictionary *message in [response objectForKey:@"new_data"])
+        self.conversations = [[NSMutableDictionary alloc] init];
+        NSLog(@"Response: %@", response);
+
+        if ([response objectForKey:@"new_data"])
         {
-            [[self.conversations objectForKey:[message objectForKey:@"username"]] addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[message objectForKey:@"date"], [message objectForKey:@"imagedata"], nil] forKeys:[NSArray arrayWithObjects:@"date", @"imagedata", nil]]];
-        }
-    }
-
-    self.friends = [response objectForKey:@"aspects"];
-    
-    // update cache
-    NSURL *plistURL = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
-    NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:self.conversations, self.friends, nil] forKeys:[NSArray arrayWithObjects:@"conversations", @"friends", nil]];
-    NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
-    if (plistData)
-    {
-        [plistData writeToURL:plistURL atomically:YES];
-    }
-
-    // update cell list
-    NSMutableArray *cells = [[NSMutableArray alloc] init];
-    for (id user in self.conversations)
-    {
-        NSDictionary *cell = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:user, [[[self.conversations objectForKey:user] lastObject] objectForKey:@"date"], nil] forKeys:[NSArray arrayWithObjects:@"username", @"date", nil]];
-        [cells addObject:cell];
-    }
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:FALSE];
-    [cells sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-
-    NSMutableArray *remainingFriends = [[NSMutableArray alloc] init];
-    for (NSDictionary *friend in self.friends)
-    {
-        [remainingFriends addObject:[NSDictionary dictionaryWithObject:[friend objectForKey:@"username"] forKey:@"username"]];
-    }
-    for (NSDictionary *friend in cells)
-    {
-        for (int i = 0; i < [remainingFriends count]; i++)
-        {
-            if ([friend objectForKey:@"username"] == [remainingFriends[i] objectForKey:@"username"])
+            for (NSDictionary *message in [response objectForKey:@"new_data"])
             {
-                [remainingFriends removeObjectAtIndex:i];
+                if (![self.conversations objectForKey:[message objectForKey:@"username"]])
+                {
+                    [self.conversations setObject:[NSMutableArray array] forKey:[message objectForKey:@"username"]];
+                }
+                [[self.conversations objectForKey:[message objectForKey:@"username"]] addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[message objectForKey:@"date"], [message objectForKey:@"imagedata"], nil] forKeys:[NSArray arrayWithObjects:@"date", @"imagedata", nil]]];
             }
         }
+        self.friends = [response objectForKey:@"aspects"];
+
+        // update cell list
+        NSMutableArray *cells = [[NSMutableArray alloc] init];
+        for (id user in self.conversations)
+        {
+            NSDictionary *cell = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:user, [[[self.conversations objectForKey:user] lastObject] objectForKey:@"date"], nil] forKeys:[NSArray arrayWithObjects:@"username", @"date", nil]];
+            [cells addObject:cell];
+        }
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:FALSE];
+        [cells sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+
+        NSMutableArray *remainingFriends = [[NSMutableArray alloc] init];
+        for (NSDictionary *friend in self.friends)
+        {
+            [remainingFriends addObject:[NSDictionary dictionaryWithObject:[friend objectForKey:@"username"] forKey:@"username"]];
+        }
+        for (NSDictionary *friend in cells)
+        {
+            for (int i = 0; i < [remainingFriends count]; i++)
+            {
+                if ([friend objectForKey:@"username"] == [remainingFriends[i] objectForKey:@"username"])
+                {
+                    [remainingFriends removeObjectAtIndex:i];
+                }
+            }
+        }
+        NSSortDescriptor *alphabetize = [[NSSortDescriptor alloc] initWithKey:@"username" ascending:TRUE];
+        [remainingFriends sortUsingDescriptors:[NSArray arrayWithObject:alphabetize]];
+    
+        self.cellList = [cells arrayByAddingObjectsFromArray:remainingFriends];
     }
-    NSSortDescriptor *alphabetize = [[NSSortDescriptor alloc] initWithKey:@"username" ascending:TRUE];
-    [remainingFriends sortUsingDescriptors:[NSArray arrayWithObject:alphabetize]];
-    
-    self.cellList = [cells arrayByAddingObjectsFromArray:remainingFriends];
-    
+  
     // release connection & response data
     self.connection = nil;
     self.response = nil;
@@ -234,6 +249,19 @@
         {
             NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
             vc.friendUsername = [self.cellList[indexPath.row] objectForKey:@"username"];
+            vc.conversations = self.conversations;
+            
+            NSError *error;
+            if (self.conversations && self.friends)
+            {
+                NSURL *plistURL = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+                NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:self.conversations, self.friends, [self.cellList[indexPath.row] objectForKey:@"username"], nil] forKeys:[NSArray arrayWithObjects:@"conversations", @"friends", @"recipient", nil]];
+                NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+                if (plistData)
+                {
+                    [plistData writeToURL:plistURL atomically:YES];
+                }
+            }
         }
     }
 }

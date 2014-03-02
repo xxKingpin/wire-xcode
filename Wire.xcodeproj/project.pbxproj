@@ -13,6 +13,7 @@
 		6F25DDD818A8DB4B00533736 /* wireConversations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F25DDD718A8DB4B00533736 /* wireConversations.m */; };
 		6F3207AF18AF408D00F3CBCB /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F3207AE18AF408D00F3CBCB /* data.plist */; };
 		6F3207B218AF615B00F3CBCB /* notificationsController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F3207B118AF615B00F3CBCB /* notificationsController.m */; };
+		6F805B6318C12C9A00FEBF25 /* GLKContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F805B6218C12C9A00FEBF25 /* GLKContainer.m */; };
 		6F8FCBF31851A5D400EB0F4E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8FCBF21851A5D400EB0F4E /* Foundation.framework */; };
 		6F8FCBF51851A5D400EB0F4E /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8FCBF41851A5D400EB0F4E /* CoreGraphics.framework */; };
 		6F8FCBF71851A5D400EB0F4E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F8FCBF61851A5D400EB0F4E /* UIKit.framework */; };
@@ -59,6 +60,8 @@
 		6F3207AE18AF408D00F3CBCB /* data.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = data.plist; sourceTree = "<group>"; };
 		6F3207B018AF615B00F3CBCB /* notificationsController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = notificationsController.h; sourceTree = "<group>"; };
 		6F3207B118AF615B00F3CBCB /* notificationsController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = notificationsController.m; sourceTree = "<group>"; };
+		6F805B6118C12C9A00FEBF25 /* GLKContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLKContainer.h; path = Wire/GLKContainer.h; sourceTree = "<group>"; };
+		6F805B6218C12C9A00FEBF25 /* GLKContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GLKContainer.m; path = Wire/GLKContainer.m; sourceTree = "<group>"; };
 		6F8FCBEF1851A5D400EB0F4E /* Wire.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Wire.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6F8FCBF21851A5D400EB0F4E /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		6F8FCBF41851A5D400EB0F4E /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -132,6 +135,8 @@
 		6F8FCBE61851A5D400EB0F4E = {
 			isa = PBXGroup;
 			children = (
+				6F805B6118C12C9A00FEBF25 /* GLKContainer.h */,
+				6F805B6218C12C9A00FEBF25 /* GLKContainer.m */,
 				6F027D6218B757F400809259 /* friendRequestController.h */,
 				6F027D6318B757F400809259 /* friendRequestController.m */,
 				6F3207AD18AF402100F3CBCB /* resources */,
@@ -353,6 +358,7 @@
 				6F3207B218AF615B00F3CBCB /* notificationsController.m in Sources */,
 				6FABF2A81887E0B0001F0A0C /* wireDrawing.m in Sources */,
 				E58269E01853D082001C088A /* registerViewController.m in Sources */,
+				6F805B6318C12C9A00FEBF25 /* GLKContainer.m in Sources */,
 				6F027D6418B757F400809259 /* friendRequestController.m in Sources */,
 				6FBCA35D18659F46007BCAD3 /* wireRootNavigationController.m in Sources */,
 				6F25DDD818A8DB4B00533736 /* wireConversations.m in Sources */,

@@ -8,8 +8,24 @@
 
 #import <UIKit/UIKit.h>
 
-@interface wireConversations : UIViewController <UIPageViewControllerDelegate>
+@protocol wireConversationsDelegate;
 
+@interface wireConversations : UIViewController <UIPageViewControllerDelegate>
+{
+    id<wireConversationsDelegate> delegate;
+    
+    NSArray *imageData;
+}
+
+@property (strong, nonatomic) id<wireConversationsDelegate> delegate;
+@property (strong, nonatomic) NSArray *imageData;
 @property (strong, nonatomic) NSString *friendUsername;
+@property (strong, nonatomic) NSMutableDictionary *conversations;
+
+@end
+
+@protocol wireConversationsDelegate
+
+- (void)passImageData:(wireConversations *)WireConversations;
 
 @end

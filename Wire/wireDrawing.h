@@ -13,6 +13,7 @@
 
 @property (retain, nonatomic) NSURLConnection *connection;
 @property (retain, nonatomic) NSMutableData *response;
+@property (retain, nonatomic) NSString *recipient;
 
 @property (assign, nonatomic) BOOL hasSignature;
 @property (strong, nonatomic) UIImage *signatureImage;

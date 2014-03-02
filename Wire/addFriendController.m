@@ -101,17 +101,17 @@ shouldReloadTableForSearchString:(NSString *)searchString
         if (responseArray.firstObject)
         {
             searchResults = responseArray;
-            [self.tableView reloadData];  // we're handling the data correctly, but for some reason this isn't reloading the table
+            [self.searchDisplayController.searchResultsTableView reloadData];
         }
         else
         {
             searchResults = nil;
-            [self.tableView reloadData];
+            [self.searchDisplayController.searchResultsTableView reloadData];
         }
     }
     else
     {
-        [self.tableView reloadData];
+        [self.searchDisplayController.searchResultsTableView reloadData];
     }
 
     // release connection & response data
