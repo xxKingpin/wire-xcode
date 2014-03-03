@@ -33,7 +33,6 @@
     NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
     self.conversations = [plistData objectForKey:@"conversations"];
     self.friends = [plistData objectForKey:@"friends"];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -259,12 +258,29 @@
             NSError *error;
             if (self.conversations && self.friends)
             {
-                NSURL *plistURL = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
-                NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:self.conversations, self.friends, [self.cellList[indexPath.row] objectForKey:@"username"], nil] forKeys:[NSArray arrayWithObjects:@"conversations", @"friends", @"recipient", nil]];
-                NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
-                if (plistData)
+                NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+                NSDictionary *plistOldData = [NSDictionary dictionaryWithContentsOfURL:plist];
+                
+                if ([plistOldData objectForKey:@"address"])
                 {
-                    [plistData writeToURL:plistURL atomically:YES];
+                    NSURL *plistURL = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+                    NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[plistOldData objectForKey:@"username"], [plistOldData objectForKey:@"token"], [plistOldData objectForKey:@"address"], self.conversations, self.friends, [self.cellList[indexPath.row] objectForKey:@"username"], nil] forKeys:[NSArray arrayWithObjects:@"username", @"token", @"address", @"conversations", @"friends", @"recipient", nil]];
+                    NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+                    if (plistData)
+                    {
+                        [plistData writeToURL:plistURL atomically:YES];
+                    }
+                }
+                else
+                {
+                    // I should actually probably add in a provision here to retrieve the address if it isn't already present
+                    NSURL *plistURL = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+                    NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[plistOldData objectForKey:@"username"], [plistOldData objectForKey:@"token"], self.conversations, self.friends, [self.cellList[indexPath.row] objectForKey:@"username"], nil] forKeys:[NSArray arrayWithObjects:@"username", @"token", @"conversations", @"friends", @"recipient", nil]];
+                    NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+                    if (plistData)
+                    {
+                        [plistData writeToURL:plistURL atomically:YES];
+                    }
                 }
             }
         }
