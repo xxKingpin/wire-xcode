@@ -227,12 +227,12 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     NSString *address;
     for (NSDictionary *friend in [plistData objectForKey:@"friends"])
     {
-        if ([friend objectForKey:@"username"] == self.recipient)
+        if ([friend objectForKey:@"username"] == [plistData objectForKey:@"recipient"])
         {
             address = [friend objectForKey:@"address"];
         }
     }
-    NSString *recipient = self.recipient;
+    NSString *recipient = [plistData objectForKey:@"recipient"];
     NSString *username = [plistData objectForKey:@"username"];
     NSString *wire_type = @"_private";
     NSString *boundary = @"---------------------------14737809831466499882746641449";
@@ -266,7 +266,7 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     self.response = [[NSMutableData alloc] init];
     [conn start];
     NSLog(@"Wire sent!");
-    
+
     // perform animations
 }
 
