@@ -162,12 +162,15 @@ float delta;
         NSLog(@"Registration successful.");
         
         NSString *error;
-        NSURL *plistURL = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
         NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:uname.text, response[1], nil] forKeys:[NSArray arrayWithObjects:@"username", @"address", nil]];
         NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+        
+        NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
+        NSString *prefsDirectory = [[sysPaths objectAtIndex:0] stringByAppendingPathComponent:@"/Preferences"];
+        NSString *outputFilePath = [prefsDirectory stringByAppendingPathComponent:@"data.plist"];
         if (plistData)
         {
-            [plistData writeToURL:plistURL atomically:YES];
+            [plistData writeToFile:outputFilePath atomically:YES];
         }
         
         [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];

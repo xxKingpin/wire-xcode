@@ -29,8 +29,16 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 
     // load plist
-    NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
-    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+    /*
+        NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
+        NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+        self.conversations = [plistData objectForKey:@"conversations"];
+        self.friends = [plistData objectForKey:@"friends"];
+     */
+    NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
+    NSString *prefsDirectory = [[sysPaths objectAtIndex:0] stringByAppendingPathComponent:@"/Preferences"];
+    NSString *outputFilePath = [prefsDirectory stringByAppendingPathComponent:@"data.plist"];
+    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:outputFilePath];
     self.conversations = [plistData objectForKey:@"conversations"];
     self.friends = [plistData objectForKey:@"friends"];
 }
@@ -45,11 +53,14 @@
 - (void)updateConversationsData
 {
     // load plist
-    NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
-    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+    NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
+    NSString *prefsDirectory = [[sysPaths objectAtIndex:0] stringByAppendingPathComponent:@"/Preferences"];
+    NSString *outputFilePath = [prefsDirectory stringByAppendingPathComponent:@"data.plist"];
+    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:outputFilePath];
     self.conversations = [plistData objectForKey:@"conversations"];
     self.friends = [plistData objectForKey:@"friends"];
     
+
     // update with data from server
     NSMutableArray *lastMessages = [[NSMutableArray alloc] init];
     for (id user in self.conversations)
@@ -258,28 +269,30 @@
             NSError *error;
             if (self.conversations && self.friends)
             {
-                NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
-                NSDictionary *plistOldData = [NSDictionary dictionaryWithContentsOfURL:plist];
+                NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
+                NSString *prefsDirectory = [[sysPaths objectAtIndex:0] stringByAppendingPathComponent:@"/Preferences"];
+                NSString *outputFilePath = [prefsDirectory stringByAppendingPathComponent:@"data.plist"];
+                NSDictionary *plistOldData = [NSDictionary dictionaryWithContentsOfFile:outputFilePath];
                 
                 if ([plistOldData objectForKey:@"address"])
                 {
-                    NSURL *plistURL = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
                     NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[plistOldData objectForKey:@"username"], [plistOldData objectForKey:@"token"], [plistOldData objectForKey:@"address"], self.conversations, self.friends, [self.cellList[indexPath.row] objectForKey:@"username"], nil] forKeys:[NSArray arrayWithObjects:@"username", @"token", @"address", @"conversations", @"friends", @"recipient", nil]];
                     NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+                    
                     if (plistData)
                     {
-                        [plistData writeToURL:plistURL atomically:YES];
+                        [plistData writeToFile:outputFilePath atomically:YES];
                     }
                 }
                 else
                 {
                     // I should actually probably add in a provision here to retrieve the address if it isn't already present
-                    NSURL *plistURL = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
                     NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[plistOldData objectForKey:@"username"], [plistOldData objectForKey:@"token"], self.conversations, self.friends, [self.cellList[indexPath.row] objectForKey:@"username"], nil] forKeys:[NSArray arrayWithObjects:@"username", @"token", @"conversations", @"friends", @"recipient", nil]];
                     NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+                    
                     if (plistData)
                     {
-                        [plistData writeToURL:plistURL atomically:YES];
+                        [plistData writeToFile:outputFilePath atomically:YES];
                     }
                 }
             }
@@ -287,7 +300,6 @@
     }
 }
 
- 
 
 
 @end

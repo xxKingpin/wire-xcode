@@ -37,8 +37,10 @@
     upass.borderStyle = UITextBorderStyleRoundedRect;
     
     // read from plist
-    NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
-    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+    NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
+    NSString *prefsDirectory = [[sysPaths objectAtIndex:0] stringByAppendingPathComponent:@"/Preferences"];
+    NSString *outputFilePath = [prefsDirectory stringByAppendingPathComponent:@"data.plist"];
+    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:outputFilePath];
     if ([[plistData objectForKey:@"username"] length] != 0 && [[plistData objectForKey:@"token"] length] != 0)
     {
         NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_token=%@", [plistData objectForKey:@"username"], [plistData objectForKey:@"token"]];
@@ -157,15 +159,18 @@
     if ([response[0]  isEqual: @"1"])
     {
         NSLog(@"Login successful.");
-        
+
         // update plist
         NSString *error;
-        NSURL *plistURL = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
         NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:uname.text, response[1], nil] forKeys:[NSArray arrayWithObjects:@"username", @"token", nil]];
         NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
+        
+        NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
+        NSString *prefsDirectory = [[sysPaths objectAtIndex:0] stringByAppendingPathComponent:@"/Preferences"];
+        NSString *outputFilePath = [prefsDirectory stringByAppendingPathComponent:@"data.plist"];
         if (plistData)
         {
-            [plistData writeToURL:plistURL atomically:YES];
+            [plistData writeToFile:outputFilePath atomically:YES];
         }
         
         [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];

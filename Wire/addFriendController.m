@@ -38,8 +38,10 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
-    plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+    NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
+    NSString *prefsDirectory = [[sysPaths objectAtIndex:0] stringByAppendingPathComponent:@"/Preferences"];
+    NSString *outputFilePath = [prefsDirectory stringByAppendingPathComponent:@"data.plist"];
+    plistData = [NSDictionary dictionaryWithContentsOfFile:outputFilePath];
 }
 
 - (void)didReceiveMemoryWarning
@@ -186,8 +188,10 @@ shouldReloadTableForSearchString:(NSString *)searchString
 {
     if (buttonIndex == 1)
     {
-        NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
-        NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+        NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
+        NSString *prefsDirectory = [[sysPaths objectAtIndex:0] stringByAppendingPathComponent:@"/Preferences"];
+        NSString *outputFilePath = [prefsDirectory stringByAppendingPathComponent:@"data.plist"];
+        NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:outputFilePath];
         
         // send friend request
         NSString *post = [NSString stringWithFormat:@"wire_request=friend&wire_recipient=%@&wire_sender=%@", requestRecipient, [plistData objectForKey:@"username"]];

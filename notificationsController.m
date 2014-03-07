@@ -45,8 +45,10 @@
         navBar.frame = CGRectMake(navBar.frame.origin.x, navBar.frame.origin.y, navBar.frame.size.width, 64);
     }
     
-    NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
-    plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+    NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
+    NSString *prefsDirectory = [[sysPaths objectAtIndex:0] stringByAppendingPathComponent:@"/Preferences"];
+    NSString *outputFilePath = [prefsDirectory stringByAppendingPathComponent:@"data.plist"];
+    plistData = [NSDictionary dictionaryWithContentsOfFile:outputFilePath];
     
     // load recent notifications
     NSString *post = [NSString stringWithFormat:@"wire_notifications=wire&wire_user=%@", [plistData objectForKey:@"username"]];
@@ -80,7 +82,7 @@
     if (self.response)
     {
         NSArray *notifications = [NSJSONSerialization JSONObjectWithData:self.response options:kNilOptions error:&error];
-        
+        NSLog(@"%@", notifications);
         if (notifications.firstObject)
         {
             notificationsResult = notifications;

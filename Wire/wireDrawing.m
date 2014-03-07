@@ -216,8 +216,10 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
 
 - (IBAction)sendWire:(id)sender {
     // load plist
-    NSURL *plist = [[NSBundle mainBundle] URLForResource:@"data" withExtension:@"plist"];
-    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfURL:plist];
+    NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
+    NSString *prefsDirectory = [[sysPaths objectAtIndex:0] stringByAppendingPathComponent:@"/Preferences"];
+    NSString *outputFilePath = [prefsDirectory stringByAppendingPathComponent:@"data.plist"];
+    NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:outputFilePath];
     
     // capture image
     UIImage *imagedata = [self signatureImage];

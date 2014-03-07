@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wire/loginViewController.m"
-            timestampString = "415431406.089425"
+            timestampString = "415868024.126077"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "121"
+            endingLineNumber = "121"
             landmarkName = "-touchDown:"
             landmarkType = "5">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wire/wireDrawing.m"
-            timestampString = "415315871.749878"
+            timestampString = "415869073.421889"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "239"
-            endingLineNumber = "239"
+            startingLineNumber = "241"
+            endingLineNumber = "241"
             landmarkName = "-sendWire:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wire/wireDrawing.m"
-            timestampString = "415315871.749878"
+            timestampString = "415869073.421889"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "236"
-            endingLineNumber = "236"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "-sendWire:"
             landmarkType = "5">
          </BreakpointContent>
@@ -73,12 +73,12 @@
                   symbolName = "-[wireConversations pageViewController:spineLocationForInterfaceOrientation:]"
                   moduleName = "Wire"
                   urlString = "file:///Users/laneshetron/Documents/xcode/wire/Wire/Wire/wireConversations.m"
-                  timestampString = "415861321.835756"
+                  timestampString = "415870505.237702"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "99"
                   endingLineNumber = "99"
-                  offsetFromSymbolStart = "1357">
+                  offsetFromSymbolStart = "1308">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -87,12 +87,12 @@
                   symbolName = "-[wireConversations pageViewController:spineLocationForInterfaceOrientation:]"
                   moduleName = "Wire"
                   urlString = "file:///Users/laneshetron/Documents/xcode/wire/Wire/Wire/wireConversations.m"
-                  timestampString = "415861321.836086"
+                  timestampString = "415870505.238094"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "99"
                   endingLineNumber = "99"
-                  offsetFromSymbolStart = "1431">
+                  offsetFromSymbolStart = "1346">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -104,11 +104,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wire/addFriendController.m"
-            timestampString = "415426108.542506"
+            timestampString = "415870322.185922"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "158"
-            endingLineNumber = "158"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -120,11 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "notificationsController.m"
-            timestampString = "415101900.636889"
+            timestampString = "415870086.22123"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "-tableView:cellForRowAtIndexPath:"
             landmarkType = "5">
          </BreakpointContent>
@@ -136,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wire/wireModelController.m"
-            timestampString = "415410655.764094"
+            timestampString = "415868669.254174"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "62"
+            endingLineNumber = "62"
             landmarkName = "-init"
             landmarkType = "5">
          </BreakpointContent>
@@ -159,36 +159,6 @@
             endingLineNumber = "16"
             landmarkName = "connection"
             landmarkType = "19">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[wireModelController connection]"
-                  moduleName = "Wire"
-                  urlString = "file:///Users/laneshetron/Documents/xcode/wire/Wire/Wire/wireModelController.h"
-                  timestampString = "415861321.83638"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16"
-                  offsetFromSymbolStart = "24">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[wireModelController setConnection:]"
-                  moduleName = "Wire"
-                  urlString = "file:///Users/laneshetron/Documents/xcode/wire/Wire/Wire/wireModelController.h"
-                  timestampString = "415861321.836645"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16"
-                  offsetFromSymbolStart = "31">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
