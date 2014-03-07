@@ -59,7 +59,7 @@
             UIImage *decodedImage = [[UIImage alloc] initWithData:decodedData];
             [images insertObject:decodedImage atIndex:0]; // add each image to beginning of array
         }
- 
+
         // Create the data model.
         if ([images firstObject])
         {
