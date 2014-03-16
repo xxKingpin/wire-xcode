@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wire/loginViewController.m"
-            timestampString = "415868024.126077"
+            timestampString = "416652597.511812"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "121"
-            endingLineNumber = "121"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "-touchDown:"
             landmarkType = "5">
          </BreakpointContent>
@@ -65,36 +65,6 @@
             endingLineNumber = "98"
             landmarkName = "-pageViewController:spineLocationForInterfaceOrientation:"
             landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[wireConversations pageViewController:spineLocationForInterfaceOrientation:]"
-                  moduleName = "Wire"
-                  urlString = "file:///Users/laneshetron/Documents/xcode/wire/Wire/Wire/wireConversations.m"
-                  timestampString = "415870505.237702"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99"
-                  offsetFromSymbolStart = "1308">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[wireConversations pageViewController:spineLocationForInterfaceOrientation:]"
-                  moduleName = "Wire"
-                  urlString = "file:///Users/laneshetron/Documents/xcode/wire/Wire/Wire/wireConversations.m"
-                  timestampString = "415870505.238094"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "99"
-                  endingLineNumber = "99"
-                  offsetFromSymbolStart = "1346">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -159,6 +129,36 @@
             endingLineNumber = "16"
             landmarkName = "connection"
             landmarkType = "19">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[wireModelController connection]"
+                  moduleName = "Wire"
+                  urlString = "file:///Users/laneshetron/Documents/xcode/wire/Wire/Wire/wireModelController.h"
+                  timestampString = "416652758.850502"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "24">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[wireModelController setConnection:]"
+                  moduleName = "Wire"
+                  urlString = "file:///Users/laneshetron/Documents/xcode/wire/Wire/Wire/wireModelController.h"
+                  timestampString = "416652758.850831"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "31">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

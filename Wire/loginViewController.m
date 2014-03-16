@@ -36,6 +36,13 @@
     uname.borderStyle = UITextBorderStyleRoundedRect;
     upass.borderStyle = UITextBorderStyleRoundedRect;
     
+}
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    /// automatic login
     // read from plist
     NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
     NSString *prefsDirectory = [[sysPaths objectAtIndex:0] stringByAppendingPathComponent:@"/Preferences"];
@@ -58,15 +65,6 @@
         [conn start];
         NSLog(@"Automatic login request sent.");
     }
-}
-
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    
-    //CGPoint center = self.view.window.center;
-    //self.view.window.center = CGPointMake(center.x, center.y - 100);
 }
 
 - (void)didReceiveMemoryWarning

@@ -509,7 +509,7 @@
 				GCC_PREFIX_HEADER = "Wire/Wire-Prefix.pch";
 				INFOPLIST_FILE = "Wire/Wire-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "2E423DC0-F40C-4F4A-AB88-C6F379099584";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
