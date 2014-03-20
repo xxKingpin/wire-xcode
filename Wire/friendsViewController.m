@@ -122,59 +122,62 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    NSError *error;
-    NSDictionary *response = [NSJSONSerialization JSONObjectWithData:self.response options:kNilOptions error:&error];
-    if ([[response objectForKey:@"aspects"] count] > 0)
+    if (self.response != nil)
     {
-        self.conversations = [[NSMutableDictionary alloc] init];
-        NSLog(@"Response: %@", response);
-
-        if ([response objectForKey:@"new_data"])
+        NSError *error;
+        NSDictionary *response = [NSJSONSerialization JSONObjectWithData:self.response options:kNilOptions error:&error];
+        if ([[response objectForKey:@"aspects"] count] > 0)
         {
-            for (NSDictionary *message in [response objectForKey:@"new_data"])
+            self.conversations = [[NSMutableDictionary alloc] init];
+            NSLog(@"Response: %@", response);
+
+            if ([response objectForKey:@"new_data"])
             {
-                if (![self.conversations objectForKey:[message objectForKey:@"username"]])
+                for (NSDictionary *message in [response objectForKey:@"new_data"])
                 {
-                    [self.conversations setObject:[NSMutableArray array] forKey:[message objectForKey:@"username"]];
-                }
-                [[self.conversations objectForKey:[message objectForKey:@"username"]] addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[message objectForKey:@"date"], [message objectForKey:@"imagedata"], nil] forKeys:[NSArray arrayWithObjects:@"date", @"imagedata", nil]]];
-            }
-        }
-        self.friends = [response objectForKey:@"aspects"];
-
-        // update cell list
-        NSMutableArray *cells = [[NSMutableArray alloc] init];
-        for (id user in self.conversations)
-        {
-            NSDictionary *cell = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:user, [[[self.conversations objectForKey:user] lastObject] objectForKey:@"date"], nil] forKeys:[NSArray arrayWithObjects:@"username", @"date", nil]];
-            [cells addObject:cell];
-        }
-        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:FALSE];
-        [cells sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-
-        NSMutableArray *remainingFriends = [[NSMutableArray alloc] init];
-        for (NSDictionary *friend in self.friends)
-        {
-            [remainingFriends addObject:[NSDictionary dictionaryWithObject:[friend objectForKey:@"username"] forKey:@"username"]];
-        }
-        for (NSDictionary *friend in cells)
-        {
-            for (int i = 0; i < [remainingFriends count]; i++)
-            {
-                if ([friend objectForKey:@"username"] == [remainingFriends[i] objectForKey:@"username"])
-                {
-                    [remainingFriends removeObjectAtIndex:i];
+                    if (![self.conversations objectForKey:[message objectForKey:@"username"]])
+                    {
+                        [self.conversations setObject:[NSMutableArray array] forKey:[message objectForKey:@"username"]];
+                    }
+                    [[self.conversations objectForKey:[message objectForKey:@"username"]] addObject:[NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:[message objectForKey:@"date"], [message objectForKey:@"imagedata"], nil] forKeys:[NSArray arrayWithObjects:@"date", @"imagedata", nil]]];
                 }
             }
-        }
-        NSSortDescriptor *alphabetize = [[NSSortDescriptor alloc] initWithKey:@"username" ascending:TRUE];
-        [remainingFriends sortUsingDescriptors:[NSArray arrayWithObject:alphabetize]];
+            self.friends = [response objectForKey:@"aspects"];
+
+            // update cell list
+            NSMutableArray *cells = [[NSMutableArray alloc] init];
+            for (id user in self.conversations)
+            {
+                NSDictionary *cell = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:user, [[[self.conversations objectForKey:user] lastObject] objectForKey:@"date"], nil] forKeys:[NSArray arrayWithObjects:@"username", @"date", nil]];
+                [cells addObject:cell];
+            }
+            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:FALSE];
+            [cells sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+
+            NSMutableArray *remainingFriends = [[NSMutableArray alloc] init];
+            for (NSDictionary *friend in self.friends)
+            {
+                [remainingFriends addObject:[NSDictionary dictionaryWithObject:[friend objectForKey:@"username"] forKey:@"username"]];
+            }
+            for (NSDictionary *friend in cells)
+            {
+                for (int i = 0; i < [remainingFriends count]; i++)
+                {
+                    if ([friend objectForKey:@"username"] == [remainingFriends[i] objectForKey:@"username"])
+                    {
+                        [remainingFriends removeObjectAtIndex:i];
+                    }
+                }
+            }
+            NSSortDescriptor *alphabetize = [[NSSortDescriptor alloc] initWithKey:@"username" ascending:TRUE];
+            [remainingFriends sortUsingDescriptors:[NSArray arrayWithObject:alphabetize]];
     
-        self.cellList = [cells arrayByAddingObjectsFromArray:remainingFriends];
-    }
-    else
-    {
-        NSLog(@"%@", response);
+            self.cellList = [cells arrayByAddingObjectsFromArray:remainingFriends];
+        }
+        else
+        {
+            NSLog(@"%@", response);
+        }
     }
   
     // release connection & response data

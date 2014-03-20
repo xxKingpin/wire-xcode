@@ -16,6 +16,8 @@
     NSArray *searchResults;
     NSString *requestRecipient;
     NSDictionary *plistData;
+    BOOL requestSent;
+    NSIndexPath *requestIndex;
 }
 
 
@@ -37,6 +39,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    requestSent = false;
     
     NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
     NSString *prefsDirectory = [[sysPaths objectAtIndex:0] stringByAppendingPathComponent:@"/Preferences"];
@@ -107,8 +110,15 @@ shouldReloadTableForSearchString:(NSString *)searchString
         }
         else
         {
-            searchResults = nil;
-            [self.searchDisplayController.searchResultsTableView reloadData];
+            if (requestSent)
+            {
+                requestSent = false;
+            }
+            else
+            {
+                searchResults = nil;
+                [self.searchDisplayController.searchResultsTableView reloadData];
+            }
         }
     }
     else
@@ -150,7 +160,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
     
     if (!cell)
     {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
         //cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     
@@ -165,7 +175,7 @@ shouldReloadTableForSearchString:(NSString *)searchString
         }
         else
         {
-            cell.detailTextLabel.text = @"Add Friend";
+            //cell.detailTextLabel.text = @"Add Friend";
             [cell setAccessoryType:UITableViewCellAccessoryDisclosureIndicator];
         }
     }
@@ -175,12 +185,15 @@ shouldReloadTableForSearchString:(NSString *)searchString
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (![[[searchResults objectAtIndex:indexPath.row] objectAtIndex:1] isEqualToNumber:[NSNumber numberWithInt:2]])
+    UITableViewCell *cell = [self.searchDisplayController.searchResultsTableView cellForRowAtIndexPath:indexPath];
+    
+    if ([cell accessoryType] != UITableViewCellAccessoryCheckmark)
     {
         UIAlertView *requestAlert = [[UIAlertView alloc] initWithTitle:@"Add Friend" message:[NSString stringWithFormat:@"Are you sure you want to send %@ a friend request?", searchResults[indexPath.row][0]] delegate:self cancelButtonTitle:@"Cancel" otherButtonTitles:@"Yes", nil];
         [requestAlert show];
         
         requestRecipient = searchResults[indexPath.row][0];
+        requestIndex = indexPath;
     }
 }
 
@@ -208,6 +221,11 @@ shouldReloadTableForSearchString:(NSString *)searchString
         self.response = [[NSMutableData alloc] init];
         [conn start];
         NSLog(@"%@", post);
+        
+        requestSent = true;
+        UITableViewCell *cell = [self.searchDisplayController.searchResultsTableView cellForRowAtIndexPath:requestIndex];
+        [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        cell.detailTextLabel.text = @"Request Sent!";
     }
 }
 
