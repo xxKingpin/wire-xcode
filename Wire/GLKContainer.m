@@ -27,8 +27,10 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
+
     self.drawingView.recipient = self.recipient;
+    // use this later in case we need to dismiss via code
+    //[self performSegueWithIdentifier:@"unwindToConversation" sender:self];
 }
 
 - (void)didReceiveMemoryWarning
@@ -37,4 +39,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)eraseDrawing:(id)sender {
+    [self.drawingView erase];
+}
 @end

@@ -21,6 +21,7 @@
 @property (strong, nonatomic) NSArray *imageData;
 @property (strong, nonatomic) NSString *friendUsername;
 @property (strong, nonatomic) NSMutableDictionary *conversations;
+- (IBAction)unwindToConversation:(UIStoryboardSegue *)segue;
 
 @end
 

@@ -52,11 +52,29 @@ float delta;
 /* Hide keyboard on return/background press */
 - (BOOL)textFieldShouldReturn: (UITextField *)textField
 {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    CGRect rect = self.view.window.frame;
+    rect.origin.y += delta;
+    rect.size.height -= delta;
+    self.view.window.frame = rect;
+    [UIView commitAnimations];
+    delta = 0.0f;
+    
     [textField resignFirstResponder];
     return NO;
 }
 
 - (IBAction)touchedBackground:(id)sender {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    CGRect rect = self.view.window.frame;
+    rect.origin.y += delta;
+    rect.size.height -= delta;
+    self.view.window.frame = rect;
+    [UIView commitAnimations];
+    delta = 0.0f;
+    
     [uname resignFirstResponder];
     [upass resignFirstResponder];
     [cupass resignFirstResponder];
@@ -95,22 +113,13 @@ float delta;
 }
 
 - (IBAction)editingBegan:(UITextField *)sender {
-    delta = (sender.frame.origin.y / 2);
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     CGRect rect = self.view.window.frame;
-    rect.origin.y -= (sender.frame.origin.y / 2);
-    rect.size.height += (sender.frame.origin.y / 2);
-    self.view.window.frame = rect;
-    [UIView commitAnimations];
-}
-
-- (IBAction)editingEnded:(id)sender {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3];
-    CGRect rect = self.view.window.frame;
-    rect.origin.y += delta;
-    rect.size.height -= delta;
+    float lastDelta = (sender.frame.origin.y - delta) - ((rect.size.height - delta) / 4);
+    delta += lastDelta;
+    rect.origin.y -= lastDelta;
+    rect.size.height += lastDelta;
     self.view.window.frame = rect;
     [UIView commitAnimations];
 }
@@ -162,7 +171,7 @@ float delta;
         NSLog(@"Registration successful.");
         
         NSString *error;
-        NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:uname.text, response[1], nil] forKeys:[NSArray arrayWithObjects:@"username", @"address", nil]];
+        NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:response[2], response[1], nil] forKeys:[NSArray arrayWithObjects:@"username", @"address", nil]];
         NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
         
         NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);

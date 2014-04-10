@@ -122,13 +122,16 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
 
 - (void)commonInit {
     context = [[EAGLContext alloc] initWithAPI:kEAGLRenderingAPIOpenGLES2];
-    
+     
     if (context) {
         time(NULL);
-        
+
         self.context = context;
         self.drawableDepthFormat = GLKViewDrawableDepthFormat24;
         self.enableSetNeedsDisplay = YES;
+        
+        //CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
+        //eaglLayer.opaque = NO;
         
         // Turn on antialiasing
         self.drawableMultisample = GLKViewDrawableMultisample4X;
@@ -180,6 +183,7 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
 - (void)drawRect:(CGRect)rect
 {
     glClearColor(1, 1, 1, 1.0f);
+    //glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT);
     
     [effect prepareToDraw];
@@ -309,7 +313,7 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
         addVertex(&dotsLength, centerPoint);
         
         static int segments = 20;
-        GLKVector2 radius = (GLKVector2){ penThickness * 2.0 * generateRandom(0.5, 1.5), penThickness * 2.0 * generateRandom(0.5, 1.5) };
+        GLKVector2 radius = (GLKVector2){ penThickness * 1.5 * generateRandom(0.5, 1.5), penThickness * 1.5 * generateRandom(0.75, 1.25) };
         GLKVector2 velocityRadius = radius;//GLKVector2Multiply(radius, GLKVector2MultiplyScalar(GLKVector2Normalize((GLKVector2){currentVelocity.vertex.y, currentVelocity.vertex.x}), 1.0));
         float angle = 0;
         

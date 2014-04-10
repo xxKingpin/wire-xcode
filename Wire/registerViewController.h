@@ -20,6 +20,5 @@
 - (IBAction)touchedBackground:(id)sender;
 - (IBAction)touchRegister:(id)sender;
 - (IBAction)editingBegan:(id)sender;
-- (IBAction)editingEnded:(id)sender;
 
 @end

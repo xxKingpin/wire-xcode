@@ -14,7 +14,7 @@
 
 @implementation loginViewController
 
-@synthesize uname, upass, bSubmit;
+@synthesize uname, upass, bSubmit, activityIndicator;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,6 +36,7 @@
     uname.borderStyle = UITextBorderStyleRoundedRect;
     upass.borderStyle = UITextBorderStyleRoundedRect;
     
+    self.conversations = [[NSMutableDictionary alloc] init];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -63,7 +64,9 @@
         self.connection = conn;
         self.response = [[NSMutableData alloc] init];
         [conn start];
+        self.activityIndicator.hidden = NO;
         NSLog(@"Automatic login request sent.");
+        self.conversations = [plistData objectForKey:@"conversations"];
     }
 }
 
@@ -150,6 +153,7 @@
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
     //NSString *responseStr = [[NSString alloc] initWithData:self.response encoding:NSUTF8StringEncoding];
+    self.activityIndicator.hidden = YES;
     NSError *error;
     NSArray *response = [NSJSONSerialization JSONObjectWithData:self.response options:kNilOptions error:&error];
     NSLog(@"Response: %@", response);
@@ -160,7 +164,7 @@
 
         // update plist
         NSString *error;
-        NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:uname.text, response[1], nil] forKeys:[NSArray arrayWithObjects:@"username", @"token", nil]];
+        NSDictionary *plistDict = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:response[2], response[1], self.conversations, nil] forKeys:[NSArray arrayWithObjects:@"username", @"token", @"conversations", nil]];
         NSData *plistData = [NSPropertyListSerialization dataFromPropertyList:plistDict format:NSPropertyListXMLFormat_v1_0 errorDescription:&error];
         
         NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);

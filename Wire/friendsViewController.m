@@ -17,6 +17,7 @@
 
 @implementation friendsViewController
 
+@synthesize activityIndicator;
 
 - (void)viewDidLoad
 {
@@ -57,9 +58,9 @@
     NSString *prefsDirectory = [[sysPaths objectAtIndex:0] stringByAppendingPathComponent:@"/Preferences"];
     NSString *outputFilePath = [prefsDirectory stringByAppendingPathComponent:@"data.plist"];
     NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:outputFilePath];
+    self.conversations = [[NSMutableDictionary alloc] init];
     self.conversations = [plistData objectForKey:@"conversations"];
-    self.friends = [plistData objectForKey:@"friends"];
-    
+    self.friends = [plistData objectForKey:@"friends"];  
 
     // update with data from server
     NSMutableArray *lastMessages = [[NSMutableArray alloc] init];
@@ -82,18 +83,19 @@
                 lastDate = [[[self.conversations objectForKey:user] objectAtIndex:i] objectForKey:@"date"];
             }
         }
+
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
         [dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-        if (user && [dateFormatter stringFromDate:lastDate])
+        if (user && lastDate)
         {
-            NSDictionary *lastMessage = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:user, [dateFormatter stringFromDate:lastDate], nil] forKeys:[NSArray arrayWithObjects:@"username", @"date", nil]];
+            NSDictionary *lastMessage = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:user, [NSString stringWithFormat:@"%@", lastDate], nil] forKeys:[NSArray arrayWithObjects:@"username", @"date", nil]];
             [lastMessages addObject:lastMessage];
         }
     }
     NSError *error;
     NSData *jsonData = [NSJSONSerialization dataWithJSONObject:lastMessages options:kNilOptions error:&error];
     NSString *jsonStr = [[NSString alloc] initWithBytes:[jsonData bytes] length:[jsonData length] encoding:NSUTF8StringEncoding];
-    
+
     NSString *post = [NSString stringWithFormat:@"wire_update=update&wire_user=%@&wire_token=%@&wire_json=%@", [plistData objectForKey:@"username"], [plistData objectForKey:@"token"], jsonStr];
     NSLog(@"%@", post);
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
@@ -108,6 +110,7 @@
     self.connection = conn;
     self.response = [[NSMutableData alloc] init];
     [conn start];
+    self.activityIndicator.hidden = NO;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -122,17 +125,21 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    self.activityIndicator.hidden = YES;
     if (self.response != nil)
     {
         NSError *error;
         NSDictionary *response = [NSJSONSerialization JSONObjectWithData:self.response options:kNilOptions error:&error];
         if ([[response objectForKey:@"aspects"] count] > 0)
         {
-            self.conversations = [[NSMutableDictionary alloc] init];
-            NSLog(@"Response: %@", response);
+            //NSLog(@"Response: %@", response);
 
             if ([response objectForKey:@"new_data"])
             {
+                NSMutableDictionary *tempDict = [self.conversations copy];
+                self.conversations = [[NSMutableDictionary alloc] init]; // re-initialize conversations
+                [self.conversations addEntriesFromDictionary:tempDict];
+                
                 for (NSDictionary *message in [response objectForKey:@"new_data"])
                 {
                     if (![self.conversations objectForKey:[message objectForKey:@"username"]])
@@ -145,30 +152,23 @@
             self.friends = [response objectForKey:@"aspects"];
 
             // update cell list
-            NSMutableArray *cells = [[NSMutableArray alloc] init];
-            for (id user in self.conversations)
-            {
-                NSDictionary *cell = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:user, [[[self.conversations objectForKey:user] lastObject] objectForKey:@"date"], nil] forKeys:[NSArray arrayWithObjects:@"username", @"date", nil]];
-                [cells addObject:cell];
-            }
-            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:FALSE];
-            [cells sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
-
             NSMutableArray *remainingFriends = [[NSMutableArray alloc] init];
             for (NSDictionary *friend in self.friends)
             {
                 [remainingFriends addObject:[NSDictionary dictionaryWithObject:[friend objectForKey:@"username"] forKey:@"username"]];
             }
-            for (NSDictionary *friend in cells)
+            
+            NSMutableArray *cells = [[NSMutableArray alloc] init];
+            for (id user in self.conversations)
             {
-                for (int i = 0; i < [remainingFriends count]; i++)
-                {
-                    if ([friend objectForKey:@"username"] == [remainingFriends[i] objectForKey:@"username"])
-                    {
-                        [remainingFriends removeObjectAtIndex:i];
-                    }
-                }
+                NSDictionary *cell = [NSDictionary dictionaryWithObjects:[NSArray arrayWithObjects:user, [[[self.conversations objectForKey:user] lastObject] objectForKey:@"date"], nil] forKeys:[NSArray arrayWithObjects:@"username", @"date", nil]];
+                [cells addObject:cell];
+                
+                [remainingFriends removeObject:[NSDictionary dictionaryWithObject:user forKey:@"username"]];
             }
+            NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"date" ascending:FALSE];
+            [cells sortUsingDescriptors:[NSArray arrayWithObject:sortDescriptor]];
+            
             NSSortDescriptor *alphabetize = [[NSSortDescriptor alloc] initWithKey:@"username" ascending:TRUE];
             [remainingFriends sortUsingDescriptors:[NSArray arrayWithObject:alphabetize]];
     
@@ -176,7 +176,7 @@
         }
         else
         {
-            NSLog(@"%@", response);
+            NSLog(@"%@", self.response);
         }
     }
   

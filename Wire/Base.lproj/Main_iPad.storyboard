@@ -65,12 +65,16 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alpha v0.1.2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVh-WP-Fao">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alpha v0.1.3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVh-WP-Fao">
                                 <rect key="frame" x="340" y="226" width="89" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="dAR-36-z4a">
+                                <rect key="frame" x="374" y="299" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -79,6 +83,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="CNe-SD-a5n"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="dAR-36-z4a" id="E0c-lm-SUh"/>
                         <outlet property="uname" destination="LN6-Vp-W91" id="Tjr-Ra-Djh"/>
                         <outlet property="upass" destination="v4C-Yc-qBn" id="Y6l-MA-0lt"/>
                     </connections>
@@ -234,6 +239,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="j6b-Mi-AYG">
+                            <rect key="frame" x="0.0" y="130" width="768" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="conversation" textLabel="lju-u8-H7t" style="IBUITableViewCellStyleDefault" id="v8a-xd-leg">
                                 <rect key="frame" x="0.0" y="86" width="768" height="44"/>
@@ -270,6 +279,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="j6b-Mi-AYG" id="Qir-4T-C6P"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AXA-Cg-H0C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -441,6 +453,10 @@
                                 </navigationItem>
                             </items>
                         </navigationBar>
+                        <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="6vQ-c2-Wdw">
+                            <rect key="frame" x="0.0" y="184" width="768" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="normal" textLabel="MRY-zv-288" style="IBUITableViewCellStyleDefault" id="svs-Y9-wM0">
                                 <rect key="frame" x="0.0" y="66" width="768" height="44"/>
@@ -512,6 +528,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Notifications" id="WTt-BB-X9n"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="6vQ-c2-Wdw" id="F6R-19-h77"/>
                         <outlet property="navBar" destination="kmc-kL-vAC" id="eP0-4n-qnl"/>
                     </connections>
                 </tableViewController>
@@ -580,6 +597,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="sendWire:" destination="bXA-Zf-gZh" eventType="touchUpInside" id="P3y-fr-yfu"/>
+                                    <segue destination="3hf-bU-CZl" kind="unwind" unwindAction="unwindToConversation:" id="UDj-kC-TAU"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -589,12 +607,18 @@
                     </glkView>
                     <navigationItem key="navigationItem" id="4Lb-YK-NKd">
                         <nil key="title"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="8tI-oJ-hmc">
+                            <connections>
+                                <action selector="eraseDrawing:" destination="IZb-ww-puO" id="YwS-5e-cYY"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="drawingView" destination="bXA-Zf-gZh" id="VIT-AR-gDu"/>
                     </connections>
                 </glkViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z9S-4N-uIH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="3hf-bU-CZl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2157" y="1713"/>
         </scene>

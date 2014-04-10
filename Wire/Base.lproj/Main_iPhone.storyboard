@@ -13,6 +13,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="xdd-pI-hbY">
+                            <rect key="frame" x="0.0" y="130" width="320" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="conversation" textLabel="er4-Jr-F84" style="IBUITableViewCellStyleDefault" id="qpz-lV-B1C">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
@@ -49,6 +53,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="activityIndicator" destination="xdd-pI-hbY" id="z0n-aQ-6uN"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="puD-GI-D0Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -99,6 +106,9 @@
                                         <state key="normal" title="Edit">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <connections>
+                                            <action selector="editPressed:" destination="hzS-jB-y9W" eventType="touchUpInside" id="f5J-vh-A36"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -180,12 +190,16 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alpha v0.1.2" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGM-xX-iv3">
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Alpha v0.1.3" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eGM-xX-iv3">
                                 <rect key="frame" x="122" y="111" width="77" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" animating="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="vYm-1X-Dlv">
+                                <rect key="frame" x="150" y="154" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <connections>
@@ -194,6 +208,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Login" id="XYu-aH-8VZ"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="vYm-1X-Dlv" id="VGV-EK-GpR"/>
                         <outlet property="uname" destination="Op0-aF-NtO" id="3I9-j4-uKe"/>
                         <outlet property="upass" destination="MSo-4g-CTa" id="aj6-zW-9oF"/>
                     </connections>
@@ -244,7 +259,6 @@
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                 <connections>
                                     <action selector="editingBegan:" destination="NYT-FI-X6A" eventType="editingDidBegin" id="WZS-yd-oO6"/>
-                                    <action selector="editingEnded:" destination="NYT-FI-X6A" eventType="editingDidEnd" id="Xpz-9o-I7B"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="n4S-E2-DSD">
@@ -256,7 +270,6 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="editingBegan:" destination="NYT-FI-X6A" eventType="editingDidBegin" id="LW8-Zw-GG0"/>
-                                    <action selector="editingEnded:" destination="NYT-FI-X6A" eventType="editingDidEnd" id="rye-5L-L1y"/>
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirm Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Anb-aM-RnC">
@@ -268,7 +281,6 @@
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="editingBegan:" destination="NYT-FI-X6A" eventType="editingDidBegin" id="A9k-D0-Z6u"/>
-                                    <action selector="editingEnded:" destination="NYT-FI-X6A" eventType="editingDidEnd" id="sgv-f6-dBg"/>
                                 </connections>
                             </textField>
                         </subviews>
@@ -434,6 +446,7 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="sendWire:" destination="72Z-Ie-R4K" eventType="touchUpInside" id="NIe-Cf-ANT"/>
+                                    <segue destination="xc6-n3-LBF" kind="unwind" identifier="unwindToConversation" unwindAction="unwindToConversation:" id="WXJ-E9-Pi7"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -443,12 +456,18 @@
                     </glkView>
                     <navigationItem key="navigationItem" id="tvd-Gk-SKB">
                         <nil key="title"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="g0U-ge-pAa">
+                            <connections>
+                                <action selector="eraseDrawing:" destination="z8O-XZ-Gka" id="IDH-Cb-eu1"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="drawingView" destination="72Z-Ie-R4K" id="bT6-Hi-2Wp"/>
                     </connections>
                 </glkViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aLW-4z-FpH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="xc6-n3-LBF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1315" y="1153"/>
         </scene>
@@ -491,6 +510,10 @@
                                 </navigationItem>
                             </items>
                         </navigationBar>
+                        <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="7I2-Xf-4YK">
+                            <rect key="frame" x="0.0" y="184" width="320" height="20"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="normal" textLabel="1Ge-en-h7l" style="IBUITableViewCellStyleDefault" id="H4K-Nv-dmZ">
                                 <rect key="frame" x="0.0" y="66" width="320" height="44"/>
@@ -562,6 +585,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Notifications" id="sEk-cl-85z"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="7I2-Xf-4YK" id="fVh-rX-5VP"/>
                         <outlet property="navBar" destination="en3-84-S8c" id="gi7-a9-m1Q"/>
                     </connections>
                 </tableViewController>

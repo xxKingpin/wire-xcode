@@ -13,5 +13,6 @@
 
 @property (strong, nonatomic) NSString *recipient;
 @property (strong, nonatomic) IBOutlet wireDrawing *drawingView;
+- (IBAction)eraseDrawing:(id)sender;
 
 @end

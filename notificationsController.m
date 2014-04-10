@@ -17,7 +17,7 @@
     NSDictionary *plistData;
 }
 
-@synthesize navBar;
+@synthesize navBar, activityIndicator;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -64,6 +64,7 @@
     self.connection = conn;
     self.response = [[NSMutableData alloc] init];
     [conn start];
+    self.activityIndicator.hidden = NO;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -78,6 +79,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
+    self.activityIndicator.hidden = YES;
     NSError *error;
     if (self.response)
     {
