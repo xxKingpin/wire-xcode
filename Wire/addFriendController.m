@@ -173,6 +173,11 @@ shouldReloadTableForSearchString:(NSString *)searchString
             //friendButton.hidden = YES;
             [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
         }
+        else if ([[[searchResults objectAtIndex:indexPath.row] objectAtIndex:1] isEqualToNumber:[NSNumber numberWithInt:1]])
+        {
+            cell.detailTextLabel.text = @"Request Sent!";
+            [cell setAccessoryType:UITableViewCellAccessoryCheckmark];
+        }
         else
         {
             //cell.detailTextLabel.text = @"Add Friend";

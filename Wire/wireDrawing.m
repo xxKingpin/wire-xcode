@@ -112,6 +112,9 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     CGPoint previousMidPoint;
     wireDrawingPoint previousVertex;
     wireDrawingPoint currentVelocity;
+    
+    // double-panned points
+    CGPoint previousDPPoint;
 }
 
 @end
@@ -152,6 +155,11 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
         /*
         [self addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)]];
          */
+        
+        // Sending with double pan
+        UIPanGestureRecognizer *doublepan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(doublepan:)];
+        doublepan.maximumNumberOfTouches = doublepan.minimumNumberOfTouches = 2;
+        [self addGestureRecognizer:doublepan];
         
     } else [NSException raise:@"NSOpenGLES2ContextException" format:@"Failed to create OpenGL ES2 context"];
 }
@@ -341,6 +349,43 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     [self erase];
 }
 
+- (void)doublepan:(UIPanGestureRecognizer *)dp {
+    CGPoint l = [dp locationInView:self.window];
+    
+    float distance = (l.y - previousDPPoint.y);
+
+    if ([dp state] == UIGestureRecognizerStateBegan)
+    {
+        previousDPPoint = l;
+    }
+    else if ([dp state] == UIGestureRecognizerStateChanged)
+    {
+        if (self.frame.origin.y + distance <= 0.0)
+        {
+            previousDPPoint = l;
+            CGRect rect = self.frame;
+            rect.origin.y += distance;
+            self.frame = rect;
+        }
+    }
+    else if ([dp state] == UIGestureRecognizerStateEnded || [dp state] == UIGestureRecognizerStateCancelled)
+    {
+        if (self.frame.origin.y < -(self.window.frame.size.height / 3) * 2)
+        {
+            
+        }
+        else
+        {
+            [UIView beginAnimations:nil context:NULL];
+            [UIView setAnimationDuration:0.3];
+            CGRect rect = self.frame;
+            rect.origin.y = 0.0;
+            self.frame = rect;
+            [UIView commitAnimations];
+        }
+    }
+}
+
 - (void)pan:(UIPanGestureRecognizer *)p {
     
     glBindBuffer(GL_ARRAY_BUFFER, vertexBuffer);
@@ -353,7 +398,7 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     if (previousPoint.x > 0) {
         distance = sqrtf((l.x - previousPoint.x) * (l.x - previousPoint.x) + (l.y - previousPoint.y) * (l.y - previousPoint.y));
     }
-    
+
     float velocityMagnitude = sqrtf(v.x*v.x + v.y*v.y);
     float clampedVelocityMagnitude = clamp(VELOCITY_CLAMP_MIN, VELOCITY_CLAMP_MAX, velocityMagnitude);
     float normalizedVelocity = (clampedVelocityMagnitude - VELOCITY_CLAMP_MIN) / (VELOCITY_CLAMP_MAX - VELOCITY_CLAMP_MIN);

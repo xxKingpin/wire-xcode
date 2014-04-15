@@ -17,8 +17,6 @@
 
 @implementation friendsViewController
 
-@synthesize activityIndicator;
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -42,6 +40,11 @@
     NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:outputFilePath];
     self.conversations = [plistData objectForKey:@"conversations"];
     self.friends = [plistData objectForKey:@"friends"];
+    
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Drag to refresh"];
+    [refresh addTarget:self action:@selector(updateConversationsData) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresh;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -49,10 +52,14 @@
     [super viewDidAppear:animated];
     
     [self updateConversationsData];
+    [self.refreshControl beginRefreshing];
+    [self.tableView setContentOffset:CGPointMake(0, -self.topLayoutGuide.length) animated:YES]; // manually animates table
 }
 
 - (void)updateConversationsData
 {
+    [self.refreshControl setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Refreshing Messages..."]];
+    
     // load plist
     NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
     NSString *prefsDirectory = [[sysPaths objectAtIndex:0] stringByAppendingPathComponent:@"/Preferences"];
@@ -110,7 +117,6 @@
     self.connection = conn;
     self.response = [[NSMutableData alloc] init];
     [conn start];
-    self.activityIndicator.hidden = NO;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -125,7 +131,6 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    self.activityIndicator.hidden = YES;
     if (self.response != nil)
     {
         NSError *error;
@@ -185,6 +190,8 @@
     self.response = nil;
 
     [self.tableView reloadData];
+    [self.refreshControl endRefreshing];
+    [self.refreshControl setAttributedTitle:[[NSAttributedString alloc] initWithString:@"Drag to refresh"]];
 }
 
 

@@ -16,6 +16,5 @@
 @property (strong, nonatomic) NSMutableDictionary *conversations;
 @property (strong, nonatomic) NSArray *friends;
 @property (strong, nonatomic) NSArray *cellList;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end

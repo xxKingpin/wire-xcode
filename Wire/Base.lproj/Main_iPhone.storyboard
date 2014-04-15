@@ -13,10 +13,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="xdd-pI-hbY">
-                            <rect key="frame" x="0.0" y="130" width="320" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="conversation" textLabel="er4-Jr-F84" style="IBUITableViewCellStyleDefault" id="qpz-lV-B1C">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
@@ -53,9 +49,6 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
-                    <connections>
-                        <outlet property="activityIndicator" destination="xdd-pI-hbY" id="z0n-aQ-6uN"/>
-                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="puD-GI-D0Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -510,10 +503,6 @@
                                 </navigationItem>
                             </items>
                         </navigationBar>
-                        <activityIndicatorView key="tableFooterView" hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" animating="YES" style="gray" id="7I2-Xf-4YK">
-                            <rect key="frame" x="0.0" y="184" width="320" height="20"/>
-                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        </activityIndicatorView>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="normal" textLabel="1Ge-en-h7l" style="IBUITableViewCellStyleDefault" id="H4K-Nv-dmZ">
                                 <rect key="frame" x="0.0" y="66" width="320" height="44"/>
@@ -585,7 +574,6 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Notifications" id="sEk-cl-85z"/>
                     <connections>
-                        <outlet property="activityIndicator" destination="7I2-Xf-4YK" id="fVh-rX-5VP"/>
                         <outlet property="navBar" destination="en3-84-S8c" id="gi7-a9-m1Q"/>
                     </connections>
                 </tableViewController>

@@ -17,7 +17,7 @@
     NSDictionary *plistData;
 }
 
-@synthesize navBar, activityIndicator;
+@synthesize navBar;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -45,6 +45,17 @@
         navBar.frame = CGRectMake(navBar.frame.origin.x, navBar.frame.origin.y, navBar.frame.size.width, 64);
     }
     
+    UIRefreshControl *refresh = [[UIRefreshControl alloc] init];
+    refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Drag to refresh"];
+    [refresh addTarget:self action:@selector(updateNotifications) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refresh;
+    
+    [self updateNotifications];
+}
+
+- (void)updateNotifications
+{
+    // load plist
     NSArray *sysPaths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory,NSUserDomainMask, YES);
     NSString *prefsDirectory = [[sysPaths objectAtIndex:0] stringByAppendingPathComponent:@"/Preferences"];
     NSString *outputFilePath = [prefsDirectory stringByAppendingPathComponent:@"data.plist"];
@@ -64,7 +75,6 @@
     self.connection = conn;
     self.response = [[NSMutableData alloc] init];
     [conn start];
-    self.activityIndicator.hidden = NO;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -79,7 +89,8 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    self.activityIndicator.hidden = YES;
+    [self.refreshControl endRefreshing];
+
     NSError *error;
     if (self.response)
     {
