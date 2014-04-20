@@ -7,6 +7,7 @@
 //
 
 #import "loginViewController.h"
+#import "wireAppDelegate.h"
 
 @interface loginViewController ()
 
@@ -118,7 +119,8 @@
     if ([uname.text length] != 0 && [upass.text length] != 0)
     {
         // send login request to graffiti
-        NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_pass=%@", uname.text, upass.text];
+        wireAppDelegate *appDelegate = (wireAppDelegate *)[[UIApplication sharedApplication] delegate];
+        NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_pass=%@&push_token=%@", uname.text, upass.text, [[NSString alloc] initWithData:appDelegate.apnsToken encoding:NSUTF8StringEncoding]]; 
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
         NSMutableURLRequest *loginRequest = [[NSMutableURLRequest alloc] init];
