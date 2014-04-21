@@ -11,6 +11,6 @@
 @interface wireAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) NSData *apnsToken;
+@property (strong, nonatomic) NSString *apnsToken;
 
 @end

@@ -45,6 +45,8 @@
     refresh.attributedTitle = [[NSAttributedString alloc] initWithString:@"Drag to refresh"];
     [refresh addTarget:self action:@selector(updateConversationsData) forControlEvents:UIControlEventValueChanged];
     self.refreshControl = refresh;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateConversationsData) name:UIApplicationDidBecomeActiveNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated

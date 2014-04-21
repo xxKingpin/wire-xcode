@@ -7,6 +7,7 @@
 //
 
 #import "registerViewController.h"
+#import "wireAppDelegate.h"
 
 @interface registerViewController ()
 
@@ -95,7 +96,8 @@ float delta;
     else
     {
         // submit registration data to graffiti
-        NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_pass=%@&wire_email=%@&wire_pass_confirm=%@", uname.text, upass.text, email.text, cupass.text];
+        wireAppDelegate *appDelegate = (wireAppDelegate *)[[UIApplication sharedApplication] delegate];
+        NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_pass=%@&wire_email=%@&wire_pass_confirm=%@&push_token=%@", uname.text, upass.text, email.text, cupass.text, appDelegate.apnsToken];
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
         NSMutableURLRequest *registrationRequest = [[NSMutableURLRequest alloc] init];

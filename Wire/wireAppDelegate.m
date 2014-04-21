@@ -25,7 +25,7 @@
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
 	NSLog(@"Device APNs token: %@", deviceToken);
-    self.apnsToken = deviceToken;
+    self.apnsToken = [[NSString alloc] initWithString:[[[[deviceToken description] stringByReplacingOccurrencesOfString:@"<" withString: @""] stringByReplacingOccurrencesOfString:@">" withString:@""] stringByReplacingOccurrencesOfString:@" " withString: @""]];
 }
 
 - (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error

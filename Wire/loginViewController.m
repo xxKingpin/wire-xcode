@@ -52,7 +52,8 @@
     NSDictionary *plistData = [NSDictionary dictionaryWithContentsOfFile:outputFilePath];
     if ([[plistData objectForKey:@"username"] length] != 0 && [[plistData objectForKey:@"token"] length] != 0)
     {
-        NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_token=%@", [plistData objectForKey:@"username"], [plistData objectForKey:@"token"]];
+        wireAppDelegate *appDelegate = (wireAppDelegate *)[[UIApplication sharedApplication] delegate];
+        NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_token=%@&push_token=%@", [plistData objectForKey:@"username"], [plistData objectForKey:@"token"], appDelegate.apnsToken];
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
         NSMutableURLRequest *loginRequest = [[NSMutableURLRequest alloc] init];
@@ -120,7 +121,7 @@
     {
         // send login request to graffiti
         wireAppDelegate *appDelegate = (wireAppDelegate *)[[UIApplication sharedApplication] delegate];
-        NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_pass=%@&push_token=%@", uname.text, upass.text, [[NSString alloc] initWithData:appDelegate.apnsToken encoding:NSUTF8StringEncoding]]; 
+        NSString *post = [NSString stringWithFormat:@"wire=wire&wire_user=%@&wire_pass=%@&push_token=%@", uname.text, upass.text, appDelegate.apnsToken];
         NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
         NSString *postLength = [NSString stringWithFormat:@"%d", [postData length]];
         NSMutableURLRequest *loginRequest = [[NSMutableURLRequest alloc] init];
@@ -134,6 +135,7 @@
         self.response = [[NSMutableData alloc] init]; // this is important apparently!
         [conn start]; // initiate connection
         NSLog(@"login request sent");
+        NSLog(@"%@", post);
     }
     else
     {
