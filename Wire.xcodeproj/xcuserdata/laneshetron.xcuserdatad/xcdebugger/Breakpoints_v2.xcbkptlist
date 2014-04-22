@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wire/wireDrawing.m"
-            timestampString = "419244045.147184"
+            timestampString = "419849527.260709"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "253"
-            endingLineNumber = "253"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
             landmarkName = "-sendWire:"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Wire/wireDrawing.m"
-            timestampString = "419244045.147184"
+            timestampString = "419849527.260709"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "250"
-            endingLineNumber = "250"
+            startingLineNumber = "249"
+            endingLineNumber = "249"
             landmarkName = "-sendWire:"
             landmarkType = "5">
          </BreakpointContent>
@@ -137,7 +137,7 @@
                   symbolName = "-[wireModelController connection]"
                   moduleName = "Wire"
                   urlString = "file:///Users/laneshetron/Documents/xcode/wire/Wire/Wire/wireModelController.h"
-                  timestampString = "419749408.598894"
+                  timestampString = "419850448.46923"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "16"
@@ -151,7 +151,7 @@
                   symbolName = "-[wireModelController setConnection:]"
                   moduleName = "Wire"
                   urlString = "file:///Users/laneshetron/Documents/xcode/wire/Wire/Wire/wireModelController.h"
-                  timestampString = "419749408.599257"
+                  timestampString = "419850448.469459"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "16"
@@ -159,6 +159,38 @@
                   offsetFromSymbolStart = "31">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wire/wireDrawing.m"
+            timestampString = "419850259.588656"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "284"
+            endingLineNumber = "284"
+            landmarkName = "-sendWire:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Wire/GLKContainer.m"
+            timestampString = "419848163.726157"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "11"
+            endingLineNumber = "11"
+            landmarkName = "@interface GLKContainer()"
+            landmarkType = "2">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -20,7 +20,6 @@
                                            // default is 3.0, but it's at 2.0 currently to avoid breaking at cusps
 #define             MAXIMUM_VERTICES 100000
 
-
 static GLKVector3 StrokeColor = { 0, 0, 0 };
 
 struct wireDrawingPoint {
@@ -282,6 +281,8 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     NSLog(@"Wire sent!");
 
     // perform animations
+    UINavigationController *navigationController = (UINavigationController*) self.window.rootViewController;
+    [navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
@@ -349,14 +350,25 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     [self erase];
 }
 
+- (void)resetDrift {
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    CGRect rect = self.frame;
+    rect.origin.y = 0.0;
+    self.frame = rect;
+    [UIView commitAnimations];
+}
+
 - (void)doublepan:(UIPanGestureRecognizer *)dp {
+    CGPoint v = [dp velocityInView:self.window];
     CGPoint l = [dp locationInView:self.window];
-    
+    float a = 5500.0;
     float distance = (l.y - previousDPPoint.y);
 
     if ([dp state] == UIGestureRecognizerStateBegan)
     {
         previousDPPoint = l;
+        [self.window setBackgroundColor:[UIColor colorWithWhite:0.9 alpha:1.0]];
     }
     else if ([dp state] == UIGestureRecognizerStateChanged)
     {
@@ -372,16 +384,50 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     {
         if (self.frame.origin.y < -(self.window.frame.size.height / 3) * 2)
         {
-            
-        }
-        else
-        {
             [UIView beginAnimations:nil context:NULL];
             [UIView setAnimationDuration:0.3];
             CGRect rect = self.frame;
-            rect.origin.y = 0.0;
+            rect.origin.y = -rect.size.height;
             self.frame = rect;
+            [UIView setAnimationDelegate:self];
+            [UIView setAnimationDidStopSelector:@selector(sendWire:)];
             [UIView commitAnimations];
+        }
+        else
+        {
+            float time = -v.y / a;
+            float drift = v.y * time + (a / 2) * (time * time);
+            if (drift < 0.0)
+            {
+                if (self.frame.origin.y + drift < -(self.window.frame.size.height / 3) * 2)
+                {
+                    [UIView beginAnimations:nil context:NULL];
+                    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+                    [UIView setAnimationDuration:0.3];
+                    CGRect rect = self.frame;
+                    rect.origin.y = -rect.size.height;
+                    self.frame = rect;
+                    [UIView setAnimationDelegate:self];
+                    [UIView setAnimationDidStopSelector:@selector(sendWire:)];
+                    [UIView commitAnimations];
+                }
+                else
+                {
+                    [UIView beginAnimations:nil context:NULL];
+                    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+                    [UIView setAnimationDuration:time];
+                    CGRect driftRect = self.frame;
+                    driftRect.origin.y += drift;
+                    self.frame = driftRect;
+                    [UIView setAnimationDelegate:self];
+                    [UIView setAnimationDidStopSelector:@selector(resetDrift)];
+                    [UIView commitAnimations];
+                }
+            }
+            else
+            {
+                [self resetDrift];
+            }
         }
     }
 }
