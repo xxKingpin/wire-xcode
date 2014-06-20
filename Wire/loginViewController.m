@@ -31,6 +31,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
+    [self.navigationController setNavigationBarHidden:YES];
+    
     self.uname.delegate = self;
     self.upass.delegate = self;
     
@@ -71,6 +73,7 @@
         self.conversations = [plistData objectForKey:@"conversations"];
     }
 }
+
 
 - (void)didReceiveMemoryWarning
 {

@@ -33,6 +33,8 @@ float delta;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    [self.navigationController setNavigationBarHidden:NO animated:YES];
+    
     self.uname.delegate = self;
     self.upass.delegate = self;
     self.cupass.delegate = self;
@@ -42,6 +44,13 @@ float delta;
     upass.borderStyle = UITextBorderStyleRoundedRect;
     cupass.borderStyle = UITextBorderStyleRoundedRect;
     email.borderStyle = UITextBorderStyleRoundedRect;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [self.navigationController setNavigationBarHidden:YES animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
