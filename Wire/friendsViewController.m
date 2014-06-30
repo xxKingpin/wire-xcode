@@ -10,6 +10,7 @@
 #import "wireModelController.h"
 #import "wireDataViewController.h"
 #import "wireConversations.h"
+#import "UIColor+colorWithRGB.h"
 
 @interface friendsViewController ()
 
@@ -217,6 +218,11 @@
     
     // Configure the cell...
     cell.textLabel.text = [self.cellList[indexPath.row] objectForKey:@"username"];
+    
+    if (indexPath.row & 1)
+    {
+        cell.backgroundColor = [UIColor colorWithRGB:0xFFCCCC]; // dull red
+    }
 
     return cell;
 }

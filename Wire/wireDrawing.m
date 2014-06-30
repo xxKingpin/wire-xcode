@@ -80,6 +80,16 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     };
 }
 
+static GLKVector3 hexToVector3(int color)
+{
+    return (GLKVector3)
+    {
+        ( (float) ((color & 0xFF0000) >> 16) ) / 255.0f,
+        ( (float) ((color & 0xFF00) >> 8) ) / 255.0f,
+        ( (float) (color & 0xFF) ) / 255.0f
+    };
+}
+
 
 @interface wireDrawing () {
     // OpenGL state
@@ -114,6 +124,10 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     
     // double-panned points
     CGPoint previousDPPoint;
+    
+    // color wheel gesture
+    UIPanGestureRecognizer *spin;
+    CGPoint previousSPPoint;
 }
 
 @end
@@ -140,25 +154,10 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
         
         [self setupGL];
         
-        // Capture touches
-        UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-        pan.maximumNumberOfTouches = pan.minimumNumberOfTouches = 1;
-        [self addGestureRecognizer:pan];
-        
-        // For dotting your i's
-        
-        UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
-        [self addGestureRecognizer:tap];
-        
-        // Erase with long press
-        /*
-        [self addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)]];
-         */
-        
-        // Sending with double pan
-        UIPanGestureRecognizer *doublepan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(doublepan:)];
-        doublepan.maximumNumberOfTouches = doublepan.minimumNumberOfTouches = 2;
-        [self addGestureRecognizer:doublepan];
+        // Spinning color wheel gesture
+        spin = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(spin:)];
+        spin.maximumNumberOfTouches = spin.minimumNumberOfTouches = 1;
+        [self addGestureRecognizer:spin];
         
     } else [NSException raise:@"NSOpenGLES2ContextException" format:@"Failed to create OpenGL ES2 context"];
 }
@@ -176,6 +175,81 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
     return self;
 }
 
+- (void)setupGestures
+{
+    [_blackButton setHidden:YES];
+    [_redButton setHidden:YES];
+    [_tealButton setHidden:YES];
+    [_greenButton setHidden:YES];
+    [_orangeButton setHidden:YES];
+    [_pinkButton setHidden:YES];
+    
+    [self removeGestureRecognizer:spin];
+    
+    // Capture touches
+    UIPanGestureRecognizer *pan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+    pan.maximumNumberOfTouches = pan.minimumNumberOfTouches = 1;
+    [self addGestureRecognizer:pan];
+    
+    // For dotting your i's
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
+    [self addGestureRecognizer:tap];
+    
+    // Erase with long press
+    /*
+     [self addGestureRecognizer:[[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPress:)]];
+     */
+    
+    // Sending with double pan
+    UIPanGestureRecognizer *doublepan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(doublepan:)];
+    doublepan.maximumNumberOfTouches = doublepan.minimumNumberOfTouches = 2;
+    [self addGestureRecognizer:doublepan];
+}
+
+#pragma mark - color selection
+
+- (IBAction)blackSelected:(id)sender
+{
+    StrokeColor = (GLKVector3) { 0, 0, 0 };
+    
+    [self setupGestures];
+}
+
+- (IBAction)redSelected:(id)sender
+{
+    StrokeColor = hexToVector3(0xCF6767);
+    
+    [self setupGestures];
+}
+
+- (IBAction)tealSelected:(id)sender
+{
+    StrokeColor = hexToVector3(0x20A1CB);
+    
+    [self setupGestures];
+}
+
+- (IBAction)greenSelected:(id)sender
+{
+    StrokeColor = hexToVector3(0x36E876);
+    
+    [self setupGestures];
+}
+
+- (IBAction)orangeSelected:(id)sender
+{
+    StrokeColor = hexToVector3(0xFFA13B);
+    
+    [self setupGestures];
+}
+
+- (IBAction)pinkSelected:(id)sender
+{
+    StrokeColor = hexToVector3(0xF33887);
+    
+    [self setupGestures];
+}
 
 - (void)dealloc
 {
@@ -429,6 +503,22 @@ static wireDrawingPoint ViewPointToGL(CGPoint viewPoint, CGRect bounds, GLKVecto
                 [self resetDrift];
             }
         }
+    }
+}
+
+- (void)spin:(UIPanGestureRecognizer *)sp {
+    CGPoint v = [sp velocityInView:self];
+    CGPoint l = [sp locationInView:self];
+    
+    float distance = (l.y - previousSPPoint.y);
+    
+    if ([sp state] == UIGestureRecognizerStateBegan)
+    {
+        previousSPPoint = l;
+    }
+    else if ([sp state] == UIGestureRecognizerStateChanged)
+    {
+        
     }
 }
 

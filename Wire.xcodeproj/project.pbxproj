@@ -36,6 +36,7 @@
 		6FBCA35A1865834E007BCAD3 /* friendsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBCA3591865834E007BCAD3 /* friendsViewController.m */; };
 		6FBCA35D18659F46007BCAD3 /* wireRootNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBCA35C18659F46007BCAD3 /* wireRootNavigationController.m */; };
 		6FEDD73A1853290E0003012E /* loginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FEDD7381853290E0003012E /* loginViewController.m */; };
+		6FFBE4621955042B007B6757 /* UIColor+colorWithRGB.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FFBE4611955042B007B6757 /* UIColor+colorWithRGB.m */; };
 		E58269E01853D082001C088A /* registerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E58269DF1853D082001C088A /* registerViewController.m */; };
 /* End PBXBuildFile section */
 
@@ -96,6 +97,8 @@
 		6FBCA35C18659F46007BCAD3 /* wireRootNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wireRootNavigationController.m; sourceTree = "<group>"; };
 		6FEDD7371853290E0003012E /* loginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = loginViewController.h; path = Wire/loginViewController.h; sourceTree = "<group>"; };
 		6FEDD7381853290E0003012E /* loginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = loginViewController.m; path = Wire/loginViewController.m; sourceTree = "<group>"; };
+		6FFBE4601955042B007B6757 /* UIColor+colorWithRGB.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+colorWithRGB.h"; sourceTree = "<group>"; };
+		6FFBE4611955042B007B6757 /* UIColor+colorWithRGB.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+colorWithRGB.m"; sourceTree = "<group>"; };
 		E58269DE1853D082001C088A /* registerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = registerViewController.h; path = Wire/registerViewController.h; sourceTree = "<group>"; };
 		E58269DF1853D082001C088A /* registerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = registerViewController.m; path = Wire/registerViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -201,6 +204,8 @@
 				6F8FCBF91851A5D400EB0F4E /* Supporting Files */,
 				6FBCA35B18659F45007BCAD3 /* wireRootNavigationController.h */,
 				6FBCA35C18659F46007BCAD3 /* wireRootNavigationController.m */,
+				6FFBE4601955042B007B6757 /* UIColor+colorWithRGB.h */,
+				6FFBE4611955042B007B6757 /* UIColor+colorWithRGB.m */,
 			);
 			path = Wire;
 			sourceTree = "<group>";
@@ -362,6 +367,7 @@
 				6F027D6418B757F400809259 /* friendRequestController.m in Sources */,
 				6FBCA35D18659F46007BCAD3 /* wireRootNavigationController.m in Sources */,
 				6F25DDD818A8DB4B00533736 /* wireConversations.m in Sources */,
+				6FFBE4621955042B007B6757 /* UIColor+colorWithRGB.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

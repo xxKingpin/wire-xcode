@@ -19,6 +19,20 @@
 @property (strong, nonatomic) UIImage *signatureImage;
 - (IBAction)sendWire:(id)sender;
 
+- (IBAction)blackSelected:(id)sender;
+- (IBAction)redSelected:(id)sender;
+- (IBAction)tealSelected:(id)sender;
+- (IBAction)orangeSelected:(id)sender;
+- (IBAction)greenSelected:(id)sender;
+- (IBAction)pinkSelected:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *blackButton;
+@property (weak, nonatomic) IBOutlet UIButton *redButton;
+@property (weak, nonatomic) IBOutlet UIButton *tealButton;
+@property (weak, nonatomic) IBOutlet UIButton *orangeButton;
+@property (weak, nonatomic) IBOutlet UIButton *greenButton;
+@property (weak, nonatomic) IBOutlet UIButton *pinkButton;
+
 - (void)erase;
 
 @end

@@ -85,12 +85,29 @@
 - (BOOL)textFieldShouldReturn: (UITextField *)textField
 {
     [textField resignFirstResponder];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    CGRect rect = self.view.window.frame;
+    rect.origin.y = 0;
+    rect.size.height -= 180;
+    self.view.window.frame = rect;
+    [UIView commitAnimations];
+    
     return NO;
 }
 
 - (IBAction)touchBackground:(id)sender {
     [uname resignFirstResponder];
     [upass resignFirstResponder];
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    CGRect rect = self.view.window.frame;
+    rect.origin.y = 0;
+    rect.size.height -= 180;
+    self.view.window.frame = rect;
+    [UIView commitAnimations];
 }
 /****/
 
@@ -98,18 +115,8 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     CGRect rect = self.view.window.frame;
-    rect.origin.y -= 80;
-    rect.size.height += 80;
-    self.view.window.frame = rect;
-    [UIView commitAnimations];
-}
-
-- (IBAction)endedEditingPass:(id)sender {
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3];
-    CGRect rect = self.view.window.frame;
-    rect.origin.y += 80;
-    rect.size.height -= 80;
+    rect.origin.y = -180;
+    rect.size.height += 180;
     self.view.window.frame = rect;
     [UIView commitAnimations];
 }

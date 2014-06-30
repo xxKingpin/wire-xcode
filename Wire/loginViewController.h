@@ -14,13 +14,12 @@
 @property (retain, nonatomic) NSMutableData *response;
 
 @property (strong, nonatomic) NSMutableDictionary *conversations;
-@property (strong, nonatomic) IBOutlet UITextField *uname;
-@property (strong, nonatomic) IBOutlet UITextField *upass;
-@property (strong, nonatomic) IBOutlet UIButton *bSubmit;
-@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (weak, nonatomic) IBOutlet UITextField *uname;
+@property (weak, nonatomic) IBOutlet UITextField *upass;
+@property (weak, nonatomic) IBOutlet UIButton *bSubmit;
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 - (IBAction)touchDown:(id)sender;
 - (IBAction)touchBackground:(id)sender;
 - (IBAction)beganEditingPass:(id)sender;
-- (IBAction)endedEditingPass:(id)sender;
 
 @end

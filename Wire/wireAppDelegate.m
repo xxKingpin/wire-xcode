@@ -7,6 +7,8 @@
 //
 
 #import "wireAppDelegate.h"
+#import "UIColor+colorWithRGB.h"
+
 
 @implementation wireAppDelegate
 
@@ -18,6 +20,9 @@
     
     // register for push notifications
     [[UIApplication sharedApplication] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRGB:0xCF6767]];
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     
     return YES;
 }

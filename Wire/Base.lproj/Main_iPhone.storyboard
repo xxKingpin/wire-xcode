@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A238x" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="T3q-HO-ZN4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A261i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="T3q-HO-ZN4">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
@@ -43,7 +43,7 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Item" image="Add Friend" id="S7J-d6-Whs">
-                            <color key="tintColor" red="0.81176477670000002" green="0.40392160420000001" blue="0.40392160420000001" alpha="1" colorSpace="deviceRGB"/>
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="nVi-VI-08d" kind="push" id="axu-6z-GCO"/>
                             </connections>
@@ -130,13 +130,12 @@
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="MSo-4g-CTa">
                                 <rect key="frame" x="20" y="388" width="280" height="40"/>
-                                <color key="backgroundColor" red="0.78823536630000002" green="0.32941177490000001" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <connections>
                                     <action selector="beganEditingPass:" destination="phB-pr-9g9" eventType="editingDidBegin" id="sOS-Ww-pHd"/>
-                                    <action selector="endedEditingPass:" destination="phB-pr-9g9" eventType="editingDidEnd" id="Z6M-m2-DIu"/>
                                 </connections>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WIO-Dk-Ggk">
@@ -164,10 +163,13 @@
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Username or Email" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Op0-aF-NtO">
                                 <rect key="frame" x="20" y="340" width="280" height="40"/>
-                                <color key="backgroundColor" red="0.78823536630000002" green="0.32941177490000001" blue="0.32941177490000001" alpha="1" colorSpace="deviceRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="deviceRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="beganEditingPass:" destination="phB-pr-9g9" eventType="editingDidBegin" id="a8H-4P-hpS"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="WIRE" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uql-cx-haC">
                                 <rect key="frame" x="200" y="222" width="89" height="44"/>
@@ -426,9 +428,75 @@
                                     <segue destination="xc6-n3-LBF" kind="unwind" identifier="unwindToConversation" unwindAction="unwindToConversation:" id="WXJ-E9-Pi7"/>
                                 </connections>
                             </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6X-ku-jxy">
+                                <rect key="frame" x="148" y="224" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Black button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="blackSelected:" destination="72Z-Ie-R4K" eventType="touchUpInside" id="Jba-56-q1e"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2w-Mo-RUp">
+                                <rect key="frame" x="186" y="294" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="teal button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tealSelected:" destination="72Z-Ie-R4K" eventType="touchUpInside" id="8Ca-Ku-J1g"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jKE-Rh-a4Q">
+                                <rect key="frame" x="186" y="248" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="wire red button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="redSelected:" destination="72Z-Ie-R4K" eventType="touchUpInside" id="GwF-8a-6v6"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4a-5P-VTG">
+                                <rect key="frame" x="110" y="294" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="limegreen button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="greenSelected:" destination="72Z-Ie-R4K" eventType="touchUpInside" id="Z5P-ll-xWa"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhT-Uf-aqQ">
+                                <rect key="frame" x="148" y="318" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="orange button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="orangeSelected:" destination="72Z-Ie-R4K" eventType="touchUpInside" id="9Li-Y6-OIy"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HAP-BT-PJy">
+                                <rect key="frame" x="110" y="248" width="25" height="25"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="pink button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pinkSelected:" destination="72Z-Ie-R4K" eventType="touchUpInside" id="4oG-Qw-9L6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <connections>
+                            <outlet property="blackButton" destination="H6X-ku-jxy" id="YvD-P6-g1B"/>
                             <outlet property="delegate" destination="z8O-XZ-Gka" id="boB-e5-J7C"/>
+                            <outlet property="greenButton" destination="v4a-5P-VTG" id="6Er-IF-rqb"/>
+                            <outlet property="orangeButton" destination="lhT-Uf-aqQ" id="pty-ss-DvL"/>
+                            <outlet property="pinkButton" destination="HAP-BT-PJy" id="sff-ee-9aJ"/>
+                            <outlet property="redButton" destination="jKE-Rh-a4Q" id="FC1-qc-Ulb"/>
+                            <outlet property="tealButton" destination="o2w-Mo-RUp" id="Vbf-qg-5nz"/>
                         </connections>
                     </glkView>
                     <navigationItem key="navigationItem" id="tvd-Gk-SKB">
@@ -606,7 +674,13 @@
     </scenes>
     <resources>
         <image name="Add Friend" width="22" height="22"/>
+        <image name="Black button" width="25" height="25"/>
         <image name="Logo" width="194" height="312"/>
+        <image name="limegreen button" width="25" height="25"/>
+        <image name="orange button" width="25" height="25"/>
+        <image name="pink button" width="25" height="25"/>
+        <image name="teal button" width="25" height="25"/>
+        <image name="wire red button" width="25" height="25"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
