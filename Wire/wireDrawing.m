@@ -19,6 +19,7 @@
 #define QUADRATIC_DISTANCE_TOLERANCE 2.0   // Minimum distance to make a curve
                                            // default is 3.0, but it's at 2.0 currently to avoid breaking at cusps
 #define             MAXIMUM_VERTICES 100000
+#define               SPIN_SMOOTHING 0.05
 
 static GLKVector3 StrokeColor = { 0, 0, 0 };
 
@@ -128,6 +129,12 @@ static GLKVector3 hexToVector3(int color)
     // color wheel gesture
     UIPanGestureRecognizer *spin;
     CGPoint previousSPPoint;
+    GLKVector2 blackDelta;
+    GLKVector2 redDelta;
+    GLKVector2 tealDelta;
+    GLKVector2 orangeDelta;
+    GLKVector2 greenDelta;
+    GLKVector2 pinkDelta;
 }
 
 @end
@@ -158,6 +165,13 @@ static GLKVector3 hexToVector3(int color)
         spin = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(spin:)];
         spin.maximumNumberOfTouches = spin.minimumNumberOfTouches = 1;
         [self addGestureRecognizer:spin];
+
+        blackDelta = (GLKVector2) { 0, -42.5f };
+        redDelta = (GLKVector2) { 42.5f, -21.25f };
+        tealDelta = (GLKVector2) { 42.5f, 21.25f };
+        orangeDelta = (GLKVector2) { 0, 42.5f };
+        greenDelta = (GLKVector2) { -42.5f, 21.25f };
+        pinkDelta = (GLKVector2) { -42.5f, -21.25f };
         
     } else [NSException raise:@"NSOpenGLES2ContextException" format:@"Failed to create OpenGL ES2 context"];
 }
@@ -511,6 +525,8 @@ static GLKVector3 hexToVector3(int color)
     CGPoint l = [sp locationInView:self];
     
     float distance = (l.y - previousSPPoint.y);
+    if (l.x < self.frame.size.width / 2)
+        distance = -distance;
     
     if ([sp state] == UIGestureRecognizerStateBegan)
     {
@@ -518,8 +534,71 @@ static GLKVector3 hexToVector3(int color)
     }
     else if ([sp state] == UIGestureRecognizerStateChanged)
     {
+        float arcAngle = distance / (85*M_PI) * 360 * SPIN_SMOOTHING;
         
+        float blackDeltaX = cosf(arcAngle) * 42.5f - blackDelta.x;
+        float blackDeltaY = sinf(arcAngle) * 42.5f - blackDelta.y;
+        float redDeltaX = cosf(arcAngle + 45) * 42.5f - redDelta.x;
+        float redDeltaY = sinf(arcAngle + 45) * 42.5f - redDelta.y;
+        float tealDeltaX = cosf(arcAngle + 90) * 42.5f - tealDelta.x;
+        float tealDeltaY = sinf(arcAngle + 90) * 42.5f - tealDelta.y;
+        float orangeDeltaX = cosf(arcAngle + 135) * 42.5f - orangeDelta.x;
+        float orangeDeltaY = sinf(arcAngle + 135) * 42.5f - orangeDelta.y;
+        float greenDeltaX = cosf(arcAngle + 180) * 42.5f - greenDelta.x;
+        float greenDeltaY = sinf(arcAngle + 180) * 42.5f - greenDelta.y;
+        float pinkDeltaX = cosf(arcAngle + 225) * 42.5f - pinkDelta.x;
+        float pinkDeltaY = sinf(arcAngle + 225) * 42.5f - pinkDelta.y;
+        
+        CGRect blackRect = _blackButton.frame;
+        blackRect.origin.x += blackDeltaX;
+        blackRect.origin.y += blackDeltaY;
+        _blackButton.frame = blackRect;
+        
+        CGRect redRect = _redButton.frame;
+        redRect.origin.x += redDeltaX;
+        redRect.origin.y += redDeltaY;
+        _redButton.frame = redRect;
+        
+        CGRect tealRect = _tealButton.frame;
+        tealRect.origin.x += tealDeltaX;
+        tealRect.origin.y += tealDeltaY;
+        _tealButton.frame = tealRect;
+        
+        CGRect orangeRect = _orangeButton.frame;
+        orangeRect.origin.x += orangeDeltaX;
+        orangeRect.origin.y += orangeDeltaY;
+        _orangeButton.frame = orangeRect;
+        
+        CGRect greenRect = _greenButton.frame;
+        greenRect.origin.x += greenDeltaX;
+        greenRect.origin.y += greenDeltaY;
+        _greenButton.frame = greenRect;
+        
+        CGRect pinkRect = _pinkButton.frame;
+        pinkRect.origin.x += pinkDeltaX;
+        pinkRect.origin.y += pinkDeltaY;
+        _pinkButton.frame = pinkRect;
+        
+        blackDelta.x += blackDeltaX;
+        blackDelta.y += blackDeltaY;
+        redDelta.x += redDeltaX;
+        redDelta.y += redDeltaY;
+        tealDelta.x += tealDeltaX;
+        tealDelta.y += tealDeltaY;
+        orangeDelta.x += orangeDeltaX;
+        orangeDelta.y += orangeDeltaY;
+        greenDelta.x += greenDeltaX;
+        greenDelta.y += greenDeltaY;
+        pinkDelta.x += pinkDeltaX;
+        pinkDelta.y += pinkDeltaY;
     }
+    /*else if ([sp state] == UIGestureRecognizerStateEnded || [sp state] == UIGestureRecognizerStateCancelled)
+    {
+        CGRect blackRect = _blackButton.frame;
+        blackRect.origin.x += cosf(distance / (85*M_PI) * 360) * 42.5f;
+        blackRect.origin.y += sinf(distance / (85*M_PI) * 360) * 42.5f;
+        _blackButton.frame = blackRect;
+    }*/
 }
 
 - (void)pan:(UIPanGestureRecognizer *)p {
