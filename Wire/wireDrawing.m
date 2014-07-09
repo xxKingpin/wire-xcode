@@ -450,7 +450,7 @@ static GLKVector3 hexToVector3(int color)
 - (void)doublepan:(UIPanGestureRecognizer *)dp {
     CGPoint v = [dp velocityInView:self.window];
     CGPoint l = [dp locationInView:self.window];
-    float a = 5500.0;
+    float a = 5500.0f;
     float distance = (l.y - previousDPPoint.y);
 
     if ([dp state] == UIGestureRecognizerStateBegan)
@@ -523,6 +523,7 @@ static GLKVector3 hexToVector3(int color)
 - (void)spin:(UIPanGestureRecognizer *)sp {
     CGPoint v = [sp velocityInView:self];
     CGPoint l = [sp locationInView:self];
+    float a = -5000.0f;
     
     float distance = (l.y - previousSPPoint.y);
     if (l.x < self.frame.size.width / 2)
@@ -592,13 +593,35 @@ static GLKVector3 hexToVector3(int color)
         pinkDelta.x += pinkDeltaX;
         pinkDelta.y += pinkDeltaY;
     }
-    /*else if ([sp state] == UIGestureRecognizerStateEnded || [sp state] == UIGestureRecognizerStateCancelled)
+    else if ([sp state] == UIGestureRecognizerStateEnded || [sp state] == UIGestureRecognizerStateCancelled)
     {
-        CGRect blackRect = _blackButton.frame;
-        blackRect.origin.x += cosf(distance / (85*M_PI) * 360) * 42.5f;
-        blackRect.origin.y += sinf(distance / (85*M_PI) * 360) * 42.5f;
-        _blackButton.frame = blackRect;
-    }*/
+        /*
+        float time = v.y / a;
+        float drift = v.y * time + (a / 2) * (time * time);
+        
+        CAKeyframeAnimation *arcAnimation = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+        arcAnimation.calculationMode = kCAAnimationPaced;
+        arcAnimation.fillMode = kCAFillModeForwards;
+        arcAnimation.removedOnCompletion = NO; // may remove this
+        arcAnimation.duration = 3;
+        
+        float startX = acosf((_blackButton.frame.origin.x - 105.6f) / 85.0f);
+        float offsetY = (_blackButton.frame.origin.y - 224.0f) / 85.0f;
+        if (offsetY < 0.5)
+        {
+            startX = -startX;
+        }
+        NSLog(@"%f %f", startX, offsetY);
+        
+        CGMutablePathRef arcPath = CGPathCreateMutable();
+        CGPathAddArc(arcPath, NULL, 160.625f, 279.0f, 42.5f, startX, startX + 2.0f, distance < 0.0f ? true : false);
+        
+        arcAnimation.path = arcPath;
+        CGPathRelease(arcPath);
+        
+        [_blackButton.layer addAnimation:arcAnimation forKey:@"position"];
+        */
+    }
 }
 
 - (void)pan:(UIPanGestureRecognizer *)p {

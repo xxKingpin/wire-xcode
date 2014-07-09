@@ -3,22 +3,22 @@
     {
       "idiom" : "iphone",
       "scale" : "1x",
-      "filename" : "teal.png"
+      "filename" : "stickynote_iphone.png"
     },
     {
       "idiom" : "iphone",
       "scale" : "2x",
-      "filename" : "teal@2x.png"
+      "filename" : "stickynote_iphone@2x.png"
     },
     {
       "idiom" : "ipad",
       "scale" : "1x",
-      "filename" : "teal_ipad.png"
+      "filename" : "stickynote_ipad.png"
     },
     {
       "idiom" : "ipad",
       "scale" : "2x",
-      "filename" : "teal_ipad@2x.png"
+      "filename" : "stickynote_ipad@2x.png"
     }
   ],
   "info" : {

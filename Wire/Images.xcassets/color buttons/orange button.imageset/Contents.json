@@ -9,6 +9,16 @@
       "idiom" : "iphone",
       "scale" : "2x",
       "filename" : "orange@2x.png"
+    },
+    {
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "filename" : "orange_ipad.png"
+    },
+    {
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "filename" : "orange_ipad@2x.png"
     }
   ],
   "info" : {

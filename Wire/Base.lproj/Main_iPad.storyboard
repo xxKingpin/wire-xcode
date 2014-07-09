@@ -242,7 +242,7 @@
         <scene sceneID="Qs2-JN-yeP">
             <objects>
                 <tableViewController storyboardIdentifier="friendsTable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="acG-Ir-D6Q" customClass="friendsViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="zPl-hx-Cle">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="zPl-hx-Cle">
                         <rect key="frame" x="0.0" y="0.0" width="768" height="1024"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -251,11 +251,11 @@
                                 <rect key="frame" x="0.0" y="86" width="768" height="80"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="v8a-xd-leg" id="8ZQ-Vr-VBG">
-                                    <rect key="frame" x="0.0" y="0.0" width="735" height="79"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="735" height="80"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gM7-a5-MeG">
-                                            <rect key="frame" x="15" y="0.0" width="718" height="79"/>
+                                            <rect key="frame" x="15" y="0.0" width="718" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -588,9 +588,75 @@
                                     <segue destination="3hf-bU-CZl" kind="unwind" identifier="unwindToConversation" unwindAction="unwindToConversation:" id="UDj-kC-TAU"/>
                                 </connections>
                             </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jkk-7f-UI8">
+                                <rect key="frame" x="365" y="450" width="38" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="Black button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="blackSelected:" destination="bXA-Zf-gZh" eventType="touchUpInside" id="Xat-xQ-0FZ"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpq-IH-sv5">
+                                <rect key="frame" x="408" y="514" width="38" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="teal button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="tealSelected:" destination="bXA-Zf-gZh" eventType="touchUpInside" id="7lf-8X-cjh"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GhS-Ap-9Aw">
+                                <rect key="frame" x="408" y="471" width="38" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="wire red button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="redSelected:" destination="bXA-Zf-gZh" eventType="touchUpInside" id="gu6-lY-fJB"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rdf-53-io3">
+                                <rect key="frame" x="323" y="514" width="38" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="limegreen button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="greenSelected:" destination="bXA-Zf-gZh" eventType="touchUpInside" id="J0r-r7-AEe"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KBB-vF-tLw">
+                                <rect key="frame" x="365" y="535" width="38" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="orange button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="orangeSelected:" destination="bXA-Zf-gZh" eventType="touchUpInside" id="hnU-9b-Ili"/>
+                                </connections>
+                            </button>
+                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ibx-7W-7mc">
+                                <rect key="frame" x="323" y="471" width="38" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="pink button">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="pinkSelected:" destination="bXA-Zf-gZh" eventType="touchUpInside" id="Ql2-L6-aeP"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <connections>
+                            <outlet property="blackButton" destination="jkk-7f-UI8" id="ZWL-9a-Mp1"/>
                             <outlet property="delegate" destination="IZb-ww-puO" id="Qgc-b9-arl"/>
+                            <outlet property="greenButton" destination="rdf-53-io3" id="XVJ-GX-3bI"/>
+                            <outlet property="orangeButton" destination="KBB-vF-tLw" id="G0j-kS-bmT"/>
+                            <outlet property="pinkButton" destination="Ibx-7W-7mc" id="4tY-Yh-aTw"/>
+                            <outlet property="redButton" destination="GhS-Ap-9Aw" id="g3j-4V-LYt"/>
+                            <outlet property="tealButton" destination="zpq-IH-sv5" id="VKX-tJ-q3L"/>
                         </connections>
                     </glkView>
                     <navigationItem key="navigationItem" id="4Lb-YK-NKd">
@@ -613,7 +679,13 @@
     </scenes>
     <resources>
         <image name="Add Friend" width="22" height="22"/>
+        <image name="Black button" width="38" height="38"/>
         <image name="Logo" width="248" height="400"/>
+        <image name="limegreen button" width="38" height="38"/>
+        <image name="orange button" width="38" height="38"/>
+        <image name="pink button" width="38" height="38"/>
+        <image name="teal button" width="38" height="38"/>
+        <image name="wire red button" width="38" height="38"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar" statusBarStyle="blackOpaque"/>

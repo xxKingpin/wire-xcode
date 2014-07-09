@@ -42,7 +42,7 @@
                                 <segue destination="Q2S-RE-QQM" kind="modal" id="37m-sX-uqA"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Item" image="Add Friend" id="S7J-d6-Whs">
+                        <barButtonItem key="rightBarButtonItem" image="Add Friend" id="S7J-d6-Whs">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <segue destination="nVi-VI-08d" kind="push" id="axu-6z-GCO"/>

@@ -9,6 +9,16 @@
       "idiom" : "iphone",
       "scale" : "2x",
       "filename" : "wire-red@2x.png"
+    },
+    {
+      "idiom" : "ipad",
+      "scale" : "1x",
+      "filename" : "wire-red_ipad.png"
+    },
+    {
+      "idiom" : "ipad",
+      "scale" : "2x",
+      "filename" : "wire-red_ipad@2x.png"
     }
   ],
   "info" : {
