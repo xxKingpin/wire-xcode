@@ -8,6 +8,7 @@
 
 #import "wireDrawing.h"
 #import "GLKContainer.h"
+#import "UIColor+colorWithRGB.h"
 
 #define             STROKE_WIDTH_MIN 0.002 // Stroke width determined by touch velocity
 #define             STROKE_WIDTH_MAX 0.015 // default is 0.010
@@ -135,6 +136,12 @@ static GLKVector3 hexToVector3(int color)
     GLKVector2 orangeDelta;
     GLKVector2 greenDelta;
     GLKVector2 pinkDelta;
+    
+    CGImageRef backgroundBrush;
+    GLubyte *backgroundData;
+    GLuint backgroundTexture;
+    CGContextRef backgroundContext;
+    size_t backgroundWidth, backgroundHeight;
 }
 
 @end
@@ -152,12 +159,20 @@ static GLKVector3 hexToVector3(int color)
         self.context = context;
         self.drawableDepthFormat = GLKViewDrawableDepthFormat24;
         self.enableSetNeedsDisplay = YES;
+        // double resolution on iPhone
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+        {
+            self.contentScaleFactor = 5.0f;
+        }
+        else
+        {
+            // Turn on antialiasing
+            self.drawableMultisample = GLKViewDrawableMultisample4X;
+        }
         
+        // make background transparent
         //CAEAGLLayer *eaglLayer = (CAEAGLLayer *)self.layer;
         //eaglLayer.opaque = NO;
-        
-        // Turn on antialiasing
-        self.drawableMultisample = GLKViewDrawableMultisample4X;
         
         [self setupGL];
         
@@ -172,6 +187,33 @@ static GLKVector3 hexToVector3(int color)
         orangeDelta = (GLKVector2) { 0, 42.5f };
         greenDelta = (GLKVector2) { -42.5f, 21.25f };
         pinkDelta = (GLKVector2) { -42.5f, -21.25f };
+        
+        // create background texture
+        
+        backgroundBrush = [UIImage imageNamed:@"sticky note"].CGImage;
+        backgroundWidth = CGImageGetWidth(backgroundBrush);
+        backgroundHeight = CGImageGetHeight(backgroundBrush);
+        
+        if (backgroundBrush)
+        {
+            backgroundData = (GLubyte *) calloc(backgroundWidth * backgroundHeight * 4, sizeof(GLubyte));
+            backgroundContext = CGBitmapContextCreate(backgroundData, backgroundWidth, backgroundHeight, 8, backgroundWidth * 4, CGImageGetColorSpace(backgroundBrush), kCGImageAlphaPremultipliedLast);
+            CGContextDrawImage(backgroundContext, CGRectMake(0, 0, (CGFloat)backgroundWidth, (CGFloat)backgroundHeight), backgroundBrush);
+            CGContextRelease(backgroundContext);
+            glGenTextures(1, &backgroundTexture);
+            glBindTexture(GL_TEXTURE_2D, backgroundTexture);
+            glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, backgroundWidth, backgroundHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, backgroundData);
+            free(backgroundData);
+            
+            /*glEnable(GL_TEXTURE_2D);
+            glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA);
+            glEnable(GL_BLEND);*/
+        }
+        else
+        {
+            NSLog(@"Failed to load image");
+        }
         
     } else [NSException raise:@"NSOpenGLES2ContextException" format:@"Failed to create OpenGL ES2 context"];
 }
@@ -269,6 +311,12 @@ static GLKVector3 hexToVector3(int color)
 {
     [self tearDownGL];
     
+    if (backgroundTexture)
+    {
+        glDeleteTextures(1, &backgroundTexture);
+        backgroundTexture = 0;
+    }
+    
     if ([EAGLContext currentContext] == context) {
         [EAGLContext setCurrentContext:nil];
     }
@@ -283,6 +331,19 @@ static GLKVector3 hexToVector3(int color)
     
     [effect prepareToDraw];
     
+    // draw background texture
+    GLfloat vert[] = { 0, 0, self.frame.size.width, 0, self.frame.size.width, self.frame.size.height, 0, self.frame.size.height };
+    GLfloat tex[] = { 0,0, 1,0, 1,1, 0,1 };
+    GLuint indexes[] = { 0, 1, 2, 2, 3, 0 };
+    
+    glBindTexture(GL_TEXTURE_2D, backgroundTexture);
+    glEnable(GL_TEXTURE_2D);
+    
+    glVertexPointer(2, GL_FLOAT, 0, vert);
+    glTexCoordPointer(2, GL_FLOAT, 0, tex);
+    glDrawElements(GL_TRIANGLES, 2, GL_UNSIGNED_INT, indexes);
+    
+
     // Drawing of signature lines
     if (length > 2) {
         glBindVertexArrayOES(vertexArray);
@@ -293,7 +354,7 @@ static GLKVector3 hexToVector3(int color)
         glBindVertexArrayOES(dotsArray);
         glDrawArrays(GL_TRIANGLE_STRIP, 0, dotsLength);
     }
-    
+ 
 }
 
 - (void)erase {
