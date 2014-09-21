@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="14A261i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="T3q-HO-ZN4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6206.9" systemVersion="14A329r" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="T3q-HO-ZN4">
     <dependencies>
         <deployment defaultVersion="1792" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7026.1"/>
     </dependencies>
     <scenes>
-        <!--Friends View Controller - Conversations-->
+        <!--Conversations-->
         <scene sceneID="xWS-FZ-UqJ">
             <objects>
                 <tableViewController storyboardIdentifier="friendsTable" useStoryboardIdentifierAsRestorationIdentifier="YES" id="8fw-q6-8hv" customClass="friendsViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rmI-TI-tzN">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="rmI-TI-tzN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -116,7 +116,7 @@
             </objects>
             <point key="canvasLocation" x="366" y="1153"/>
         </scene>
-        <!--Login View Controller - Login-->
+        <!--Login-->
         <scene sceneID="pCk-ib-fCd">
             <objects>
                 <viewController storyboardIdentifier="loginViewController" id="phB-pr-9g9" customClass="loginViewController" sceneMemberID="viewController">
@@ -187,7 +187,6 @@
                             </activityIndicatorView>
                             <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" fixedFrame="YES" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="Nkc-Cq-Pze">
                                 <rect key="frame" x="63" y="20" width="194" height="312"/>
-                                <autoresizingMask key="autoresizingMask"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -207,7 +206,7 @@
             </objects>
             <point key="canvasLocation" x="1784" y="476"/>
         </scene>
-        <!--Register View Controller - Wire Registration-->
+        <!--Wire Registration-->
         <scene sceneID="bUu-wJ-Wbf">
             <objects>
                 <viewController storyboardIdentifier="registerViewController" id="NYT-FI-X6A" customClass="registerViewController" sceneMemberID="viewController">
@@ -332,7 +331,7 @@
             </objects>
             <point key="canvasLocation" x="894" y="1153"/>
         </scene>
-        <!--Add Friend Controller - Add Friend-->
+        <!--Add Friend-->
         <scene sceneID="jAz-Eg-Qi8">
             <objects>
                 <tableViewController storyboardIdentifier="addFriend" useStoryboardIdentifierAsRestorationIdentifier="YES" id="nVi-VI-08d" customClass="addFriendController" sceneMemberID="viewController">
@@ -428,9 +427,8 @@
                                     <segue destination="xc6-n3-LBF" kind="unwind" identifier="unwindToConversation" unwindAction="unwindToConversation:" id="WXJ-E9-Pi7"/>
                                 </connections>
                             </button>
-                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6X-ku-jxy">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="H6X-ku-jxy">
                                 <rect key="frame" x="148" y="224" width="25" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="Black button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -438,9 +436,8 @@
                                     <action selector="blackSelected:" destination="72Z-Ie-R4K" eventType="touchUpInside" id="Jba-56-q1e"/>
                                 </connections>
                             </button>
-                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2w-Mo-RUp">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o2w-Mo-RUp">
                                 <rect key="frame" x="191" y="288" width="25" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="teal button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -448,9 +445,8 @@
                                     <action selector="tealSelected:" destination="72Z-Ie-R4K" eventType="touchUpInside" id="8Ca-Ku-J1g"/>
                                 </connections>
                             </button>
-                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jKE-Rh-a4Q">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jKE-Rh-a4Q">
                                 <rect key="frame" x="191" y="245" width="25" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="wire red button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -458,9 +454,8 @@
                                     <action selector="redSelected:" destination="72Z-Ie-R4K" eventType="touchUpInside" id="GwF-8a-6v6"/>
                                 </connections>
                             </button>
-                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4a-5P-VTG">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v4a-5P-VTG">
                                 <rect key="frame" x="106" y="288" width="25" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="limegreen button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -468,9 +463,8 @@
                                     <action selector="greenSelected:" destination="72Z-Ie-R4K" eventType="touchUpInside" id="Z5P-ll-xWa"/>
                                 </connections>
                             </button>
-                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhT-Uf-aqQ">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lhT-Uf-aqQ">
                                 <rect key="frame" x="148" y="309" width="25" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="orange button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -478,9 +472,8 @@
                                     <action selector="orangeSelected:" destination="72Z-Ie-R4K" eventType="touchUpInside" id="9Li-Y6-OIy"/>
                                 </connections>
                             </button>
-                            <button appearanceType="aqua" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HAP-BT-PJy">
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HAP-BT-PJy">
                                 <rect key="frame" x="106" y="245" width="25" height="25"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="pink button">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -534,7 +527,7 @@
             </objects>
             <point key="canvasLocation" x="366" y="-216"/>
         </scene>
-        <!--Notifications Controller - Notifications-->
+        <!--Notifications-->
         <scene sceneID="ugU-cT-IRT">
             <objects>
                 <tableViewController storyboardIdentifier="notifController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Q2S-RE-QQM" customClass="notificationsController" sceneMemberID="viewController">
@@ -685,6 +678,9 @@
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
+        <simulatedScreenMetrics key="destination" type="retina4">
+            <size key="portraitSize" width="320" height="568"/>
+            <size key="landscapeSize" width="568" height="320"/>
+        </simulatedScreenMetrics>
     </simulatedMetricsContainer>
 </document>
