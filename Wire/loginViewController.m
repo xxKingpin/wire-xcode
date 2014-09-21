@@ -17,6 +17,8 @@
 
 @synthesize uname, upass, bSubmit, activityIndicator;
 
+int delta;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -86,13 +88,17 @@
 {
     [textField resignFirstResponder];
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3];
-    CGRect rect = self.view.window.frame;
-    rect.origin.y = 0;
-    rect.size.height -= 180;
-    self.view.window.frame = rect;
-    [UIView commitAnimations];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+    {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.3];
+        CGRect rect = self.view.window.frame;
+        rect.origin.y = 0;
+        rect.size.height -= delta;
+        self.view.window.frame = rect;
+        [UIView commitAnimations];
+        delta = 0;
+    }
     
     return NO;
 }
@@ -101,13 +107,17 @@
     [uname resignFirstResponder];
     [upass resignFirstResponder];
     
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3];
-    CGRect rect = self.view.window.frame;
-    rect.origin.y = 0;
-    rect.size.height -= 180;
-    self.view.window.frame = rect;
-    [UIView commitAnimations];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+    {
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.3];
+        CGRect rect = self.view.window.frame;
+        rect.origin.y = 0;
+        rect.size.height -= delta;
+        self.view.window.frame = rect;
+        [UIView commitAnimations];
+        delta = 0;
+    }
 }
 /****/
 
@@ -119,6 +129,7 @@
     rect.size.height += 180;
     self.view.window.frame = rect;
     [UIView commitAnimations];
+    delta += 180;
 }
 
 

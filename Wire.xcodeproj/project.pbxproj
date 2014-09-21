@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6F027D6418B757F400809259 /* friendRequestController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F027D6318B757F400809259 /* friendRequestController.m */; };
-		6F25DDCC18A8BE6100533736 /* notfriend.png in Resources */ = {isa = PBXBuildFile; fileRef = 6F25DDCB18A8BE6100533736 /* notfriend.png */; };
 		6F25DDD218A8C83600533736 /* addFriendController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F25DDD118A8C83600533736 /* addFriendController.m */; };
 		6F25DDD818A8DB4B00533736 /* wireConversations.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F25DDD718A8DB4B00533736 /* wireConversations.m */; };
 		6F3207AF18AF408D00F3CBCB /* data.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6F3207AE18AF408D00F3CBCB /* data.plist */; };
@@ -53,7 +52,6 @@
 /* Begin PBXFileReference section */
 		6F027D6218B757F400809259 /* friendRequestController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = friendRequestController.h; path = Wire/friendRequestController.h; sourceTree = "<group>"; };
 		6F027D6318B757F400809259 /* friendRequestController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = friendRequestController.m; path = Wire/friendRequestController.m; sourceTree = "<group>"; };
-		6F25DDCB18A8BE6100533736 /* notfriend.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = notfriend.png; sourceTree = "<group>"; };
 		6F25DDD018A8C83600533736 /* addFriendController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = addFriendController.h; path = Wire/addFriendController.h; sourceTree = "<group>"; };
 		6F25DDD118A8C83600533736 /* addFriendController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = addFriendController.m; path = Wire/addFriendController.m; sourceTree = "<group>"; };
 		6F25DDD618A8DB4B00533736 /* wireConversations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wireConversations.h; path = Wire/wireConversations.h; sourceTree = "<group>"; };
@@ -149,7 +147,6 @@
 				6F25DDD718A8DB4B00533736 /* wireConversations.m */,
 				6F25DDD018A8C83600533736 /* addFriendController.h */,
 				6F25DDD118A8C83600533736 /* addFriendController.m */,
-				6F25DDCB18A8BE6100533736 /* notfriend.png */,
 				6FABF2A61887E0B0001F0A0C /* wireDrawing.h */,
 				6FABF2A71887E0B0001F0A0C /* wireDrawing.m */,
 				6FBCA3581865834D007BCAD3 /* friendsViewController.h */,
@@ -330,7 +327,6 @@
 				6FBCA357186417E4007BCAD3 /* UIButton.png in Resources */,
 				6F8FCC121851A5D400EB0F4E /* Main_iPad.storyboard in Resources */,
 				6F8FCC141851A5D400EB0F4E /* Images.xcassets in Resources */,
-				6F25DDCC18A8BE6100533736 /* notfriend.png in Resources */,
 				6F8FCC0F1851A5D400EB0F4E /* Main_iPhone.storyboard in Resources */,
 				6F3207AF18AF408D00F3CBCB /* data.plist in Resources */,
 				6F8FCBFD1851A5D400EB0F4E /* InfoPlist.strings in Resources */,
